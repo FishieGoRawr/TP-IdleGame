@@ -14,7 +14,7 @@ CREATE DATABASE BD_IdleGame
 --CREATING TABLES
  CREATE TABLE Characters --This table creates characters with stats, equipment, level, etc...
 (
-   CharID int IDENTITY(1,1),
+   CharID int IDENTITY(1,1), 
    CharRaceID int NOT NULL,
    CharClassID int NOT NULL,
    CharName nvarchar(50) ,
@@ -116,7 +116,7 @@ GO
 )
 GO
 
-CREATE TABLE Loot --
+CREATE TABLE Loot --This table keeps all possible loot items
 (
    LootID int IDENTITY(1,1),
    LootName nvarchar(50),
@@ -124,7 +124,7 @@ CREATE TABLE Loot --
 )
 GO
 
-CREATE TABLE CharLoot --
+CREATE TABLE CharLoot --This table keeps track of a character's loot
 (
    CharLootID int IDENTITY(1,1),
    CharLootCharacterID int,
@@ -133,14 +133,14 @@ CREATE TABLE CharLoot --
 )
 GO
 
-CREATE TABLE ConsumType --
+CREATE TABLE ConsumType --This table keeps all the possible types of consummables
 (
    ConsumTypeID int IDENTITY(1,1),
    EquipTypeName nvarchar(50)
 )
 GO
 
-CREATE TABLE Consum --
+CREATE TABLE Consum --This table keeps all consummable items
 (
    ConsumID int IDENTITY(1,1),
    ConsumConsumTypeID int,
@@ -149,7 +149,7 @@ CREATE TABLE Consum --
 )
 GO
 
-CREATE TABLE CharConsum --
+CREATE TABLE CharConsum --This table keeps track of the cosummable possessed by a specific character
 (
    CharConsumID int IDENTITY(1,1),
    CharConsumCharacterID int,
@@ -158,14 +158,14 @@ CREATE TABLE CharConsum --
 )
 GO
 
-CREATE TABLE EquipType --
+CREATE TABLE EquipType --This table keeps all the types of equipment
 (
    EquipTypeID int IDENTITY(1,1),
    EquipTypeName nvarchar(50)
 )
 GO
 
-CREATE TABLE Equip --
+CREATE TABLE Equip --This table keeps all equipable items
 (
    EquipID int IDENTITY(1,1),
    EquipEquipTypeID int,
@@ -174,7 +174,7 @@ CREATE TABLE Equip --
 )
 GO
 
-CREATE TABLE CharEquip --
+CREATE TABLE CharEquip --This table keeps track of the equipable items equiped by a specific character
 (
    CharEquipID int IDENTITY(1,1),
    CharEquipCharacterID int,
@@ -183,7 +183,7 @@ CREATE TABLE CharEquip --
 )
 GO
 
-CREATE TABLE Spells --
+CREATE TABLE Spells --This table keeps all possible spells 
 (
    SpellsID int IDENTITY(1,1),
    SpellMana int,
@@ -192,7 +192,7 @@ CREATE TABLE Spells --
 )
 GO
 
-CREATE TABLE CharSpells --
+CREATE TABLE CharSpells --This table keeps track of the spells learned by a specific character
 (
    CharSpellsID int IDENTITY(1,1),
    CharSpellsCharacterID int,
@@ -245,6 +245,8 @@ GO
 
 
 --ADDING FOREIN KEYS CONSTRAINT
+ALTER TABLE Characters ADD CONSTRAINT CHK_CharHP CHECK (CharHP >= 0);
+GO
 ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Race FOREIGN KEY (CharRaceID) REFERENCES Race(RaceID)
 GO
 ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Class FOREIGN KEY (CharClassID) REFERENCES Class(ClassID)
