@@ -15,8 +15,8 @@ CREATE DATABASE BD_IdleGame
  CREATE TABLE Characters --This table creates characters with stats, equipment, level, etc...
 (
    CharID int IDENTITY(1,1),
-   CharRaceId int NOT NULL,
-   CharClassId int NOT NULL,
+   CharRaceID int NOT NULL,
+   CharClassID int NOT NULL,
    CharName nvarchar(50) ,
    CharLevel int NOT NULL,
    CharExp int NOT NULL,
@@ -63,11 +63,11 @@ GO
 
  CREATE TABLE Kills
 (
-   KillID int IDENTITY(1,1),
-   KillCharacterID int NOT NULL,
-   KillDungeonID int NOT NULL,
-   KillMonsterID int NOT NULL,
-   KillQty int NOT NULL,
+   KillsID int IDENTITY(1,1),
+   KillsCharacterID int NOT NULL,
+   KillsDungeonID int NOT NULL,
+   KillsMonsterID int NOT NULL,
+   KillsQty int NOT NULL,
 )
 GO
 
@@ -233,7 +233,7 @@ ALTER TABLE Dungeons ADD PRIMARY KEY (DungeonID)
 GO
 ALTER TABLE Race ADD PRIMARY KEY (RaceID)
 GO
-ALTER TABLE Kills ADD PRIMARY KEY (KillID)
+ALTER TABLE Kills ADD PRIMARY KEY (KillsID)
 GO
 ALTER TABLE MonsterBundle ADD PRIMARY KEY (MonsterBundleID)
 GO
@@ -245,5 +245,46 @@ GO
 
 
 --ADDING FOREIN KEYS CONSTRAINT
-
+ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Race FOREIGN KEY (CharRaceID) REFERENCES Race(RaceID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Class FOREIGN KEY (CharRaceID) REFERENCES Race(ClassID)
+GO
+ALTER TABLE CharLoot ADD CONSTRAINT FK_CharLoot_Characters FOREIGN KEY (CharLootCharacterID) REFERENCES Characters(CharID)
+GO
+ALTER TABLE CharLoot ADD CONSTRAINT FK_CharLoot_Loot FOREIGN KEY (CharLootLootID) REFERENCES Loot(LootID)
+GO
+ALTER TABLE Consum ADD CONSTRAINT FK_Consum_ConsumType FOREIGN KEY (ConsumConsumTypeID) REFERENCES ConsumType(ConsumTypeID)
+GO
+ALTER TABLE CharConsum ADD CONSTRAINT FK_CharConsum_Consum FOREIGN KEY (CharConsumConsumID) REFERENCES Consum(ConsumID)
+GO
+ALTER TABLE CharConsum ADD CONSTRAINT FK_CharConsum_Characters FOREIGN KEY (CharConsumCharacterID) REFERENCES Characters(CharID)
+GO
+ALTER TABLE Equip ADD CONSTRAINT FK_Equip_EquipType FOREIGN KEY (EquipEquipTypeID) REFERENCES EquipType(EquipTypeID)
+GO
+ALTER TABLE CharEquip ADD CONSTRAINT FK_CharEquip_Equip FOREIGN KEY (CharEquipEquipID) REFERENCES Equip(EquipID)
+GO
+ALTER TABLE CharEquip ADD CONSTRAINT FK_CharEquip_Characters FOREIGN KEY (CharEquipCharacterID) REFERENCES Characters(CharID)
+GO
+ALTER TABLE CharSpells ADD CONSTRAINT FK_CharSpells_Spells FOREIGN KEY (CharSpellsSpellID) REFERENCES Spells(SpellsID)
+GO
+ALTER TABLE CharSpells ADD CONSTRAINT FK_CharSpells_Characters FOREIGN KEY (CharSpellsCharacterID) REFERENCES Characters(CharID)
+GO
+ALTER TABLE QuestJournal ADD CONSTRAINT FK_QuestJournal_Characters FOREIGN KEY (QuestJournalCharacterID) REFERENCES Characters(CharID)
+GO
+ALTER TABLE QuestJournal ADD CONSTRAINT FK_QuestJournal_Quests FOREIGN KEY (QuestJournalQuestID) REFERENCES Quests(QuestID)
+GO
+ALTER TABLE Quests ADD CONSTRAINT FK_Quests_Dungeons FOREIGN KEY (QuestDungeonID) REFERENCES Dungeons(DungeonID)
+GO
+ALTER TABLE Dungeons ADD CONSTRAINT FK_Dungeons_MonsterBundle FOREIGN KEY (DungeonMonsterBundleID) REFERENCES MonsterBundle(MonsterBundleID)
+GO
+ALTER TABLE Kills ADD CONSTRAINT FK_Kills_Characters FOREIGN KEY (KillsCharacterID) REFERENCES Characters(CharID)
+GO
+ALTER TABLE Kills ADD CONSTRAINT FK_Kills_Dungeons FOREIGN KEY (KillsDungeonID) REFERENCES Dungeons(DungeonID)
+GO
+ALTER TABLE Kills ADD CONSTRAINT FK_Kills_Monsters FOREIGN KEY (KillsMonsterID) REFERENCES Monsters(MonsterID)
+GO
+ALTER TABLE MonsterBundle ADD CONSTRAINT FK_MonsterBundle_Dungeons FOREIGN KEY (MonsterBundleDungeonID) REFERENCES Dungeons(DungeonID)
+GO
+ALTER TABLE MonsterBundle ADD CONSTRAINT FK_MonsterBundle_Monsters FOREIGN KEY (MonsterBundleMonsterID) REFERENCES Monsters(MonsterID)
+GO
 --DONE ADDING FOREIGN KEY CONSTRAINT
