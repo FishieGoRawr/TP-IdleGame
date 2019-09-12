@@ -1,3 +1,4 @@
+--CREATING DATA BASE
 CREATE DATABASE BD_IdleGame
  CONTAINMENT = NONE
  ON PRIMARY
@@ -7,8 +8,11 @@ CREATE DATABASE BD_IdleGame
  GO
 
  USE BD_IdleGame
+ --DONE CREATING DB
 
- CREATE TABLE Characters
+
+--CREATING TABLES
+ CREATE TABLE Characters --This table creates characters with stats, equipment, level, etc...
 (
    CharID int IDENTITY(1,1),
    CharRaceId int NOT NULL,
@@ -43,14 +47,14 @@ CREATE DATABASE BD_IdleGame
 )
 GO
 
- CREATE TABLE Race
+ CREATE TABLE Race --This table set the character's race
 (
    RaceID int IDENTITY(1,1),
    RaceName nvarchar(50) NOT NULL,
 )
 GO
 
- CREATE TABLE Class
+ CREATE TABLE Class --This table set the character's class
 (
    ClassID int IDENTITY(1,1),
    ClassName nvarchar(50) NOT NULL,
@@ -67,7 +71,7 @@ GO
 )
 GO
 
- CREATE TABLE Monsters
+ CREATE TABLE Monsters --This table keeps all possible monsters
 (
    MonsterID int IDENTITY(1,1),
    MonsterLevel int NOT NULL,
@@ -76,7 +80,7 @@ GO
 )
 GO
 
- CREATE TABLE Quests
+ CREATE TABLE Quests --This table keep the quests, quest reward, which dungeon is linked to the quest, etc...
 (
    QuestID int IDENTITY(1,1),
    QuestDungeonID int NOT NULL,
@@ -85,7 +89,7 @@ GO
 )
 GO
 
- CREATE TABLE QuestJournal
+ CREATE TABLE QuestJournal --This table keep track of which quest is done
 (
    QuestJournalID int IDENTITY(1,1),
    QuestJournalCharacterID int NOT NULL,
@@ -94,7 +98,7 @@ GO
 )
 GO
 
- CREATE TABLE Dungeons
+ CREATE TABLE Dungeons --This table keeps track of dungeon and which "MonsterBundle" is associated with it
 (
    DungeonID int IDENTITY(1,1),
    DungeonMonsterBundleID int NOT NULL,
@@ -103,7 +107,7 @@ GO
 )
 GO
 
- CREATE TABLE MonsterBundle
+ CREATE TABLE MonsterBundle --This table creates a bundle that the user has to fight in order to progress (Complete dungeon)
 (
    MonsterBundleID int IDENTITY(1,1),
    MonsterBundleDungeonID int NOT NULL,
@@ -112,7 +116,7 @@ GO
 )
 GO
 
-CREATE TABLE Loot
+CREATE TABLE Loot --
 (
    LootID int IDENTITY(1,1),
    LootName nvarchar(50),
@@ -120,7 +124,7 @@ CREATE TABLE Loot
 )
 GO
 
-CREATE TABLE CharLoot
+CREATE TABLE CharLoot --
 (
    CharLootID int IDENTITY(1,1),
    CharLootCharacterID int,
@@ -129,14 +133,14 @@ CREATE TABLE CharLoot
 )
 GO
 
-CREATE TABLE ConsumType
+CREATE TABLE ConsumType --
 (
    ConsumTypeID int IDENTITY(1,1),
    EquipTypeName nvarchar(50)
 )
 GO
 
-CREATE TABLE Consum
+CREATE TABLE Consum --
 (
    ConsumID int IDENTITY(1,1),
    ConsumConsumTypeID int,
@@ -145,7 +149,7 @@ CREATE TABLE Consum
 )
 GO
 
-CREATE TABLE CharConsum
+CREATE TABLE CharConsum --
 (
    CharConsumID int IDENTITY(1,1),
    CharConsumCharacterID int,
@@ -154,14 +158,14 @@ CREATE TABLE CharConsum
 )
 GO
 
-CREATE TABLE EquipType
+CREATE TABLE EquipType --
 (
    EquipTypeID int IDENTITY(1,1),
    EquipTypeName nvarchar(50)
 )
 GO
 
-CREATE TABLE Equip
+CREATE TABLE Equip --
 (
    EquipID int IDENTITY(1,1),
    EquipEquipTypeID int,
@@ -170,7 +174,7 @@ CREATE TABLE Equip
 )
 GO
 
-CREATE TABLE CharEquip
+CREATE TABLE CharEquip --
 (
    CharEquipID int IDENTITY(1,1),
    CharEquipCharacterID int,
@@ -179,7 +183,7 @@ CREATE TABLE CharEquip
 )
 GO
 
-CREATE TABLE Spells
+CREATE TABLE Spells --
 (
    SpellsID int IDENTITY(1,1),
    SpellMana int,
@@ -188,14 +192,17 @@ CREATE TABLE Spells
 )
 GO
 
-CREATE TABLE CharSpells
+CREATE TABLE CharSpells --
 (
    CharSpellsID int IDENTITY(1,1),
    CharSpellsCharacterID int,
    CharSpellsSpellID int
 )
 GO
+--DONE CREATING TABLES
 
+
+--ADDING PRIMARY KEYS
 ALTER TABLE Loot ADD PRIMARY KEY (LootID)
 GO
 ALTER TABLE CharLoot ADD PRIMARY KEY (CharLootID)
@@ -234,3 +241,9 @@ ALTER TABLE Class ADD PRIMARY KEY (ClassID)
 GO
 ALTER TABLE Monsters ADD PRIMARY KEY (MonsterID)
 GO
+--DONE ADDING PRIMARY KEYS
+
+
+--ADDING FOREIN KEYS CONSTRAINT
+
+--DONE ADDING FOREIGN KEY CONSTRAINT
