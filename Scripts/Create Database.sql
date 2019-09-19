@@ -14,7 +14,7 @@ CREATE DATABASE BD_IdleGame
 --CREATING TABLES
  CREATE TABLE Characters --This table creates characters with stats, equipment, level, etc...
 (
-   CharID int IDENTITY(1,1),
+   CharID int IDENTITY(1,1), 
    CharRaceID int NOT NULL,
    CharClassID int NOT NULL,
    CharName nvarchar(50) ,
@@ -245,6 +245,8 @@ GO
 
 
 --ADDING FOREIN KEYS CONSTRAINT
+ALTER TABLE Characters ADD CONSTRAINT CHK_CharHP CHECK (CharHP >= 0);
+GO
 ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Race FOREIGN KEY (CharRaceID) REFERENCES Race(RaceID)
 GO
 ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Class FOREIGN KEY (CharClassID) REFERENCES Class(ClassID)
