@@ -1,0 +1,7 @@
+[ODBC]
+DRIVER=SQL Server
+UID=AlexMartigny
+DATABASE=BD_IdleGame
+WSID=J-C236-OL-06
+APP=Microsoft Office 2016
+SERVER=J-C236-OL-06

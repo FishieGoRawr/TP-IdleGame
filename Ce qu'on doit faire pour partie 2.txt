@@ -1,0 +1,3 @@
+-Tout les interfaces (Creation de persos, creation d'item, creation de monstres, creation de dongeon, quests, loot...)
+-Tout est permissif (Je peux crée un perso lv100 avec 100 str si je veux, ou un monstre intuable)
+-Tout doit etre très intuituif et ergonomique pour l'usager (Ne doit pas passer son temps a fermer/reouvrir des fenêtres)
