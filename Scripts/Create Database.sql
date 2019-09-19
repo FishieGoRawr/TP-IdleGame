@@ -116,7 +116,7 @@ GO
 )
 GO
 
-CREATE TABLE Loot --
+CREATE TABLE Loot --This table has all possible loot
 (
    LootID int IDENTITY(1,1),
    LootName nvarchar(50),
@@ -124,7 +124,7 @@ CREATE TABLE Loot --
 )
 GO
 
-CREATE TABLE CharLoot --
+CREATE TABLE CharLoot --This table has the character loot inventory
 (
    CharLootID int IDENTITY(1,1),
    CharLootCharacterID int,
@@ -133,14 +133,14 @@ CREATE TABLE CharLoot --
 )
 GO
 
-CREATE TABLE ConsumType --
+CREATE TABLE ConsumType --This table keeps track the possible types of consummable
 (
    ConsumTypeID int IDENTITY(1,1),
    EquipTypeName nvarchar(50)
 )
 GO
 
-CREATE TABLE Consum --
+CREATE TABLE Consum --This table keeps the possible consummable
 (
    ConsumID int IDENTITY(1,1),
    ConsumConsumTypeID int,
@@ -149,7 +149,7 @@ CREATE TABLE Consum --
 )
 GO
 
-CREATE TABLE CharConsum --
+CREATE TABLE CharConsum --This table keeps the character's consummable
 (
    CharConsumID int IDENTITY(1,1),
    CharConsumCharacterID int,
@@ -158,14 +158,14 @@ CREATE TABLE CharConsum --
 )
 GO
 
-CREATE TABLE EquipType --
+CREATE TABLE EquipType --This table keeps the possible equipment type
 (
    EquipTypeID int IDENTITY(1,1),
    EquipTypeName nvarchar(50)
 )
 GO
 
-CREATE TABLE Equip --
+CREATE TABLE Equip --This table keeps all possible equipment
 (
    EquipID int IDENTITY(1,1),
    EquipEquipTypeID int,
@@ -174,7 +174,7 @@ CREATE TABLE Equip --
 )
 GO
 
-CREATE TABLE CharEquip --
+CREATE TABLE CharEquip --This table keeps the charatcer's equipment
 (
    CharEquipID int IDENTITY(1,1),
    CharEquipCharacterID int,
@@ -183,7 +183,7 @@ CREATE TABLE CharEquip --
 )
 GO
 
-CREATE TABLE Spells --
+CREATE TABLE Spells --This table keeps track of all possible spells
 (
    SpellsID int IDENTITY(1,1),
    SpellMana int,
@@ -192,7 +192,7 @@ CREATE TABLE Spells --
 )
 GO
 
-CREATE TABLE CharSpells --
+CREATE TABLE CharSpells --This table keeps the character's spells
 (
    CharSpellsID int IDENTITY(1,1),
    CharSpellsCharacterID int,
