@@ -1,0 +1,6 @@
+CREATE FUNCTION fnFillRaceCmb ()
+	RETURNS TABLE
+AS
+	RETURN 
+		SELECT DISTINCT Race.RaceID AS ID, Race.RaceName AS Name FROM Race
+	
