@@ -47,14 +47,14 @@ CREATE DATABASE BD_IdleGame
 )
 GO
 
- CREATE TABLE Races --This table set the character's race
+ CREATE TABLE Races --This table set the character's races
 (
    RaceID int IDENTITY(1,1),
    RaceName nvarchar(50) NOT NULL,
 )
 GO
 
- CREATE TABLE Classes --This table set the character's class
+ CREATE TABLE Classes --This table set the character's Classes
 (
    ClassID int IDENTITY(1,1),
    ClassName nvarchar(50) NOT NULL,
@@ -136,7 +136,7 @@ GO
 CREATE TABLE ConsumType --This table keeps track the possible types of consummable
 (
    ConsumTypeID int IDENTITY(1,1),
-   EquipTypeName nvarchar(50)
+   ConsumTypeName nvarchar(50)
 )
 GO
 
@@ -203,7 +203,7 @@ GO
 
 
 --ADDING PRIMARY KEYS
-ALTER TABLE Loot ADD PRIMARY KEY (LootID)
+ALTER TABLE Loots ADD PRIMARY KEY (LootID)
 GO
 ALTER TABLE CharLoot ADD PRIMARY KEY (CharLootID)
 GO
@@ -211,13 +211,13 @@ ALTER TABLE Characters ADD PRIMARY KEY (CharID)
 GO
 ALTER TABLE ConsumType ADD PRIMARY KEY (ConsumTypeID)
 GO
-ALTER TABLE Consum ADD PRIMARY KEY (ConsumID)
+ALTER TABLE Consummables ADD PRIMARY KEY (ConsumID)
 GO
 ALTER TABLE CharConsum ADD PRIMARY KEY (CharConsumID)
 GO
 ALTER TABLE EquipType ADD PRIMARY KEY (EquipTypeID)
 GO
-ALTER TABLE Equip ADD PRIMARY KEY (EquipID)
+ALTER TABLE Equipements ADD PRIMARY KEY (EquipID)
 GO
 ALTER TABLE CharEquip ADD PRIMARY KEY (CharEquipID)
 GO
@@ -231,39 +231,107 @@ ALTER TABLE Quests ADD PRIMARY KEY (QuestID)
 GO
 ALTER TABLE Dungeons ADD PRIMARY KEY (DungeonID)
 GO
-ALTER TABLE Race ADD PRIMARY KEY (RaceID)
+ALTER TABLE Races ADD PRIMARY KEY (RaceID)
 GO
 ALTER TABLE Kills ADD PRIMARY KEY (KillsID)
 GO
 ALTER TABLE MonsterBundle ADD PRIMARY KEY (MonsterBundleID)
 GO
-ALTER TABLE Class ADD PRIMARY KEY (ClassID)
+ALTER TABLE Classes ADD PRIMARY KEY (ClassID)
 GO
 ALTER TABLE Monsters ADD PRIMARY KEY (MonsterID)
 GO
 --DONE ADDING PRIMARY KEYS
 
+--**ADDING BASE DATA**
+
+--*ADDING RACES*
+INSERT INTO Races (RaceName)
+VALUES 
+('Elfe des Montagnes'),
+('Argonien'),
+('Elfe des Forêts'),
+('Elfe de l''ombre'),
+('Orque'),
+('Nordique'),
+('Rougegarde'),
+('Khajiit'),
+('Bréton'),
+('Impérial')
+;
+--*DONE ADDING RACES*
+
+--*ADDING CLASSES*
+INSERT INTO Classes(ClassName)
+VALUES 
+('Guerrier'),
+('Archer'),
+('Mage'),
+('Berserk'),
+('Assassin'),
+('Paladin')
+;
+--*DONE ADDING CLASSES*
+
+--*ADDING SPELLS*
+INSERT INTO Spells(SpellMana,SpellName,SpellDamage)
+VALUES
+(10,'Flammes',25),
+(10,'Froid mordant',25),
+(20,'Éclair enflammé',50),
+(20,'Éclair foudroyant',50),
+(15,'Éclairs multiples',40),
+(20,'Boule de feu',40),
+(30,'Incinération',60)
+;
+--*DONE ADDING SPELLS*
+
+--*ADDING CONSUMMABLES TYPES*
+INSERT INTO ConsumType(ConsumTypeName)
+VALUES
+('Potion de soin'),
+('Potion de mana'),
+('Potion de force'),
+('Potion d''intelligence')
+;
+--*DONE ADDING CONSUMMABLES TYPES*
+
+--*ADDING CONSUMMABLES*
+INSERT INTO Consummables(ConsumConsumTypeID,ConsumName,ConsumRestore)
+VALUES
+(1,'Petite potion de Regain  de santé',25),
+(1,'Potion de Regain  de santé',25),
+(2,'Potion de restauration de santé',50),
+(2,'Petite potion de Regain  de mana',100),
+(2,'Potion de Regain de Mana',50),
+(2,'Potion de restauration de Mana',100),
+(3,'Potion de Renfort de force',10),
+(4,'Potion d''intelligence',10)
+;
+--*DONE ADDING CONSUMMABLES*
+
+--**DONE ADDING BASE DATA**
 
 --ADDING FOREIN KEYS CONSTRAINT
 ALTER TABLE Characters ADD CONSTRAINT CHK_CharHP CHECK (CharHP >= 0);
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Race FOREIGN KEY (CharRaceID) REFERENCES Race(RaceID)
+ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Race FOREIGN KEY (CharRaceID) REFERENCES Races(RaceID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Class FOREIGN KEY (CharClassID) REFERENCES Class(ClassID)
+ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Class FOREIGN KEY (CharClassID) REFERENCES Classes(ClassID)
 GO
 ALTER TABLE CharLoot ADD CONSTRAINT FK_CharLoot_Characters FOREIGN KEY (CharLootCharacterID) REFERENCES Characters(CharID)
 GO
-ALTER TABLE CharLoot ADD CONSTRAINT FK_CharLoot_Loot FOREIGN KEY (CharLootLootID) REFERENCES Loot(LootID)
+ALTER TABLE CharLoot ADD CONSTRAINT FK_CharLoot_Loot FOREIGN KEY (CharLootLootID) REFERENCES Loots(LootID)
 GO
-ALTER TABLE Consum ADD CONSTRAINT FK_Consum_ConsumType FOREIGN KEY (ConsumConsumTypeID) REFERENCES ConsumType(ConsumTypeID)
+ALTER TABLE Consummables ADD CONSTRAINT FK_Consum_ConsumType FOREIGN KEY (ConsumConsumTypeID) REFERENCES ConsumType(ConsumTypeID)
 GO
-ALTER TABLE CharConsum ADD CONSTRAINT FK_CharConsum_Consum FOREIGN KEY (CharConsumConsumID) REFERENCES Consum(ConsumID)
+ALTER TABLE CharConsum ADD CONSTRAINT FK_CharConsum_Consum FOREIGN KEY (CharConsumConsumID) REFERENCES Consummables(ConsumID)
 GO
 ALTER TABLE CharConsum ADD CONSTRAINT FK_CharConsum_Characters FOREIGN KEY (CharConsumCharacterID) REFERENCES Characters(CharID)
 GO
-ALTER TABLE Equip ADD CONSTRAINT FK_Equip_EquipType FOREIGN KEY (EquipEquipTypeID) REFERENCES EquipType(EquipTypeID)
+ALTER TABLE Equipements ADD CONSTRAINT FK_Equip_EquipType FOREIGN KEY (EquipEquipTypeID) REFERENCES EquipType(EquipTypeID)
 GO
-ALTER TABLE CharEquip ADD CONSTRAINT FK_CharEquip_Equip FOREIGN KEY (CharEquipEquipID) REFERENCES Equip(EquipID)
+ALTER TABLE CharEquip ADD CONSTRAINT FK_CharEquip_Equip FOREIGN KEY (CharEquipEquipID) REFERENCES Equipements(EquipID)
 GO
 ALTER TABLE CharEquip ADD CONSTRAINT FK_CharEquip_Characters FOREIGN KEY (CharEquipCharacterID) REFERENCES Characters(CharID)
 GO
