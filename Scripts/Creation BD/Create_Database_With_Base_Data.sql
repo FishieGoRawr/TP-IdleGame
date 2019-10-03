@@ -101,7 +101,6 @@ GO
  CREATE TABLE Dungeons --This table keeps track of dungeon and which "MonsterBundle" is associated with it
 (
    DungeonID int IDENTITY(1,1),
-   DungeonMonsterBundleID int NOT NULL,
    DungeonName nvarchar(50),
    DungeonLevel int NOT NULL
 )
@@ -110,7 +109,6 @@ GO
  CREATE TABLE MonsterBundle --This table creates a bundle that the user has to fight in order to progress (Complete dungeon)
 (
    MonsterBundleID int IDENTITY(1,1),
-   MonsterBundleDungeonID int NOT NULL,
    MonsterBundleMonsterID int NOT NULL,
    MonsterQty int NOT NULL
 )
@@ -250,14 +248,14 @@ INSERT INTO Races (RaceName)
 VALUES 
 ('Elfe des Montagnes'),
 ('Argonien'),
-('Elfe des Forêts'),
+('Elfe des Forï¿½ts'),
 ('Elfe de l''ombre'),
 ('Orque'),
 ('Nordique'),
 ('Rougegarde'),
 ('Khajiit'),
-('Bréton'),
-('Impérial')
+('Brï¿½ton'),
+('Impï¿½rial')
 ;
 --*DONE ADDING RACES*
 
@@ -278,11 +276,11 @@ INSERT INTO Spells(SpellMana,SpellName,SpellDamage)
 VALUES
 (10,'Flammes',25),
 (10,'Froid mordant',25),
-(20,'Éclair enflammé',50),
-(20,'Éclair foudroyant',50),
-(15,'Éclairs multiples',40),
+(20,'ï¿½clair enflammï¿½',50),
+(20,'ï¿½clair foudroyant',50),
+(15,'ï¿½clairs multiples',40),
 (20,'Boule de feu',40),
-(30,'Incinération',60)
+(30,'Incinï¿½ration',60)
 ;
 --*DONE ADDING SPELLS*
 
@@ -299,9 +297,9 @@ VALUES
 --*ADDING CONSUMMABLES*
 INSERT INTO Consummables(ConsumConsumTypeID,ConsumName,ConsumRestore)
 VALUES
-(1,'Petite potion de Regain  de santé',25),
-(1,'Potion de Regain  de santé',25),
-(2,'Potion de restauration de santé',50),
+(1,'Petite potion de Regain  de santï¿½',25),
+(1,'Potion de Regain  de santï¿½',25),
+(2,'Potion de restauration de santï¿½',50),
 (2,'Petite potion de Regain  de mana',100),
 (2,'Potion de Regain de Mana',50),
 (2,'Potion de restauration de Mana',100),
