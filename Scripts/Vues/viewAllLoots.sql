@@ -1,0 +1,2 @@
+CREATE VIEW viewAllLoots AS SELECT * FROM Loots
+

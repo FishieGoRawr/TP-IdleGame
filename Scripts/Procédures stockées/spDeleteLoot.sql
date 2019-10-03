@@ -1,0 +1,5 @@
+CREATE PROCEDURE spDeleteLoot
+@id INTEGER
+AS
+DELETE FROM Loots
+WHERE Loots.LootID= @id
