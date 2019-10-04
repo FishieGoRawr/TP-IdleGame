@@ -1,5 +1,5 @@
 CREATE PROCEDURE spCreateBundle 
-@monsID integer, @qty integer
+@dunID integer, @monsID integer, @qty integer
 AS
 INSERT INTO MonsterBundle
-VALUES(0, @monsID, @qty)
+VALUES(@dunID, @monsID, @qty)
