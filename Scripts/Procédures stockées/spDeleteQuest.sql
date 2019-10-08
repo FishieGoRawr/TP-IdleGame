@@ -1,0 +1,5 @@
+CREATE PROCEDURE spDeleteQuest
+@id INTEGER
+AS
+DELETE FROM Quests
+WHERE QuestID = @id

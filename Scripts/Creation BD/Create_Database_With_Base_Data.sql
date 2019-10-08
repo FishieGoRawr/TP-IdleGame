@@ -77,6 +77,7 @@ GO
    MonsterLevel int NOT NULL,
    MonsterHP int NOT NULL,
    MonsterDmg int NOT NULL,
+   MonsterName nvarchar(50)
 )
 GO
 
@@ -109,6 +110,7 @@ GO
  CREATE TABLE MonsterBundle --This table creates a bundle that the user has to fight in order to progress (Complete dungeon)
 (
    MonsterBundleID int IDENTITY(1,1),
+   MonsterBundleDungeonID int,
    MonsterBundleMonsterID int NOT NULL,
    MonsterQty int NOT NULL
 )
