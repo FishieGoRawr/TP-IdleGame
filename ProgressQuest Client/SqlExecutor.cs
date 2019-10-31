@@ -22,7 +22,7 @@ namespace ProgressQuest_Client
         SqlConnection cnx;
 
         /// <summary>
-        /// Default constructor with valid connection
+        /// Default constructor. Create a connection without validating it.
         /// </summary>
         public SqlExecutor()
         {
@@ -31,12 +31,12 @@ namespace ProgressQuest_Client
         }
 
         /// <summary>
-        /// Constructor that takes differerent connection args than default
+        /// Create and validate a connection using the specified values.
         /// </summary>
-        /// <param name="server"> Server location.</param>
-        /// <param name="database"> Database name.</param>
-        /// <param name="user"> Username (SQLServer cred).</param>
-        /// <param name="pass"> Password (SQLServer cred).</param>
+        /// <param name="server">Create a connection to this server.</param>
+        /// <param name="database">Create a connection using this database.</param>
+        /// <param name="user">Create a connection using this username.</param>
+        /// <param name="pass">Create a connection using this password.</param>
         public SqlExecutor(string server, string database, string user, string pass)
         {
             try
@@ -47,9 +47,13 @@ namespace ProgressQuest_Client
             catch (Exception e)
             {
                 Console.WriteLine("Failure: {0}", e.Message);
-            }            
+            }
         }
 
+        /// <summary>
+        /// Change the server name of an existing connection.
+        /// </summary>
+        /// <param name="newServer">Server name to change to.</param>
         public void changeServer(string newServer)
         {
             string tempServer = server;
@@ -72,6 +76,10 @@ namespace ProgressQuest_Client
             }
         }
 
+        /// <summary>
+        /// Change the database of an existing connection.
+        /// </summary>
+        /// <param name="newDatabase">Database to change to.</param>
         public void changeDatabase(string newDatabase)
         {
             string tempDatabase = database;
@@ -94,6 +102,11 @@ namespace ProgressQuest_Client
             }
         }
 
+        /// <summary>
+        /// Change the credentials (User & password) of an existing connection.
+        /// </summary>
+        /// <param name="newUser">Username to change to.</param>
+        /// <param name="newPass">Password to change to.</param>
         public void changeCredentials(string newUser, string newPass)
         {
             string tempUser = user, tempPass = pass;
@@ -116,16 +129,19 @@ namespace ProgressQuest_Client
             }
         }
 
+        /// <summary>
+        /// Validate the connection at any given point in time with the constructed connection string.
+        /// </summary>
         public void validateServer()
         {
             try
             {
                 Console.WriteLine("Connecting to: {0}", cnxString);
-                using (var connection = new SqlConnection(cnxString))
+                using (SqlConnection connection = new SqlConnection(cnxString))
                 {
                     Console.WriteLine("Executing: {0}", "SELECT 1");
 
-                    var command = new SqlCommand("SELECT 1", connection);
+                    SqlCommand command = new SqlCommand("SELECT 1", connection);
 
                     connection.Open();
                     Console.WriteLine("SQL Connection successful.");

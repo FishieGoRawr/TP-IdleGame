@@ -1,0 +1,126 @@
+\hypertarget{class_progress_quest___client_1_1_sql_executor}{}\doxysection{Progress\+Quest\+\_\+\+Client.\+Sql\+Executor Class Reference}
+\label{class_progress_quest___client_1_1_sql_executor}\index{ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}}
+
+
+Principal tool to communicate with DB  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_progress_quest___client_1_1_sql_executor_a7ff13ae775e554b380067f6e8cdc83a0}{Sql\+Executor}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. Create a connection without validating it. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_progress_quest___client_1_1_sql_executor_ad730e702e5199cfefd7d2ca23aff253d}{Sql\+Executor}} (string server, string database, string user, string pass)
+\begin{DoxyCompactList}\small\item\em Create and validate a connection using the specified values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_progress_quest___client_1_1_sql_executor_a8e77c668184137b508344c48f50bf3cb}{change\+Server}} (string new\+Server)
+\begin{DoxyCompactList}\small\item\em Change the server name of an existing connection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_progress_quest___client_1_1_sql_executor_a3ca86dc0795a2786d84ea63adfba0f84}{change\+Database}} (string new\+Database)
+\begin{DoxyCompactList}\small\item\em Change the database of an existing connection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_progress_quest___client_1_1_sql_executor_a0db016f613d80eca40599f8f4d4c40ad}{change\+Credentials}} (string new\+User, string new\+Pass)
+\begin{DoxyCompactList}\small\item\em Change the credentials (User \& password) of an existing connection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_progress_quest___client_1_1_sql_executor_a9602acc5bb61e18b1620c82505305b32}{validate\+Server}} ()
+\begin{DoxyCompactList}\small\item\em Validate the connection at any given point in time with the constructed connection string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Principal tool to communicate with DB 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_progress_quest___client_1_1_sql_executor_a7ff13ae775e554b380067f6e8cdc83a0}\label{class_progress_quest___client_1_1_sql_executor_a7ff13ae775e554b380067f6e8cdc83a0}} 
+\index{ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}!SqlExecutor@{SqlExecutor}}
+\index{SqlExecutor@{SqlExecutor}!ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}}
+\doxysubsubsection{\texorpdfstring{SqlExecutor()}{SqlExecutor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Progress\+Quest\+\_\+\+Client.\+Sql\+Executor.\+Sql\+Executor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor. Create a connection without validating it. 
+
+\mbox{\Hypertarget{class_progress_quest___client_1_1_sql_executor_ad730e702e5199cfefd7d2ca23aff253d}\label{class_progress_quest___client_1_1_sql_executor_ad730e702e5199cfefd7d2ca23aff253d}} 
+\index{ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}!SqlExecutor@{SqlExecutor}}
+\index{SqlExecutor@{SqlExecutor}!ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}}
+\doxysubsubsection{\texorpdfstring{SqlExecutor()}{SqlExecutor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Progress\+Quest\+\_\+\+Client.\+Sql\+Executor.\+Sql\+Executor (\begin{DoxyParamCaption}\item[{string}]{server,  }\item[{string}]{database,  }\item[{string}]{user,  }\item[{string}]{pass }\end{DoxyParamCaption})}
+
+
+
+Create and validate a connection using the specified values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & Create a connection to this server.\\
+\hline
+{\em database} & Create a connection using this database.\\
+\hline
+{\em user} & Create a connection using this username.\\
+\hline
+{\em pass} & Create a connection using this password.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_progress_quest___client_1_1_sql_executor_a0db016f613d80eca40599f8f4d4c40ad}\label{class_progress_quest___client_1_1_sql_executor_a0db016f613d80eca40599f8f4d4c40ad}} 
+\index{ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}!changeCredentials@{changeCredentials}}
+\index{changeCredentials@{changeCredentials}!ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}}
+\doxysubsubsection{\texorpdfstring{changeCredentials()}{changeCredentials()}}
+{\footnotesize\ttfamily void Progress\+Quest\+\_\+\+Client.\+Sql\+Executor.\+change\+Credentials (\begin{DoxyParamCaption}\item[{string}]{new\+User,  }\item[{string}]{new\+Pass }\end{DoxyParamCaption})}
+
+
+
+Change the credentials (User \& password) of an existing connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+User} & Username to change to.\\
+\hline
+{\em new\+Pass} & Password to change to.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_progress_quest___client_1_1_sql_executor_a3ca86dc0795a2786d84ea63adfba0f84}\label{class_progress_quest___client_1_1_sql_executor_a3ca86dc0795a2786d84ea63adfba0f84}} 
+\index{ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}!changeDatabase@{changeDatabase}}
+\index{changeDatabase@{changeDatabase}!ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}}
+\doxysubsubsection{\texorpdfstring{changeDatabase()}{changeDatabase()}}
+{\footnotesize\ttfamily void Progress\+Quest\+\_\+\+Client.\+Sql\+Executor.\+change\+Database (\begin{DoxyParamCaption}\item[{string}]{new\+Database }\end{DoxyParamCaption})}
+
+
+
+Change the database of an existing connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Database} & Database to change to.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_progress_quest___client_1_1_sql_executor_a8e77c668184137b508344c48f50bf3cb}\label{class_progress_quest___client_1_1_sql_executor_a8e77c668184137b508344c48f50bf3cb}} 
+\index{ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}!changeServer@{changeServer}}
+\index{changeServer@{changeServer}!ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}}
+\doxysubsubsection{\texorpdfstring{changeServer()}{changeServer()}}
+{\footnotesize\ttfamily void Progress\+Quest\+\_\+\+Client.\+Sql\+Executor.\+change\+Server (\begin{DoxyParamCaption}\item[{string}]{new\+Server }\end{DoxyParamCaption})}
+
+
+
+Change the server name of an existing connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Server} & Server name to change to.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_progress_quest___client_1_1_sql_executor_a9602acc5bb61e18b1620c82505305b32}\label{class_progress_quest___client_1_1_sql_executor_a9602acc5bb61e18b1620c82505305b32}} 
+\index{ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}!validateServer@{validateServer}}
+\index{validateServer@{validateServer}!ProgressQuest\_Client.SqlExecutor@{ProgressQuest\_Client.SqlExecutor}}
+\doxysubsubsection{\texorpdfstring{validateServer()}{validateServer()}}
+{\footnotesize\ttfamily void Progress\+Quest\+\_\+\+Client.\+Sql\+Executor.\+validate\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Validate the connection at any given point in time with the constructed connection string. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+P\+:/École/\+Automne 2019/\+Prog I\+I\+I/\+T\+P Progress\+Quest/\+T\+P-\/\+Idle\+Game/\+Progress\+Quest Client/Sql\+Executor.\+cs\end{DoxyCompactItemize}
