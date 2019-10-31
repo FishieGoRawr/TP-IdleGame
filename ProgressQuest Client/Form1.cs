@@ -22,7 +22,7 @@ namespace ProgressQuest_Client
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            
+            sqlExec = new SqlExecutor();
         }
 
         private void BtnTest_Click(object sender, EventArgs e)
