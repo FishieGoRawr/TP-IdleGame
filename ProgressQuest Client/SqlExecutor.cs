@@ -10,6 +10,8 @@ namespace ProgressQuest_Client
 {
     class SqlExecutor
     {
+        SqlConnection cnx = new SqlConnection("Data Source='J-C236-OL-06';Initial Catalog='BD_IdleGame';User ID='AlexMartigny';Password='Orange123';");
+
         public void changeDB(string change)
         {
 
@@ -22,6 +24,7 @@ namespace ProgressQuest_Client
 
         public bool testConnexion()
         {
+            cnx.Open();
             return true;
         }
 
