@@ -12,9 +12,23 @@ namespace ProgressQuest_Client
 {
     public partial class Form1 : Form
     {
+        SqlExecutor sqlExec;
+
         public Form1()
         {
+            
             InitializeComponent();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            sqlExec = new SqlExecutor();
+        }
+
+        private void BtnTest_Click(object sender, EventArgs e)
+        {
+            sqlExec = new SqlExecutor();
+            sqlExec.changeDatabase("lmao");
         }
     }
 }

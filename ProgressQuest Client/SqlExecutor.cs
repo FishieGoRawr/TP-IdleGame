@@ -4,60 +4,156 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Data;
+
+
 
 namespace ProgressQuest_Client
 {
+    /// <summary>
+    /// Principal tool to communicate with DB
+    /// </summary>
     class SqlExecutor
     {
-        SqlConnection cnx = new SqlConnection("Data Source='J-C236-OL-06';Initial Catalog='BD_IdleGame';User ID='AlexMartigny';Password='Orange123';");
+        string cnxString = "";
+        string database = "BD_IdleGame";
+        string server = "J-C236-OL-06";
+        string user = "AlexMartigny";
+        string pass = "Orange123";
+        SqlConnection cnx;
 
-        public void changeDB(string change)
+        /// <summary>
+        /// Default constructor. Create a connection without validating it.
+        /// </summary>
+        public SqlExecutor()
         {
-
+            cnxString = "Data Source='" + server + "';Initial Catalog='" + database + "';User ID='" + user + "';Password='" + pass + "'";
+            this.cnx = new SqlConnection(cnxString);
         }
 
-        public void changeServer(string change)
+        /// <summary>
+        /// Create and validate a connection using the specified values.
+        /// </summary>
+        /// <param name="server">Create a connection to this server.</param>
+        /// <param name="database">Create a connection using this database.</param>
+        /// <param name="user">Create a connection using this username.</param>
+        /// <param name="pass">Create a connection using this password.</param>
+        public SqlExecutor(string server, string database, string user, string pass)
         {
-
+            try
+            {
+                cnxString = "Data Source='" + server + "';Initial Catalog='" + database + "';User ID='" + user + "';Password='" + pass + "'";
+                this.cnx = new SqlConnection(cnxString);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Failure: {0}", e.Message);
+            }
         }
 
-        public bool testConnexion()
+        /// <summary>
+        /// Change the server name of an existing connection.
+        /// </summary>
+        /// <param name="newServer">Server name to change to.</param>
+        public void changeServer(string newServer)
         {
-            cnx.Open();
-            return true;
+            string tempServer = server;
+
+            try
+            {
+                server = newServer;
+                cnxString = "Data Source='" + server + "';Initial Catalog='" + database + "';User ID='" + user + "';Password='" + pass + "'";
+                cnx = new SqlConnection(cnxString);
+
+                cnx.Open();
+
+                Console.WriteLine("Successfully changed server for: {0}", server);
+            }
+            catch (SqlException e)
+            {
+                server = tempServer;
+                Console.WriteLine("Failure: {0}", e.Message);
+                Console.WriteLine("Reverting changes...\nDone!");
+            }
         }
 
-        //public DataTable extractTable()
-        //{
-        //    return 
-        //}
-
-        //public DataTable extractFunction()
-        //{
-        //    return;
-        //}
-
-        //Revoir le retour de classe
-        public void extractFunction(string nomFunction, SqlParameter[] param)
+        /// <summary>
+        /// Change the database of an existing connection.
+        /// </summary>
+        /// <param name="newDatabase">Database to change to.</param>
+        public void changeDatabase(string newDatabase)
         {
+            string tempDatabase = database;
 
+            try
+            {
+                database = newDatabase;
+                cnxString = "Data Source='" + server + "';Initial Catalog='" + database + "';User ID='" + user + "';Password='" + pass + "'";
+                cnx = new SqlConnection(cnxString);
+
+                cnx.Open();
+
+                Console.WriteLine("Successfully changed database for: {0}", database);
+            }
+            catch (SqlException e)
+            {
+                database = newDatabase;
+                Console.WriteLine("Failure: {0}", e.Message);
+                Console.WriteLine("Reverting changes...\nDone!");
+            }
         }
 
-        public void executeProc_NoParam()
+        /// <summary>
+        /// Change the credentials (User & password) of an existing connection.
+        /// </summary>
+        /// <param name="newUser">Username to change to.</param>
+        /// <param name="newPass">Password to change to.</param>
+        public void changeCredentials(string newUser, string newPass)
         {
+            string tempUser = user, tempPass = pass;
 
+            try
+            {
+                user = newUser;
+                pass = newPass;
+                cnxString = "Data Source='" + server + "';Initial Catalog='" + database + "';User ID='" + newUser + "';Password='" + newPass + "'";
+                cnx = new SqlConnection(cnxString);
+
+                cnx.Open();
+            }
+            catch (Exception e)
+            {
+                user = tempUser;
+                pass = tempPass;
+                Console.WriteLine("Failure: {0}", e.Message);
+                Console.WriteLine("Reverting changes...\n Done!");
+            }
         }
 
-        public void executeProc_WithParam()
+        /// <summary>
+        /// Validate the connection at any given point in time with the constructed connection string.
+        /// </summary>
+        public void validateServer()
         {
+            try
+            {
+                Console.WriteLine("Connecting to: {0}", cnxString);
+                using (SqlConnection connection = new SqlConnection(cnxString))
+                {
+                    Console.WriteLine("Executing: {0}", "SELECT 1");
 
-        }
+                    SqlCommand command = new SqlCommand("SELECT 1", connection);
 
-        //Revoir le retour de classe
-        public void executeProc_Id()
-        {
+                    connection.Open();
+                    Console.WriteLine("SQL Connection successful.");
 
+                    command.ExecuteScalar();
+                    Console.WriteLine("SQL Query execution successful.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failure: {0}", ex.Message);
+            }
         }
     }
 }
