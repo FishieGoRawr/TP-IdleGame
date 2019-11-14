@@ -30,5 +30,15 @@ namespace ProgressQuest_Client
             sqlExec = new SqlExecutor();
             sqlExec.changeDatabase("lmao");
         }
+
+        private void CheckBox3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
