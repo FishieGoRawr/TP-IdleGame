@@ -68,10 +68,10 @@
             this.questName = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pendingQuest = new System.Windows.Forms.GroupBox();
-            this.dungeon1 = new System.Windows.Forms.CheckBox();
-            this.dungeon2 = new System.Windows.Forms.CheckBox();
-            this.dungeon3 = new System.Windows.Forms.CheckBox();
             this.questProgressbar = new System.Windows.Forms.ProgressBar();
+            this.dungeon3 = new System.Windows.Forms.CheckBox();
+            this.dungeon2 = new System.Windows.Forms.CheckBox();
+            this.dungeon1 = new System.Windows.Forms.CheckBox();
             this.completedQuest = new System.Windows.Forms.ListView();
             this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.speed)).BeginInit();
@@ -373,7 +373,7 @@
             // 
             this.speed.Cursor = System.Windows.Forms.Cursors.Default;
             this.speed.LargeChange = 3;
-            this.speed.Location = new System.Drawing.Point(913, 46);
+            this.speed.Location = new System.Drawing.Point(904, 34);
             this.speed.Maximum = 2;
             this.speed.Name = "speed";
             this.speed.Size = new System.Drawing.Size(222, 69);
@@ -381,7 +381,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(1155, 20);
+            this.btnStop.Location = new System.Drawing.Point(1145, 26);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(151, 33);
             this.btnStop.TabIndex = 35;
@@ -390,18 +390,18 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(742, 20);
+            this.btnStart.Location = new System.Drawing.Point(731, 23);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(151, 33);
             this.btnStart.TabIndex = 36;
-            this.btnStart.Text = "Start";
+            this.btnStart.Text = "Load character";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(922, 20);
+            this.label18.Location = new System.Drawing.Point(913, 8);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(56, 20);
             this.label18.TabIndex = 61;
@@ -440,26 +440,12 @@
             this.pendingQuest.TabStop = false;
             this.pendingQuest.Text = "Pending quest";
             // 
-            // dungeon1
+            // questProgressbar
             // 
-            this.dungeon1.AutoSize = true;
-            this.dungeon1.Location = new System.Drawing.Point(22, 65);
-            this.dungeon1.Name = "dungeon1";
-            this.dungeon1.Size = new System.Drawing.Size(147, 24);
-            this.dungeon1.TabIndex = 63;
-            this.dungeon1.Text = "Dungeon Name";
-            this.dungeon1.UseVisualStyleBackColor = true;
-            // 
-            // dungeon2
-            // 
-            this.dungeon2.AutoSize = true;
-            this.dungeon2.Location = new System.Drawing.Point(22, 95);
-            this.dungeon2.Name = "dungeon2";
-            this.dungeon2.Size = new System.Drawing.Size(147, 24);
-            this.dungeon2.TabIndex = 64;
-            this.dungeon2.Text = "Dungeon Name";
-            this.dungeon2.UseVisualStyleBackColor = true;
-            this.dungeon2.CheckedChanged += new System.EventHandler(this.CheckBox2_CheckedChanged);
+            this.questProgressbar.Location = new System.Drawing.Point(6, 237);
+            this.questProgressbar.Name = "questProgressbar";
+            this.questProgressbar.Size = new System.Drawing.Size(274, 32);
+            this.questProgressbar.TabIndex = 65;
             // 
             // dungeon3
             // 
@@ -470,14 +456,26 @@
             this.dungeon3.TabIndex = 65;
             this.dungeon3.Text = "Dungeon Name";
             this.dungeon3.UseVisualStyleBackColor = true;
-            this.dungeon3.CheckedChanged += new System.EventHandler(this.CheckBox3_CheckedChanged);
             // 
-            // questProgressbar
+            // dungeon2
             // 
-            this.questProgressbar.Location = new System.Drawing.Point(6, 237);
-            this.questProgressbar.Name = "questProgressbar";
-            this.questProgressbar.Size = new System.Drawing.Size(274, 32);
-            this.questProgressbar.TabIndex = 65;
+            this.dungeon2.AutoSize = true;
+            this.dungeon2.Location = new System.Drawing.Point(22, 95);
+            this.dungeon2.Name = "dungeon2";
+            this.dungeon2.Size = new System.Drawing.Size(147, 24);
+            this.dungeon2.TabIndex = 64;
+            this.dungeon2.Text = "Dungeon Name";
+            this.dungeon2.UseVisualStyleBackColor = true;
+            // 
+            // dungeon1
+            // 
+            this.dungeon1.AutoSize = true;
+            this.dungeon1.Location = new System.Drawing.Point(22, 65);
+            this.dungeon1.Name = "dungeon1";
+            this.dungeon1.Size = new System.Drawing.Size(147, 24);
+            this.dungeon1.TabIndex = 63;
+            this.dungeon1.Text = "Dungeon Name";
+            this.dungeon1.UseVisualStyleBackColor = true;
             // 
             // completedQuest
             // 

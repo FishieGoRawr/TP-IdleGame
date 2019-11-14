@@ -11,23 +11,25 @@ namespace ProgressQuest_Client
     class SqlPQ
     {
         SqlExecutor executor;
-        SqlConnection cnx;
+        DataTable table;
 
         public SqlPQ()
         {
             executor = new SqlExecutor();
-            cnx = executor.getConnection();
+            table = new DataTable();
         }
 
         public DataTable getAllLoots()
         {
-            DataTable table = new DataTable();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM getAllLoots", cnx);
+            table.Clear();
+            table = executor.executeView("SELECT * FROM viewAllLoots");
+            return table;
+        }
 
-            cnx.Open();
-            table.Load(cmd.ExecuteReader());
-            cnx.Close();
-
+        public DataTable getAllCharacters()
+        {
+            table.Clear();
+            table = executor.executeView("SELECT * FROM viewAllCharacters");
             return table;
         }
     }
