@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-
-
+using System.Data;
 
 namespace ProgressQuest_Client
 {
@@ -154,6 +153,38 @@ namespace ProgressQuest_Client
             {
                 Console.WriteLine("Failure: {0}", ex.Message);
             }
+        }
+
+        public DataTable executeView(string viewName)
+        {
+            DataTable table = new DataTable();
+            SqlCommand cmd = new SqlCommand(viewName, cnx);
+
+            cnx.Open();
+            table.Load(cmd.ExecuteReader());
+            cnx.Close();
+
+            return table;
+        }
+
+        public void executeSP(string spName)
+        {
+            SqlCommand cmd = new SqlCommand(spName, cnx);
+
+            cnx.Open();
+            cmd.ExecuteNonQuery();
+            cnx.Close();
+        }
+
+        public void executeSP(string spName, object[] paramList)
+        {
+            SqlCommand cmd = new SqlCommand(spName, cnx);
+            foreach (object param in paramList)
+                cmd.Parameters.Add(param);
+
+            cnx.Open();
+            cmd.ExecuteNonQuery();
+            cnx.Close();
         }
     }
 }
