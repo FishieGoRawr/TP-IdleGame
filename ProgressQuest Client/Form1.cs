@@ -31,6 +31,7 @@ namespace ProgressQuest_Client
             sqlExec.changeDatabase("lmao");
         }
 
+<<<<<<< HEAD
         private void BtnStart_Click(object sender, EventArgs e)
         {
             //sqlExec = new SqlExecutor();
@@ -44,6 +45,16 @@ namespace ProgressQuest_Client
             //sqlExec.executeSP("spCreateLoot", param);
 
             sqlExec = new SqlExecutor();
+=======
+        private void CheckBox3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+
+>>>>>>> 74ff4b8f39ef6a4dada480de4a4c189fad72588c
         }
     }
 }
