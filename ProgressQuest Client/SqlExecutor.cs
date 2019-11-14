@@ -11,7 +11,7 @@ namespace ProgressQuest_Client
     /// <summary>
     /// Principal tool to communicate with DB
     /// </summary>
-    class SqlExecutor
+    public class SqlExecutor
     {
         string cnxString = "";
         string database = "BD_IdleGame";
@@ -48,6 +48,15 @@ namespace ProgressQuest_Client
                 Console.WriteLine("Failure: {0}", e.Message);
             }
         }
+
+        /// <summary>
+        /// Public accessor to get the secure connection to our database.
+        /// </summary>
+        /// <returns>Cnx: Secure connection to the database</returns>
+        public SqlConnection GetConnection()
+        {
+            return cnx;
+        }        
 
         /// <summary>
         /// Change the server name of an existing connection.
