@@ -31,6 +31,22 @@ namespace ProgressQuest_Client
             sqlExec.changeDatabase("lmao");
         }
 
+        private void BtnStart_Click(object sender, EventArgs e)
+        {
+            //sqlExec = new SqlExecutor();
+            //object[,] param = new object[2, 2];
+
+            //param[0, 0] = "@name";
+            //param[0, 1] = "Lmao";
+            //param[1, 0] = "@value";
+            //param[1, 1] = 10;
+
+            //sqlExec.executeSP("spCreateLoot", param);
+
+            sqlExec = new SqlExecutor();
+
+        }
+
         private void CheckBox3_CheckedChanged(object sender, EventArgs e)
         {
 

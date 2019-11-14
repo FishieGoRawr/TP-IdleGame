@@ -29,6 +29,8 @@ namespace ProgressQuest_Client
             this.cnx = new SqlConnection(cnxString);
         }
 
+        
+
         /// <summary>
         /// Create and validate a connection using the specified values.
         /// </summary>
@@ -47,6 +49,11 @@ namespace ProgressQuest_Client
             {
                 Console.WriteLine("Failure: {0}", e.Message);
             }
+        }
+
+        public SqlConnection getConnection()
+        {
+            return cnx;
         }
 
         /// <summary>
@@ -155,6 +162,7 @@ namespace ProgressQuest_Client
             }
         }
 
+
         public DataTable executeView(string viewName)
         {
             DataTable table = new DataTable();
@@ -176,11 +184,17 @@ namespace ProgressQuest_Client
             cnx.Close();
         }
 
-        public void executeSP(string spName, object[] paramList)
+        public void executeSP(string spName, object[,] paramList)
         {
             SqlCommand cmd = new SqlCommand(spName, cnx);
-            foreach (object param in paramList)
-                cmd.Parameters.Add(param);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            for (int i = 0; i < paramList.GetLength(0); i++)
+            {
+                string paramName = paramList[i, 0].ToString();
+                var paramValue = paramList[i, 1];
+                cmd.Parameters.AddWithValue(paramName, paramValue);
+            }
 
             cnx.Open();
             cmd.ExecuteNonQuery();
