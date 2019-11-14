@@ -13,10 +13,11 @@ namespace ProgressQuest_Client
     public partial class Form1 : Form
     {
         SqlExecutor sqlExec;
+        SqlPQ accessDB;
 
         public Form1()
         {
-            
+            accessDB = new SqlPQ();
             InitializeComponent();
         }
 
@@ -29,6 +30,11 @@ namespace ProgressQuest_Client
         {
             sqlExec = new SqlExecutor();
             sqlExec.changeDatabase("lmao");
+        }
+
+        private void BtnStart_Click(object sender, EventArgs e)
+        {
+            accessDB.getAllCharacters();
         }
     }
 }

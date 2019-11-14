@@ -148,7 +148,7 @@
             this.cmbCharacter.Name = "cmbCharacter";
             this.cmbCharacter.Size = new System.Drawing.Size(335, 28);
             this.cmbCharacter.TabIndex = 8;
-            this.cmbCharacter.Text = "Charge character";
+            this.cmbCharacter.Text = "Please choose a character";
             // 
             // healthProgressbar
             // 
@@ -385,6 +385,7 @@
             this.btnStart.TabIndex = 36;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
             // label18
             // 
