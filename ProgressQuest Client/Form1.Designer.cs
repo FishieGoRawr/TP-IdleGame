@@ -66,7 +66,9 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.speed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -185,7 +187,7 @@
             // charHead
             // 
             this.charHead.AutoSize = true;
-            this.charHead.Location = new System.Drawing.Point(1054, 127);
+            this.charHead.Location = new System.Drawing.Point(1063, 127);
             this.charHead.Name = "charHead";
             this.charHead.Size = new System.Drawing.Size(48, 20);
             this.charHead.TabIndex = 13;
@@ -194,7 +196,7 @@
             // charTorso
             // 
             this.charTorso.AutoSize = true;
-            this.charTorso.Location = new System.Drawing.Point(1054, 228);
+            this.charTorso.Location = new System.Drawing.Point(1062, 231);
             this.charTorso.Name = "charTorso";
             this.charTorso.Size = new System.Drawing.Size(49, 20);
             this.charTorso.TabIndex = 14;
@@ -203,7 +205,7 @@
             // charWeapon2
             // 
             this.charWeapon2.AutoSize = true;
-            this.charWeapon2.Location = new System.Drawing.Point(1164, 316);
+            this.charWeapon2.Location = new System.Drawing.Point(1214, 314);
             this.charWeapon2.Name = "charWeapon2";
             this.charWeapon2.Size = new System.Drawing.Size(82, 20);
             this.charWeapon2.TabIndex = 15;
@@ -212,7 +214,7 @@
             // charRing2
             // 
             this.charRing2.AutoSize = true;
-            this.charRing2.Location = new System.Drawing.Point(1164, 281);
+            this.charRing2.Location = new System.Drawing.Point(1162, 353);
             this.charRing2.Name = "charRing2";
             this.charRing2.Size = new System.Drawing.Size(55, 20);
             this.charRing2.TabIndex = 16;
@@ -221,7 +223,7 @@
             // charRing1
             // 
             this.charRing1.AutoSize = true;
-            this.charRing1.Location = new System.Drawing.Point(936, 281);
+            this.charRing1.Location = new System.Drawing.Point(948, 342);
             this.charRing1.Name = "charRing1";
             this.charRing1.Size = new System.Drawing.Size(55, 20);
             this.charRing1.TabIndex = 18;
@@ -230,7 +232,7 @@
             // charWeapon1
             // 
             this.charWeapon1.AutoSize = true;
-            this.charWeapon1.Location = new System.Drawing.Point(909, 316);
+            this.charWeapon1.Location = new System.Drawing.Point(874, 314);
             this.charWeapon1.Name = "charWeapon1";
             this.charWeapon1.Size = new System.Drawing.Size(82, 20);
             this.charWeapon1.TabIndex = 17;
@@ -239,7 +241,7 @@
             // charNeck
             // 
             this.charNeck.AutoSize = true;
-            this.charNeck.Location = new System.Drawing.Point(1054, 168);
+            this.charNeck.Location = new System.Drawing.Point(1050, 176);
             this.charNeck.Name = "charNeck";
             this.charNeck.Size = new System.Drawing.Size(74, 20);
             this.charNeck.TabIndex = 19;
@@ -248,7 +250,7 @@
             // charGloves
             // 
             this.charGloves.AutoSize = true;
-            this.charGloves.Location = new System.Drawing.Point(1054, 353);
+            this.charGloves.Location = new System.Drawing.Point(874, 248);
             this.charGloves.Name = "charGloves";
             this.charGloves.Size = new System.Drawing.Size(58, 20);
             this.charGloves.TabIndex = 21;
@@ -257,7 +259,7 @@
             // charLegs
             // 
             this.charLegs.AutoSize = true;
-            this.charLegs.Location = new System.Drawing.Point(1054, 451);
+            this.charLegs.Location = new System.Drawing.Point(1062, 379);
             this.charLegs.Name = "charLegs";
             this.charLegs.Size = new System.Drawing.Size(44, 20);
             this.charLegs.TabIndex = 22;
@@ -266,7 +268,7 @@
             // charBoots
             // 
             this.charBoots.AutoSize = true;
-            this.charBoots.Location = new System.Drawing.Point(1055, 515);
+            this.charBoots.Location = new System.Drawing.Point(1063, 472);
             this.charBoots.Name = "charBoots";
             this.charBoots.Size = new System.Drawing.Size(51, 20);
             this.charBoots.TabIndex = 23;
@@ -404,16 +406,25 @@
             this.label10.TabIndex = 62;
             this.label10.Text = "Gloves";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ProgressQuest_Client.Properties.Resources.téléchargement;
+            this.pictureBox1.Location = new System.Drawing.Point(865, 100);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(441, 432);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 63;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1336, 796);
+            this.ClientSize = new System.Drawing.Size(2049, 796);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnStop);
-            this.Controls.Add(this.speed);
             this.Controls.Add(this.statusProgress);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.splitter1);
@@ -447,9 +458,12 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.speed);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.speed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -495,6 +509,7 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
