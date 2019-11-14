@@ -34,7 +34,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.loot = new System.Windows.Forms.ListBox();
+            this.lsbLoot = new System.Windows.Forms.ListBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbCharacter = new System.Windows.Forms.ComboBox();
             this.healthProgressbar = new System.Windows.Forms.ProgressBar();
@@ -133,14 +133,14 @@
             this.label6.TabIndex = 5;
             this.label6.Text = "Luck";
             // 
-            // loot
+            // lsbLoot
             // 
-            this.loot.FormattingEnabled = true;
-            this.loot.ItemHeight = 20;
-            this.loot.Location = new System.Drawing.Point(359, 353);
-            this.loot.Name = "loot";
-            this.loot.Size = new System.Drawing.Size(486, 324);
-            this.loot.TabIndex = 6;
+            this.lsbLoot.FormattingEnabled = true;
+            this.lsbLoot.ItemHeight = 20;
+            this.lsbLoot.Location = new System.Drawing.Point(359, 353);
+            this.lsbLoot.Name = "lsbLoot";
+            this.lsbLoot.Size = new System.Drawing.Size(486, 324);
+            this.lsbLoot.TabIndex = 6;
             // 
             // label7
             // 
@@ -159,6 +159,7 @@
             this.cmbCharacter.Name = "cmbCharacter";
             this.cmbCharacter.Size = new System.Drawing.Size(335, 28);
             this.cmbCharacter.TabIndex = 8;
+            this.cmbCharacter.SelectedIndexChanged += new System.EventHandler(this.CmbCharacter_SelectedIndexChanged);
             // 
             // healthProgressbar
             // 
@@ -495,7 +496,7 @@
             this.label10.TabIndex = 66;
             this.label10.Text = "Completed quest";
             // 
-            // Form1
+            // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -532,7 +533,7 @@
             this.Controls.Add(this.healthProgressbar);
             this.Controls.Add(this.cmbCharacter);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.loot);
+            this.Controls.Add(this.lsbLoot);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -541,7 +542,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.speed);
-            this.Name = "Form1";
+            this.Name = "GUI";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.speed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -560,7 +561,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ListBox loot;
+        private System.Windows.Forms.ListBox lsbLoot;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmbCharacter;
         private System.Windows.Forms.ProgressBar healthProgressbar;

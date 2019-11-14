@@ -19,7 +19,7 @@ namespace ProgressQuest_Client
             InitializeComponent();
 
             controller = new SqlPQ();
-            loadCharacterCmb();            
+            loadCharacterCmb();
         }
 
         /// <summary>
@@ -44,6 +44,24 @@ namespace ProgressQuest_Client
                 ComboBoxItem temp = new ComboBoxItem("Name: " + character["Name"].ToString() + " | Level: " + character["Level"].ToString(), (int)character["ID"]);
                 cmbCharacter.Items.Add(temp);
             }
+        }
+
+        public void loadLsbCharacterLoot()
+        {
+            lsbLoot.Items.Clear();
+
+            ComboBoxItem selectedCharacter = (ComboBoxItem)cmbCharacter.SelectedItem;
+            DataView sortedLoot = controller.getAllCharacterLootSorted(selectedCharacter.getID());
+
+            Console.WriteLine(sortedLoot[0]["Qty"].ToString());
+
+            foreach (DataRowView loot in sortedLoot)
+                lsbLoot.Items.Add("Name: " + loot["Name"].ToString() + " | Value: " + loot["Value"].ToString() + " | Quantity: " + loot["Qty"].ToString());
+        }
+
+        private void CmbCharacter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadLsbCharacterLoot();
         }
     }
 }
