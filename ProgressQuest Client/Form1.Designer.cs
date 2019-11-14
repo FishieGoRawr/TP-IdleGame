@@ -65,6 +65,7 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.speed)).BeginInit();
             this.SuspendLayout();
             // 
@@ -394,11 +395,21 @@
             this.label18.TabIndex = 61;
             this.label18.Text = "Speed";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(24, 26);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(58, 20);
+            this.label10.TabIndex = 62;
+            this.label10.Text = "Gloves";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1336, 796);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnStop);
@@ -483,6 +494,7 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label10;
     }
 }
 
