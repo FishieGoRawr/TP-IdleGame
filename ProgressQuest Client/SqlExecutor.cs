@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Data;
+
+
 
 namespace ProgressQuest_Client
 {
     /// <summary>
     /// Principal tool to communicate with DB
     /// </summary>
-    public class SqlExecutor
+    class SqlExecutor
     {
         string cnxString = "";
         string database = "BD_IdleGame";
@@ -48,15 +49,6 @@ namespace ProgressQuest_Client
                 Console.WriteLine("Failure: {0}", e.Message);
             }
         }
-
-        /// <summary>
-        /// Public accessor to get the secure connection to our database.
-        /// </summary>
-        /// <returns>Cnx: Secure connection to the database</returns>
-        public SqlConnection GetConnection()
-        {
-            return cnx;
-        }        
 
         /// <summary>
         /// Change the server name of an existing connection.
@@ -162,38 +154,6 @@ namespace ProgressQuest_Client
             {
                 Console.WriteLine("Failure: {0}", ex.Message);
             }
-        }
-
-        public DataTable executeView(string viewName)
-        {
-            DataTable table = new DataTable();
-            SqlCommand cmd = new SqlCommand(viewName, cnx);
-
-            cnx.Open();
-            table.Load(cmd.ExecuteReader());
-            cnx.Close();
-
-            return table;
-        }
-
-        public void executeSP(string spName)
-        {
-            SqlCommand cmd = new SqlCommand(spName, cnx);
-
-            cnx.Open();
-            cmd.ExecuteNonQuery();
-            cnx.Close();
-        }
-
-        public void executeSP(string spName, object[] paramList)
-        {
-            SqlCommand cmd = new SqlCommand(spName, cnx);
-            foreach (object param in paramList)
-                cmd.Parameters.Add(param);
-
-            cnx.Open();
-            cmd.ExecuteNonQuery();
-            cnx.Close();
         }
     }
 }
