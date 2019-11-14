@@ -1,6 +1,6 @@
 ﻿namespace ProgressQuest_Client
 {
-    partial class Form1
+    partial class GUI
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -82,7 +82,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(355, 100);
+            this.label1.Location = new System.Drawing.Point(366, 90);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 20);
             this.label1.TabIndex = 0;
@@ -91,7 +91,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(355, 213);
+            this.label2.Location = new System.Drawing.Point(366, 203);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 20);
             this.label2.TabIndex = 1;
@@ -100,7 +100,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(355, 176);
+            this.label3.Location = new System.Drawing.Point(366, 166);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 20);
             this.label3.TabIndex = 2;
@@ -109,7 +109,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(355, 137);
+            this.label4.Location = new System.Drawing.Point(366, 127);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 20);
             this.label4.TabIndex = 3;
@@ -118,7 +118,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(355, 248);
+            this.label5.Location = new System.Drawing.Point(366, 238);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 20);
             this.label5.TabIndex = 4;
@@ -127,7 +127,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(355, 281);
+            this.label6.Location = new System.Drawing.Point(366, 271);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 20);
             this.label6.TabIndex = 5;
@@ -153,12 +153,12 @@
             // 
             // cmbCharacter
             // 
+            this.cmbCharacter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCharacter.FormattingEnabled = true;
             this.cmbCharacter.Location = new System.Drawing.Point(350, 26);
             this.cmbCharacter.Name = "cmbCharacter";
             this.cmbCharacter.Size = new System.Drawing.Size(335, 28);
             this.cmbCharacter.TabIndex = 8;
-            this.cmbCharacter.Text = "Charge character";
             // 
             // healthProgressbar
             // 
@@ -286,56 +286,56 @@
             // charLck
             // 
             this.charLck.AutoSize = true;
-            this.charLck.Location = new System.Drawing.Point(547, 281);
+            this.charLck.Location = new System.Drawing.Point(500, 271);
             this.charLck.Name = "charLck";
-            this.charLck.Size = new System.Drawing.Size(74, 20);
+            this.charLck.Size = new System.Drawing.Size(14, 20);
             this.charLck.TabIndex = 29;
-            this.charLck.Text = "charLuck";
+            this.charLck.Text = "-";
             // 
             // charWis
             // 
             this.charWis.AutoSize = true;
-            this.charWis.Location = new System.Drawing.Point(547, 248);
+            this.charWis.Location = new System.Drawing.Point(500, 238);
             this.charWis.Name = "charWis";
-            this.charWis.Size = new System.Drawing.Size(97, 20);
+            this.charWis.Size = new System.Drawing.Size(14, 20);
             this.charWis.TabIndex = 28;
-            this.charWis.Text = "charWisdom";
+            this.charWis.Text = "-";
             // 
             // charCon
             // 
             this.charCon.AutoSize = true;
-            this.charCon.Location = new System.Drawing.Point(547, 137);
+            this.charCon.Location = new System.Drawing.Point(500, 127);
             this.charCon.Name = "charCon";
-            this.charCon.Size = new System.Drawing.Size(125, 20);
+            this.charCon.Size = new System.Drawing.Size(14, 20);
             this.charCon.TabIndex = 27;
-            this.charCon.Text = "charConstitution";
+            this.charCon.Text = "-";
             // 
             // charDex
             // 
             this.charDex.AutoSize = true;
-            this.charDex.Location = new System.Drawing.Point(547, 176);
+            this.charDex.Location = new System.Drawing.Point(500, 166);
             this.charDex.Name = "charDex";
-            this.charDex.Size = new System.Drawing.Size(102, 20);
+            this.charDex.Size = new System.Drawing.Size(14, 20);
             this.charDex.TabIndex = 26;
-            this.charDex.Text = "charDexterity";
+            this.charDex.Text = "-";
             // 
             // charInt
             // 
             this.charInt.AutoSize = true;
-            this.charInt.Location = new System.Drawing.Point(547, 213);
+            this.charInt.Location = new System.Drawing.Point(500, 203);
             this.charInt.Name = "charInt";
-            this.charInt.Size = new System.Drawing.Size(118, 20);
+            this.charInt.Size = new System.Drawing.Size(14, 20);
             this.charInt.TabIndex = 25;
-            this.charInt.Text = "charInteligence";
+            this.charInt.Text = "-";
             // 
             // charStr
             // 
             this.charStr.AutoSize = true;
-            this.charStr.Location = new System.Drawing.Point(547, 100);
+            this.charStr.Location = new System.Drawing.Point(500, 90);
             this.charStr.Name = "charStr";
-            this.charStr.Size = new System.Drawing.Size(102, 20);
+            this.charStr.Size = new System.Drawing.Size(14, 20);
             this.charStr.TabIndex = 24;
-            this.charStr.Text = "charStrength";
+            this.charStr.Text = "-";
             // 
             // txtStatus
             // 
