@@ -17,7 +17,7 @@ namespace ProgressQuest_Client
         string database = "BD_IdleGame"; ///<summary>Database name.</summary>
         string server = "J-C236-OL-06"; ///<summary>Database server address.</summary>
         string user = "AlexMartigny"; ///<summary>Username to connect to database.</summary>
-        string pass = "Orange123"; ///<summary>Password for above user.</summary>
+        string pass = "Banane123"; ///<summary>Password for above user.</summary>
         SqlConnection cnx; ///<summary>Complete connection to database.</summary>
 
         // ---------- CLASS RELATED METHODS (CONSTRUCTORS, ACCESSORS...) ----------       

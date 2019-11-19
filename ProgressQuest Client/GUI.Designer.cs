@@ -74,6 +74,16 @@
             this.dungeon1 = new System.Windows.Forms.CheckBox();
             this.completedQuest = new System.Windows.Forms.ListView();
             this.label10 = new System.Windows.Forms.Label();
+            this.charRace = new System.Windows.Forms.Label();
+            this.charGP = new System.Windows.Forms.Label();
+            this.charLvl = new System.Windows.Forms.Label();
+            this.charName = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.ExpProgressbar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.speed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pendingQuest.SuspendLayout();
@@ -91,7 +101,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(366, 203);
+            this.label2.Location = new System.Drawing.Point(598, 91);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 20);
             this.label2.TabIndex = 1;
@@ -118,7 +128,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(366, 238);
+            this.label5.Location = new System.Drawing.Point(598, 126);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 20);
             this.label5.TabIndex = 4;
@@ -127,7 +137,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(366, 271);
+            this.label6.Location = new System.Drawing.Point(598, 159);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 20);
             this.label6.TabIndex = 5;
@@ -137,7 +147,7 @@
             // 
             this.lsbLoot.FormattingEnabled = true;
             this.lsbLoot.ItemHeight = 20;
-            this.lsbLoot.Location = new System.Drawing.Point(359, 353);
+            this.lsbLoot.Location = new System.Drawing.Point(359, 373);
             this.lsbLoot.Name = "lsbLoot";
             this.lsbLoot.Size = new System.Drawing.Size(486, 324);
             this.lsbLoot.TabIndex = 6;
@@ -145,7 +155,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(355, 330);
+            this.label7.Location = new System.Drawing.Point(355, 350);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 20);
             this.label7.TabIndex = 7;
@@ -164,14 +174,14 @@
             // healthProgressbar
             // 
             this.healthProgressbar.ForeColor = System.Drawing.Color.Red;
-            this.healthProgressbar.Location = new System.Drawing.Point(865, 573);
+            this.healthProgressbar.Location = new System.Drawing.Point(865, 593);
             this.healthProgressbar.Name = "healthProgressbar";
             this.healthProgressbar.Size = new System.Drawing.Size(441, 32);
             this.healthProgressbar.TabIndex = 9;
             // 
             // manaProgressbar
             // 
-            this.manaProgressbar.Location = new System.Drawing.Point(865, 645);
+            this.manaProgressbar.Location = new System.Drawing.Point(865, 665);
             this.manaProgressbar.Name = "manaProgressbar";
             this.manaProgressbar.Size = new System.Drawing.Size(441, 32);
             this.manaProgressbar.TabIndex = 10;
@@ -179,7 +189,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(861, 550);
+            this.label8.Location = new System.Drawing.Point(861, 570);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(56, 20);
             this.label8.TabIndex = 11;
@@ -188,7 +198,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(861, 622);
+            this.label9.Location = new System.Drawing.Point(861, 642);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 20);
             this.label9.TabIndex = 12;
@@ -287,7 +297,7 @@
             // charLck
             // 
             this.charLck.AutoSize = true;
-            this.charLck.Location = new System.Drawing.Point(500, 271);
+            this.charLck.Location = new System.Drawing.Point(732, 159);
             this.charLck.Name = "charLck";
             this.charLck.Size = new System.Drawing.Size(14, 20);
             this.charLck.TabIndex = 29;
@@ -296,7 +306,7 @@
             // charWis
             // 
             this.charWis.AutoSize = true;
-            this.charWis.Location = new System.Drawing.Point(500, 238);
+            this.charWis.Location = new System.Drawing.Point(732, 126);
             this.charWis.Name = "charWis";
             this.charWis.Size = new System.Drawing.Size(14, 20);
             this.charWis.TabIndex = 28;
@@ -323,7 +333,7 @@
             // charInt
             // 
             this.charInt.AutoSize = true;
-            this.charInt.Location = new System.Drawing.Point(500, 203);
+            this.charInt.Location = new System.Drawing.Point(732, 91);
             this.charInt.Name = "charInt";
             this.charInt.Size = new System.Drawing.Size(14, 20);
             this.charInt.TabIndex = 25;
@@ -395,7 +405,7 @@
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(151, 33);
             this.btnStart.TabIndex = 36;
-            this.btnStart.Text = "Load character";
+            this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
@@ -496,11 +506,110 @@
             this.label10.TabIndex = 66;
             this.label10.Text = "Completed quest";
             // 
+            // charRace
+            // 
+            this.charRace.AutoSize = true;
+            this.charRace.Location = new System.Drawing.Point(500, 257);
+            this.charRace.Name = "charRace";
+            this.charRace.Size = new System.Drawing.Size(14, 20);
+            this.charRace.TabIndex = 76;
+            this.charRace.Text = "-";
+            // 
+            // charGP
+            // 
+            this.charGP.AutoSize = true;
+            this.charGP.Location = new System.Drawing.Point(732, 220);
+            this.charGP.Name = "charGP";
+            this.charGP.Size = new System.Drawing.Size(14, 20);
+            this.charGP.TabIndex = 75;
+            this.charGP.Text = "-";
+            // 
+            // charLvl
+            // 
+            this.charLvl.AutoSize = true;
+            this.charLvl.Location = new System.Drawing.Point(732, 257);
+            this.charLvl.Name = "charLvl";
+            this.charLvl.Size = new System.Drawing.Size(14, 20);
+            this.charLvl.TabIndex = 74;
+            this.charLvl.Text = "-";
+            // 
+            // charName
+            // 
+            this.charName.AutoSize = true;
+            this.charName.Location = new System.Drawing.Point(500, 220);
+            this.charName.Name = "charName";
+            this.charName.Size = new System.Drawing.Size(14, 20);
+            this.charName.TabIndex = 73;
+            this.charName.Text = "-";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(366, 257);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(47, 20);
+            this.label20.TabIndex = 70;
+            this.label20.Text = "Race";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(598, 220);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(86, 20);
+            this.label21.TabIndex = 69;
+            this.label21.Text = "Gold Piece";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(598, 257);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(46, 20);
+            this.label22.TabIndex = 68;
+            this.label22.Text = "Level";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(366, 220);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(51, 20);
+            this.label23.TabIndex = 67;
+            this.label23.Text = "Name";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(367, 309);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(76, 20);
+            this.label11.TabIndex = 77;
+            this.label11.Text = "Next level";
+            // 
+            // ExpProgressbar
+            // 
+            this.ExpProgressbar.ForeColor = System.Drawing.Color.GreenYellow;
+            this.ExpProgressbar.Location = new System.Drawing.Point(456, 304);
+            this.ExpProgressbar.Name = "ExpProgressbar";
+            this.ExpProgressbar.Size = new System.Drawing.Size(389, 32);
+            this.ExpProgressbar.TabIndex = 66;
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2049, 796);
+            this.ClientSize = new System.Drawing.Size(1323, 796);
+            this.Controls.Add(this.ExpProgressbar);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.charRace);
+            this.Controls.Add(this.charGP);
+            this.Controls.Add(this.charLvl);
+            this.Controls.Add(this.charName);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.label23);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.completedQuest);
             this.Controls.Add(this.pendingQuest);
@@ -601,6 +710,16 @@
         private System.Windows.Forms.ProgressBar questProgressbar;
         private System.Windows.Forms.ListView completedQuest;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label charRace;
+        private System.Windows.Forms.Label charGP;
+        private System.Windows.Forms.Label charLvl;
+        private System.Windows.Forms.Label charName;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ProgressBar ExpProgressbar;
     }
 }
 

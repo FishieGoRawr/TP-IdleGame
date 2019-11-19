@@ -63,5 +63,10 @@ namespace ProgressQuest_Client
         {
             loadLsbCharacterLoot();
         }
+
+        public string setLabel(string data)
+        {
+            return "";
+        }
     }
 }
