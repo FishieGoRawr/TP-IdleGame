@@ -11,24 +11,62 @@ namespace ProgressQuest_Client
     class SqlPQ
     {
         SqlExecutor executor;
-        SqlConnection cnx;
+        DataTable table;
+        int selectedCharID { get; set; }
 
+        /// <summary>
+        /// SqlPQ (Controller) constructor.
+        /// </summary>
         public SqlPQ()
         {
+            selectedCharID = new int();
             executor = new SqlExecutor();
-            cnx = executor.getConnection();
+            table = new DataTable();
         }
 
+        /// <summary>
+        /// Get all characters from the database.
+        /// </summary>
+        /// <returns></returns>
+        public DataTable getAllCharacters()
+        {
+            table.Clear();
+            table = executor.executeView("SELECT * FROM viewAllCharacters");
+            return table;
+        }
+
+        /// <summary>
+        /// Get all loots from the database.
+        /// </summary>
+        /// <returns></returns>
         public DataTable getAllLoots()
         {
-            DataTable table = new DataTable();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM getAllLoots", cnx);
-
-            cnx.Open();
-            table.Load(cmd.ExecuteReader());
-            cnx.Close();
-
+            table.Clear();
+            table = executor.executeView("SELECT * FROM viewAllLoots");
             return table;
+        }
+
+        /// <summary>
+        /// Get all characters from the database and sort them by a given value (Existing column in DB).
+        /// </summary>
+        /// <param name="sortedBy">Existing column in DB table.</param>
+        /// <returns>Sorted DataView of all characters.</returns>
+        public DataView getAllCharactersSorted(string sortedBy)
+        {
+            DataView view = new DataView(executor.executeView("SELECT * FROM viewAllCharacters"));
+            view.Sort = sortedBy + " DESC";
+
+            return view;
+        }
+
+        public DataView getAllCharacterLootSorted(int characterID)
+        {
+            DataView view = new DataView(executor.executeView("SELECT * FROM fnGetAllCharacterLoot(" + characterID + ")"));
+            view.Sort = "Value DESC";
+
+
+
+            return view;
         }
     }
 }

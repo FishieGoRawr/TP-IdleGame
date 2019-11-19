@@ -1,6 +1,6 @@
 ﻿namespace ProgressQuest_Client
 {
-    partial class Form1
+    partial class GUI
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -34,7 +34,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.loot = new System.Windows.Forms.ListBox();
+            this.lsbLoot = new System.Windows.Forms.ListBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbCharacter = new System.Windows.Forms.ComboBox();
             this.healthProgressbar = new System.Windows.Forms.ProgressBar();
@@ -68,10 +68,10 @@
             this.questName = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pendingQuest = new System.Windows.Forms.GroupBox();
-            this.dungeon1 = new System.Windows.Forms.CheckBox();
-            this.dungeon2 = new System.Windows.Forms.CheckBox();
-            this.dungeon3 = new System.Windows.Forms.CheckBox();
             this.questProgressbar = new System.Windows.Forms.ProgressBar();
+            this.dungeon3 = new System.Windows.Forms.CheckBox();
+            this.dungeon2 = new System.Windows.Forms.CheckBox();
+            this.dungeon1 = new System.Windows.Forms.CheckBox();
             this.completedQuest = new System.Windows.Forms.ListView();
             this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.speed)).BeginInit();
@@ -82,7 +82,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(355, 100);
+            this.label1.Location = new System.Drawing.Point(366, 90);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 20);
             this.label1.TabIndex = 0;
@@ -91,7 +91,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(355, 213);
+            this.label2.Location = new System.Drawing.Point(366, 203);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 20);
             this.label2.TabIndex = 1;
@@ -100,7 +100,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(355, 176);
+            this.label3.Location = new System.Drawing.Point(366, 166);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 20);
             this.label3.TabIndex = 2;
@@ -109,7 +109,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(355, 137);
+            this.label4.Location = new System.Drawing.Point(366, 127);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 20);
             this.label4.TabIndex = 3;
@@ -118,7 +118,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(355, 248);
+            this.label5.Location = new System.Drawing.Point(366, 238);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 20);
             this.label5.TabIndex = 4;
@@ -127,20 +127,20 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(355, 281);
+            this.label6.Location = new System.Drawing.Point(366, 271);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 20);
             this.label6.TabIndex = 5;
             this.label6.Text = "Luck";
             // 
-            // loot
+            // lsbLoot
             // 
-            this.loot.FormattingEnabled = true;
-            this.loot.ItemHeight = 20;
-            this.loot.Location = new System.Drawing.Point(359, 353);
-            this.loot.Name = "loot";
-            this.loot.Size = new System.Drawing.Size(486, 324);
-            this.loot.TabIndex = 6;
+            this.lsbLoot.FormattingEnabled = true;
+            this.lsbLoot.ItemHeight = 20;
+            this.lsbLoot.Location = new System.Drawing.Point(359, 353);
+            this.lsbLoot.Name = "lsbLoot";
+            this.lsbLoot.Size = new System.Drawing.Size(486, 324);
+            this.lsbLoot.TabIndex = 6;
             // 
             // label7
             // 
@@ -153,12 +153,13 @@
             // 
             // cmbCharacter
             // 
+            this.cmbCharacter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCharacter.FormattingEnabled = true;
             this.cmbCharacter.Location = new System.Drawing.Point(350, 26);
             this.cmbCharacter.Name = "cmbCharacter";
             this.cmbCharacter.Size = new System.Drawing.Size(335, 28);
             this.cmbCharacter.TabIndex = 8;
-            this.cmbCharacter.Text = "Charge character";
+            this.cmbCharacter.SelectedIndexChanged += new System.EventHandler(this.CmbCharacter_SelectedIndexChanged);
             // 
             // healthProgressbar
             // 
@@ -286,56 +287,56 @@
             // charLck
             // 
             this.charLck.AutoSize = true;
-            this.charLck.Location = new System.Drawing.Point(547, 281);
+            this.charLck.Location = new System.Drawing.Point(500, 271);
             this.charLck.Name = "charLck";
-            this.charLck.Size = new System.Drawing.Size(74, 20);
+            this.charLck.Size = new System.Drawing.Size(14, 20);
             this.charLck.TabIndex = 29;
-            this.charLck.Text = "charLuck";
+            this.charLck.Text = "-";
             // 
             // charWis
             // 
             this.charWis.AutoSize = true;
-            this.charWis.Location = new System.Drawing.Point(547, 248);
+            this.charWis.Location = new System.Drawing.Point(500, 238);
             this.charWis.Name = "charWis";
-            this.charWis.Size = new System.Drawing.Size(97, 20);
+            this.charWis.Size = new System.Drawing.Size(14, 20);
             this.charWis.TabIndex = 28;
-            this.charWis.Text = "charWisdom";
+            this.charWis.Text = "-";
             // 
             // charCon
             // 
             this.charCon.AutoSize = true;
-            this.charCon.Location = new System.Drawing.Point(547, 137);
+            this.charCon.Location = new System.Drawing.Point(500, 127);
             this.charCon.Name = "charCon";
-            this.charCon.Size = new System.Drawing.Size(125, 20);
+            this.charCon.Size = new System.Drawing.Size(14, 20);
             this.charCon.TabIndex = 27;
-            this.charCon.Text = "charConstitution";
+            this.charCon.Text = "-";
             // 
             // charDex
             // 
             this.charDex.AutoSize = true;
-            this.charDex.Location = new System.Drawing.Point(547, 176);
+            this.charDex.Location = new System.Drawing.Point(500, 166);
             this.charDex.Name = "charDex";
-            this.charDex.Size = new System.Drawing.Size(102, 20);
+            this.charDex.Size = new System.Drawing.Size(14, 20);
             this.charDex.TabIndex = 26;
-            this.charDex.Text = "charDexterity";
+            this.charDex.Text = "-";
             // 
             // charInt
             // 
             this.charInt.AutoSize = true;
-            this.charInt.Location = new System.Drawing.Point(547, 213);
+            this.charInt.Location = new System.Drawing.Point(500, 203);
             this.charInt.Name = "charInt";
-            this.charInt.Size = new System.Drawing.Size(118, 20);
+            this.charInt.Size = new System.Drawing.Size(14, 20);
             this.charInt.TabIndex = 25;
-            this.charInt.Text = "charInteligence";
+            this.charInt.Text = "-";
             // 
             // charStr
             // 
             this.charStr.AutoSize = true;
-            this.charStr.Location = new System.Drawing.Point(547, 100);
+            this.charStr.Location = new System.Drawing.Point(500, 90);
             this.charStr.Name = "charStr";
-            this.charStr.Size = new System.Drawing.Size(102, 20);
+            this.charStr.Size = new System.Drawing.Size(14, 20);
             this.charStr.TabIndex = 24;
-            this.charStr.Text = "charStrength";
+            this.charStr.Text = "-";
             // 
             // txtStatus
             // 
@@ -373,7 +374,7 @@
             // 
             this.speed.Cursor = System.Windows.Forms.Cursors.Default;
             this.speed.LargeChange = 3;
-            this.speed.Location = new System.Drawing.Point(913, 46);
+            this.speed.Location = new System.Drawing.Point(904, 34);
             this.speed.Maximum = 2;
             this.speed.Name = "speed";
             this.speed.Size = new System.Drawing.Size(222, 69);
@@ -381,7 +382,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(1155, 20);
+            this.btnStop.Location = new System.Drawing.Point(1145, 26);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(151, 33);
             this.btnStop.TabIndex = 35;
@@ -390,18 +391,18 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(742, 20);
+            this.btnStart.Location = new System.Drawing.Point(731, 23);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(151, 33);
             this.btnStart.TabIndex = 36;
-            this.btnStart.Text = "Start";
+            this.btnStart.Text = "Load character";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(922, 20);
+            this.label18.Location = new System.Drawing.Point(913, 8);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(56, 20);
             this.label18.TabIndex = 61;
@@ -440,26 +441,12 @@
             this.pendingQuest.TabStop = false;
             this.pendingQuest.Text = "Pending quest";
             // 
-            // dungeon1
+            // questProgressbar
             // 
-            this.dungeon1.AutoSize = true;
-            this.dungeon1.Location = new System.Drawing.Point(22, 65);
-            this.dungeon1.Name = "dungeon1";
-            this.dungeon1.Size = new System.Drawing.Size(147, 24);
-            this.dungeon1.TabIndex = 63;
-            this.dungeon1.Text = "Dungeon Name";
-            this.dungeon1.UseVisualStyleBackColor = true;
-            // 
-            // dungeon2
-            // 
-            this.dungeon2.AutoSize = true;
-            this.dungeon2.Location = new System.Drawing.Point(22, 95);
-            this.dungeon2.Name = "dungeon2";
-            this.dungeon2.Size = new System.Drawing.Size(147, 24);
-            this.dungeon2.TabIndex = 64;
-            this.dungeon2.Text = "Dungeon Name";
-            this.dungeon2.UseVisualStyleBackColor = true;
-            this.dungeon2.CheckedChanged += new System.EventHandler(this.CheckBox2_CheckedChanged);
+            this.questProgressbar.Location = new System.Drawing.Point(6, 237);
+            this.questProgressbar.Name = "questProgressbar";
+            this.questProgressbar.Size = new System.Drawing.Size(274, 32);
+            this.questProgressbar.TabIndex = 65;
             // 
             // dungeon3
             // 
@@ -470,14 +457,26 @@
             this.dungeon3.TabIndex = 65;
             this.dungeon3.Text = "Dungeon Name";
             this.dungeon3.UseVisualStyleBackColor = true;
-            this.dungeon3.CheckedChanged += new System.EventHandler(this.CheckBox3_CheckedChanged);
             // 
-            // questProgressbar
+            // dungeon2
             // 
-            this.questProgressbar.Location = new System.Drawing.Point(6, 237);
-            this.questProgressbar.Name = "questProgressbar";
-            this.questProgressbar.Size = new System.Drawing.Size(274, 32);
-            this.questProgressbar.TabIndex = 65;
+            this.dungeon2.AutoSize = true;
+            this.dungeon2.Location = new System.Drawing.Point(22, 95);
+            this.dungeon2.Name = "dungeon2";
+            this.dungeon2.Size = new System.Drawing.Size(147, 24);
+            this.dungeon2.TabIndex = 64;
+            this.dungeon2.Text = "Dungeon Name";
+            this.dungeon2.UseVisualStyleBackColor = true;
+            // 
+            // dungeon1
+            // 
+            this.dungeon1.AutoSize = true;
+            this.dungeon1.Location = new System.Drawing.Point(22, 65);
+            this.dungeon1.Name = "dungeon1";
+            this.dungeon1.Size = new System.Drawing.Size(147, 24);
+            this.dungeon1.TabIndex = 63;
+            this.dungeon1.Text = "Dungeon Name";
+            this.dungeon1.UseVisualStyleBackColor = true;
             // 
             // completedQuest
             // 
@@ -497,7 +496,7 @@
             this.label10.TabIndex = 66;
             this.label10.Text = "Completed quest";
             // 
-            // Form1
+            // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -534,7 +533,7 @@
             this.Controls.Add(this.healthProgressbar);
             this.Controls.Add(this.cmbCharacter);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.loot);
+            this.Controls.Add(this.lsbLoot);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -543,7 +542,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.speed);
-            this.Name = "Form1";
+            this.Name = "GUI";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.speed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -562,7 +561,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ListBox loot;
+        private System.Windows.Forms.ListBox lsbLoot;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmbCharacter;
         private System.Windows.Forms.ProgressBar healthProgressbar;

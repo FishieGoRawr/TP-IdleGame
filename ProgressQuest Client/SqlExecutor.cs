@@ -13,13 +13,14 @@ namespace ProgressQuest_Client
     /// </summary>
     class SqlExecutor
     {
-        string cnxString = "";
-        string database = "BD_IdleGame";
-        string server = "J-C236-OL-06";
-        string user = "AlexMartigny";
-        string pass = "Orange123";
-        SqlConnection cnx;
+        string cnxString = ""; ///<summary>Connection string required to access database.</summary>
+        string database = "BD_IdleGame"; ///<summary>Database name.</summary>
+        string server = "J-C236-OL-06"; ///<summary>Database server address.</summary>
+        string user = "AlexMartigny"; ///<summary>Username to connect to database.</summary>
+        string pass = "Orange123"; ///<summary>Password for above user.</summary>
+        SqlConnection cnx; ///<summary>Complete connection to database.</summary>
 
+        // ---------- CLASS RELATED METHODS (CONSTRUCTORS, ACCESSORS...) ----------       
         /// <summary>
         /// Default constructor. Create a connection without validating it.
         /// </summary>
@@ -28,9 +29,7 @@ namespace ProgressQuest_Client
             cnxString = "Data Source='" + server + "';Initial Catalog='" + database + "';User ID='" + user + "';Password='" + pass + "'";
             this.cnx = new SqlConnection(cnxString);
         }
-
-        
-
+   
         /// <summary>
         /// Create and validate a connection using the specified values.
         /// </summary>
@@ -51,11 +50,17 @@ namespace ProgressQuest_Client
             }
         }
 
+        /// <summary>
+        /// Accessor for the SqlConnection object that contains informations on our database connection.
+        /// </summary>
+        /// <returns>SqlConnection object.</returns>
         public SqlConnection getConnection()
         {
             return cnx;
         }
+        // ------------------------------------------------------------------------
 
+        // ---------- SERVER RELATED JUNK ----------        
         /// <summary>
         /// Change the server name of an existing connection.
         /// </summary>
@@ -161,8 +166,14 @@ namespace ProgressQuest_Client
                 Console.WriteLine("Failure: {0}", ex.Message);
             }
         }
+        // -----------------------------------------
 
-
+        // ---------- COMMUNICATION WITH DATABASE ----------        
+        /// <summary>
+        /// Sends a query to the SQL server requesting an existing view.
+        /// </summary>
+        /// <param name="viewName">View name (server-side)</param>
+        /// <returns>DataTable containing what the view returned.</returns>
         public DataTable executeView(string viewName)
         {
             DataTable table = new DataTable();
@@ -175,6 +186,10 @@ namespace ProgressQuest_Client
             return table;
         }
 
+        /// <summary>
+        /// Execute a simple stored procedure on the SQL server. The stored procedure doesn't take any args.
+        /// </summary>
+        /// <param name="spName">Stored procedure name.</param>
         public void executeSP(string spName)
         {
             SqlCommand cmd = new SqlCommand(spName, cnx);
@@ -184,6 +199,11 @@ namespace ProgressQuest_Client
             cnx.Close();
         }
 
+        /// <summary>
+        /// Execute a complex stored procedure on the SQL server that takes one or more args.
+        /// </summary>
+        /// <param name="spName">Stored procedure name.</param>
+        /// <param name="paramList">2D Array of type "object". Contain the parameter name for the SQL query (Ex.: @name) and the value of said parameter.</param>
         public void executeSP(string spName, object[,] paramList)
         {
             SqlCommand cmd = new SqlCommand(spName, cnx);
@@ -200,5 +220,6 @@ namespace ProgressQuest_Client
             cmd.ExecuteNonQuery();
             cnx.Close();
         }
+        // -------------------------------------------------
     }
 }
