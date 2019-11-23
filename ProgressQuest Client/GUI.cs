@@ -62,11 +62,22 @@ namespace ProgressQuest_Client
         private void CmbCharacter_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadLsbCharacterLoot();
+            setInfoLabel();
         }
 
-        public string setLabel(string data)
+        public void setInfoLabel()
         {
-            return "";
+            ComboBoxItem selectedCharacter = (ComboBoxItem)cmbCharacter.SelectedItem;
+            DataView info = controller.getAllCharactersInfo(selectedCharacter.getID());
+            List<DataRowView> list = new List<DataRowView>();
+
+            foreach (DataRowView stat in info)
+            {
+                charName.Text = list.ElementAt(0).ToString();
+            }
+
+            //charName.Text = list.ElementAt(0).ToString();
+            //charRace.Text = list.ElementAt(0).ToString();
         }
     }
 }
