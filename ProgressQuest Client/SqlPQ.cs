@@ -73,5 +73,10 @@ namespace ProgressQuest_Client
 
             return view;
         }
+
+        public void setQuest()
+        {
+            DataView view = new DataView(executor.executeView("SELECT * FROM fnGetAllQuests"));
+        }
     }
 }

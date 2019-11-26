@@ -69,15 +69,31 @@ namespace ProgressQuest_Client
         {
             ComboBoxItem selectedCharacter = (ComboBoxItem)cmbCharacter.SelectedItem;
             DataView info = controller.getAllCharactersInfo(selectedCharacter.getID());
-            List<DataRowView> list = new List<DataRowView>();
+            List<String> list = new List<String>();
 
-            foreach (DataRowView stat in info)
+            string temp;
+
+            for (int i = 0; i < 11; i++)
             {
-                charName.Text = list.ElementAt(0).ToString();
+                list.Add(info[0][i].ToString());
+                Console.WriteLine(info[0][i].ToString());
             }
 
-            //charName.Text = list.ElementAt(0).ToString();
-            //charRace.Text = list.ElementAt(0).ToString();
+            charName.Text = list.ElementAt(0);
+            charRace.Text = list.ElementAt(1);
+            charLvl.Text = list.ElementAt(2);
+            charGP.Text = list.ElementAt(3);
+
+            int lvl = Convert.ToInt32(list.ElementAt(2));
+            ExpProgressbar.Maximum = lvl * 100;
+            ExpProgressbar.Value = Convert.ToInt32(list.ElementAt(4));
+            
+            charStr.Text = list.ElementAt(5);
+            charCon.Text = list.ElementAt(6);
+            charDex.Text = list.ElementAt(7);
+            charInt.Text = list.ElementAt(8);
+            charWis.Text = list.ElementAt(9);
+            charLck.Text = list.ElementAt(10);
         }
     }
 }
