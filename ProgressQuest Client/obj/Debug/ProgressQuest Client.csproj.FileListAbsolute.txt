@@ -28,3 +28,13 @@ C:\xampp\htdocs\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.
 C:\xampp\htdocs\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.csproj.CoreCompileInputs.cache
 C:\xampp\htdocs\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.exe
 C:\xampp\htdocs\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.pdb
+P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\bin\Debug\ProgressQuest Client.exe.config
+P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\bin\Debug\ProgressQuest Client.exe
+P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\bin\Debug\ProgressQuest Client.pdb
+P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.csprojAssemblyReference.cache
+P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest_Client.GUI.resources
+P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest_Client.Properties.Resources.resources
+P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.csproj.GenerateResource.cache
+P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.csproj.CoreCompileInputs.cache
+P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.exe
+P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.pdb

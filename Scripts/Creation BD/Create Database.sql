@@ -1,15 +1,14 @@
 --CREATING DATA BASE
-CREATE DATABASE BD_IdleGame
+CREATE DATABASE BD_IdleGame_TEST
  CONTAINMENT = NONE
  ON PRIMARY
- ( NAME = N'IdleGame', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\IdleGame.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ ( NAME = N'IdleGame', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\IdleGameTEST.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
  LOG ON
- ( NAME = N'IdleGame_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\IdleGame_log.ldf' , SIZE = 73728KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ ( NAME = N'IdleGame_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\IdleGameTEST_log.ldf' , SIZE = 73728KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
  GO
 
- USE BD_IdleGame
+ USE BD_IdleGame_TEST
  --DONE CREATING DB
-
 
 --CREATING TABLES
  CREATE TABLE Characters --This table creates characters with stats, equipment, level, etc...
@@ -17,6 +16,7 @@ CREATE DATABASE BD_IdleGame
    CharID int IDENTITY(1,1), 
    CharRaceID int NOT NULL,
    CharClassID int NOT NULL,
+   CharStatus int NOT NULL,
    CharName nvarchar(50) ,
    CharLevel int NOT NULL,
    CharExp int NOT NULL,
@@ -34,16 +34,16 @@ CREATE DATABASE BD_IdleGame
    CharInt int NOT NULL,
    CharWis int NOT NULL,
    CharLck int NOT NULL,
-   CharHead bit NOT NULL,
-   CharTorso bit NOT NULL,
-   CharLegs bit NOT NULL,
-   CharBoots bit NOT NULL,
-   CharGloves bit NOT NULL,
-   CharWeap1 bit NOT NULL,
-   CharWeap2 bit NOT NULL,
-   CharNeckLace bit NOT NULL,
-   CharRing1 bit NOT NULL,
-   CharRing2 bit NOT NULL,
+   CharHeadID int,
+   CharTorsoID int,
+   CharLegsID int,
+   CharBootsID int,
+   CharGlovesID int,
+   CharWeap1ID int,
+   CharWeap2ID int,
+   CharNeckLaceID int,
+   CharRing1ID int,
+   CharRing2ID int,
 )
 GO
 
@@ -61,22 +61,30 @@ GO
 )
 GO
 
- CREATE TABLE Kills
-(
-   KillsID int IDENTITY(1,1),
-   KillsCharacterID int NOT NULL,
-   KillsDungeonID int NOT NULL,
-   KillsMonsterID int NOT NULL,
-   KillsQty int NOT NULL,
-)
-GO
-
  CREATE TABLE Monsters --This table keeps all possible monsters
 (
    MonsterID int IDENTITY(1,1),
    MonsterLevel int NOT NULL,
    MonsterHP int NOT NULL,
    MonsterDmg int NOT NULL,
+)
+GO
+
+CREATE TABLE Encounter --Possible monsters to meet during dungeon
+(
+EncounterID int IDENTITY(1,1),
+EncounterMonsterID int,
+EncounterDungeonID int,
+EncounterProbability int
+)
+GO
+
+CREATE TABLE Fight --Currently fighting monster in this table
+(
+FightID int IDENTITY(1,1),
+FightCharacterID int,
+FightMonsterID int,
+MonsterCurrentHP int
 )
 GO
 
@@ -101,18 +109,7 @@ GO
  CREATE TABLE Dungeons --This table keeps track of dungeon and which "MonsterBundle" is associated with it
 (
    DungeonID int IDENTITY(1,1),
-   DungeonMonsterBundleID int NOT NULL,
-   DungeonName nvarchar(50),
    DungeonLevel int NOT NULL
-)
-GO
-
- CREATE TABLE MonsterBundle --This table creates a bundle that the user has to fight in order to progress (Complete dungeon)
-(
-   MonsterBundleID int IDENTITY(1,1),
-   MonsterBundleDungeonID int NOT NULL,
-   MonsterBundleMonsterID int NOT NULL,
-   MonsterQty int NOT NULL
 )
 GO
 
@@ -133,31 +130,6 @@ CREATE TABLE CharLoot --This table has the character loot inventory
 )
 GO
 
-CREATE TABLE ConsumType --This table keeps track the possible types of consummable
-(
-   ConsumTypeID int IDENTITY(1,1),
-   EquipTypeName nvarchar(50)
-)
-GO
-
-CREATE TABLE Consummables --This table keeps the possible consummable
-(
-   ConsumID int IDENTITY(1,1),
-   ConsumConsumTypeID int,
-   ConsumName nvarchar(50),
-   ConsumRestore int
-)
-GO
-
-CREATE TABLE CharConsum --This table keeps the character's consummable
-(
-   CharConsumID int IDENTITY(1,1),
-   CharConsumCharacterID int,
-   CharConsumConsumID int,
-   CharConsumQty int
-)
-GO
-
 CREATE TABLE EquipType --This table keeps the possible equipment type
 (
    EquipTypeID int IDENTITY(1,1),
@@ -173,34 +145,7 @@ CREATE TABLE Equipements --This table keeps all possible equipment
    EquipValue int
 )
 GO
-
-CREATE TABLE CharEquip --This table keeps the charatcer's equipment
-(
-   CharEquipID int IDENTITY(1,1),
-   CharEquipCharacterID int,
-   CharEquipEquipID int,
-   CharEquipQty int
-)
-GO
-
-CREATE TABLE Spells --This table keeps track of all possible spells
-(
-   SpellsID int IDENTITY(1,1),
-   SpellMana int,
-   SpellName nvarchar(50),
-   SpellDamage int
-)
-GO
-
-CREATE TABLE CharSpells --This table keeps the character's spells
-(
-   CharSpellsID int IDENTITY(1,1),
-   CharSpellsCharacterID int,
-   CharSpellsSpellID int
-)
-GO
 --DONE CREATING TABLES
-
 
 --ADDING PRIMARY KEYS
 ALTER TABLE Loot ADD PRIMARY KEY (LootID)
@@ -209,21 +154,9 @@ ALTER TABLE CharLoot ADD PRIMARY KEY (CharLootID)
 GO
 ALTER TABLE Characters ADD PRIMARY KEY (CharID)
 GO
-ALTER TABLE ConsumType ADD PRIMARY KEY (ConsumTypeID)
-GO
-ALTER TABLE Consum ADD PRIMARY KEY (ConsumID)
-GO
-ALTER TABLE CharConsum ADD PRIMARY KEY (CharConsumID)
-GO
 ALTER TABLE EquipType ADD PRIMARY KEY (EquipTypeID)
 GO
 ALTER TABLE Equip ADD PRIMARY KEY (EquipID)
-GO
-ALTER TABLE CharEquip ADD PRIMARY KEY (CharEquipID)
-GO
-ALTER TABLE Spells ADD PRIMARY KEY (SpellsID)
-GO
-ALTER TABLE CharSpells ADD PRIMARY KEY (CharSpellsID)
 GO
 ALTER TABLE QuestJournal ADD PRIMARY KEY (QuestJournalID)
 GO
@@ -233,43 +166,16 @@ ALTER TABLE Dungeons ADD PRIMARY KEY (DungeonID)
 GO
 ALTER TABLE Race ADD PRIMARY KEY (RaceID)
 GO
-ALTER TABLE Kills ADD PRIMARY KEY (KillsID)
-GO
-ALTER TABLE MonsterBundle ADD PRIMARY KEY (MonsterBundleID)
-GO
 ALTER TABLE Class ADD PRIMARY KEY (ClassID)
 GO
 ALTER TABLE Monsters ADD PRIMARY KEY (MonsterID)
 GO
 --DONE ADDING PRIMARY KEYS
 
-
 --ADDING FOREIN KEYS CONSTRAINT
-ALTER TABLE Characters ADD CONSTRAINT CHK_CharHP CHECK (CharHP >= 0);
-GO
-ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Race FOREIGN KEY (CharRaceID) REFERENCES Race(RaceID)
-GO
-ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Class FOREIGN KEY (CharClassID) REFERENCES Class(ClassID)
-GO
 ALTER TABLE CharLoot ADD CONSTRAINT FK_CharLoot_Characters FOREIGN KEY (CharLootCharacterID) REFERENCES Characters(CharID)
 GO
 ALTER TABLE CharLoot ADD CONSTRAINT FK_CharLoot_Loot FOREIGN KEY (CharLootLootID) REFERENCES Loot(LootID)
-GO
-ALTER TABLE Consum ADD CONSTRAINT FK_Consum_ConsumType FOREIGN KEY (ConsumConsumTypeID) REFERENCES ConsumType(ConsumTypeID)
-GO
-ALTER TABLE CharConsum ADD CONSTRAINT FK_CharConsum_Consum FOREIGN KEY (CharConsumConsumID) REFERENCES Consum(ConsumID)
-GO
-ALTER TABLE CharConsum ADD CONSTRAINT FK_CharConsum_Characters FOREIGN KEY (CharConsumCharacterID) REFERENCES Characters(CharID)
-GO
-ALTER TABLE Equip ADD CONSTRAINT FK_Equip_EquipType FOREIGN KEY (EquipEquipTypeID) REFERENCES EquipType(EquipTypeID)
-GO
-ALTER TABLE CharEquip ADD CONSTRAINT FK_CharEquip_Equip FOREIGN KEY (CharEquipEquipID) REFERENCES Equip(EquipID)
-GO
-ALTER TABLE CharEquip ADD CONSTRAINT FK_CharEquip_Characters FOREIGN KEY (CharEquipCharacterID) REFERENCES Characters(CharID)
-GO
-ALTER TABLE CharSpells ADD CONSTRAINT FK_CharSpells_Spells FOREIGN KEY (CharSpellsSpellID) REFERENCES Spells(SpellsID)
-GO
-ALTER TABLE CharSpells ADD CONSTRAINT FK_CharSpells_Characters FOREIGN KEY (CharSpellsCharacterID) REFERENCES Characters(CharID)
 GO
 ALTER TABLE QuestJournal ADD CONSTRAINT FK_QuestJournal_Characters FOREIGN KEY (QuestJournalCharacterID) REFERENCES Characters(CharID)
 GO
@@ -277,16 +183,40 @@ ALTER TABLE QuestJournal ADD CONSTRAINT FK_QuestJournal_Quests FOREIGN KEY (Ques
 GO
 ALTER TABLE Quests ADD CONSTRAINT FK_Quests_Dungeons FOREIGN KEY (QuestDungeonID) REFERENCES Dungeons(DungeonID)
 GO
-ALTER TABLE Dungeons ADD CONSTRAINT FK_Dungeons_MonsterBundle FOREIGN KEY (DungeonMonsterBundleID) REFERENCES MonsterBundle(MonsterBundleID)
+ALTER TABLE Encounter ADD CONSTRAINT FK_Encounter_Dungeons FOREIGN KEY (EncounterDungeonID) REFERENCES Dungeons(DungeonID)
 GO
-ALTER TABLE Kills ADD CONSTRAINT FK_Kills_Characters FOREIGN KEY (KillsCharacterID) REFERENCES Characters(CharID)
+ALTER TABLE Encounter ADD CONSTRAINT FK_Encounter_Monsters FOREIGN KEY (EncounterMonsterID) REFERENCES Monsters(MonsterID)
 GO
-ALTER TABLE Kills ADD CONSTRAINT FK_Kills_Dungeons FOREIGN KEY (KillsDungeonID) REFERENCES Dungeons(DungeonID)
+ALTER TABLE Fight ADD CONSTRAINT FK_Fight_Characters FOREIGN KEY (FightCharacterID) REFERENCES Characters(CharID)
 GO
-ALTER TABLE Kills ADD CONSTRAINT FK_Kills_Monsters FOREIGN KEY (KillsMonsterID) REFERENCES Monsters(MonsterID)
+ALTER TABLE Fight ADD CONSTRAINT FK_Fight_Monsters FOREIGN KEY (FightMonsterID) REFERENCES Monsters(MonsterID)
 GO
-ALTER TABLE MonsterBundle ADD CONSTRAINT FK_MonsterBundle_Dungeons FOREIGN KEY (MonsterBundleDungeonID) REFERENCES Dungeons(DungeonID)
+ALTER TABLE Equip ADD CONSTRAINT FK_Equip_EquipType FOREIGN KEY (EquipEquipTypeID) REFERENCES EquipType(EquipTypeID)
 GO
-ALTER TABLE MonsterBundle ADD CONSTRAINT FK_MonsterBundle_Monsters FOREIGN KEY (MonsterBundleMonsterID) REFERENCES Monsters(MonsterID)
+ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Race FOREIGN KEY (CharRaceID) REFERENCES Race(RaceID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Class FOREIGN KEY (CharClassID) REFERENCES Class(ClassID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersHead_Equip FOREIGN KEY (CharHeadID) REFERENCES Equip(EquipID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersTorso_Equip FOREIGN KEY (CharTorsoID) REFERENCES Equip(EquipID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersLegs_Equip FOREIGN KEY (CharLegsID) REFERENCES Equip(EquipID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersBoots_Equip FOREIGN KEY (CharBootsID) REFERENCES Equip(EquipID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersGloves_Equip FOREIGN KEY (CharGlovesID) REFERENCES Equip(EquipID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersWeap1_Equip FOREIGN KEY (CharWeap1ID) REFERENCES Equip(EquipID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersWeap1_Equip FOREIGN KEY (CharWeap2ID) REFERENCES Equip(EquipID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersNeck_Equip FOREIGN KEY (CharNeckLaceID) REFERENCES Equip(EquipID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersRing1_Equip FOREIGN KEY (CharRing1ID) REFERENCES Equip(EquipID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersRing2_Equip FOREIGN KEY (CharRing2ID) REFERENCES Equip(EquipID)
+GO
+ALTER TABLE Characters ADD CONSTRAINT CHK_CharHP CHECK (CharHP >= 0);
 GO
 --DONE ADDING FOREIGN KEY CONSTRAINT
