@@ -37,11 +37,11 @@ namespace ProgressQuest_Client
         /// </summary>
         public void loadCharacterCmb()
         {
-            DataView sortedCharacters = controller.getAllCharactersSorted("Level");
+            DataView sortedCharacters = controller.getAllCharactersSorted("CharLevel");
 
             foreach (DataRowView character in sortedCharacters)
             {
-                ComboBoxItem temp = new ComboBoxItem("Name: " + character["Name"].ToString() + " | Level: " + character["Level"].ToString(), (int)character["ID"]);
+                ComboBoxItem temp = new ComboBoxItem("Name: " + character["CharName"].ToString() + " | Level: " + character["CharLevel"].ToString(), (int)character["CharID"]);
                 cmbCharacter.Items.Add(temp);
             }
         }
@@ -52,8 +52,6 @@ namespace ProgressQuest_Client
 
             ComboBoxItem selectedCharacter = (ComboBoxItem)cmbCharacter.SelectedItem;
             DataView sortedLoot = controller.getAllCharacterLootSorted(selectedCharacter.getID());
-
-            Console.WriteLine(sortedLoot[0]["Qty"].ToString());
 
             foreach (DataRowView loot in sortedLoot)
                 lsbLoot.Items.Add("Name: " + loot["Name"].ToString() + " | Value: " + loot["Value"].ToString() + " | Quantity: " + loot["Qty"].ToString());
@@ -69,31 +67,21 @@ namespace ProgressQuest_Client
         {
             ComboBoxItem selectedCharacter = (ComboBoxItem)cmbCharacter.SelectedItem;
             DataView info = controller.getAllCharactersInfo(selectedCharacter.getID());
-            List<String> list = new List<String>();
+            DataRowView character = info[0];
 
-            string temp;
+            charName.Text = character["Name"].ToString();
+            charRace.Text = character["Race"].ToString();
+            charLvl.Text = character["Level"].ToString();
+            charGP.Text = character["GP"].ToString();
+            charStr.Text = character["Str"].ToString();
+            charCon.Text = character["Con"].ToString();
+            charDex.Text = character["Dex"].ToString();
+            charInt.Text = character["Intel"].ToString();
+            charWis.Text = character["Wis"].ToString();
+            charLck.Text = character["Luck"].ToString();
 
-            for (int i = 0; i < 11; i++)
-            {
-                list.Add(info[0][i].ToString());
-                Console.WriteLine(info[0][i].ToString());
-            }
-
-            charName.Text = list.ElementAt(0);
-            charRace.Text = list.ElementAt(1);
-            charLvl.Text = list.ElementAt(2);
-            charGP.Text = list.ElementAt(3);
-
-            int lvl = Convert.ToInt32(list.ElementAt(2));
-            ExpProgressbar.Maximum = lvl * 100;
-            ExpProgressbar.Value = Convert.ToInt32(list.ElementAt(4));
-            
-            charStr.Text = list.ElementAt(5);
-            charCon.Text = list.ElementAt(6);
-            charDex.Text = list.ElementAt(7);
-            charInt.Text = list.ElementAt(8);
-            charWis.Text = list.ElementAt(9);
-            charLck.Text = list.ElementAt(10);
+            ExpProgressbar.Maximum = (int)character["Level"] * 100;
+            ExpProgressbar.Value = (int)character["Exp"];
         }
     }
 }
