@@ -1,4 +1,4 @@
-ALTER PROCEDURE spGo(@charID integer)
+Create PROCEDURE spGo(@charID integer)
 
 AS
 BEGIN
@@ -8,11 +8,13 @@ BEGIN
 	IF @state = 0
 		Begin
 			Declare @income int
-			Set @income = 1
+			Declare @gold int
+			Set @income = Execute incomeSellAllLoot
+			Set @gold = @gold + @income
 			DECLARE @nameLoot nvarchar(50)
 			SET @nameLoot = ''
 
-			SELECT 'Selling ' + @nameLoot
+			SELECT 'Selling ' + @nameLoot + ' for ' + @income
 		End
 	ELSE IF @state = 1
 		Begin
