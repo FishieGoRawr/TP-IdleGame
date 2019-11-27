@@ -61,7 +61,7 @@ namespace ProgressQuest_Client
 
         public DataView getAllCharacterLootSorted(int characterID)
         {
-            DataView view = new DataView(executor.executeView("SELECT * FROM fnGetAllCharacterLoot(" + characterID + ")"));
+            DataView view = new DataView(executor.executeView("SELECT * FROM fnGetCharacterLoot(" + characterID + ")"));
             view.Sort = "Value DESC";
 
             return view;
@@ -69,7 +69,7 @@ namespace ProgressQuest_Client
 
         public DataView getAllCharactersInfo(int characterID)
         {
-            DataView view = new DataView(executor.executeView("SELECT * FROM fnGetAllCharacterInfo(" + characterID + ")"));
+            DataView view = new DataView(executor.executeView("SELECT * FROM fnGetCharacterInfos(" + characterID + ")"));
 
             return view;
         }

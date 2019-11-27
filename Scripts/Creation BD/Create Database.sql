@@ -1,13 +1,13 @@
 --CREATING DATA BASE
-CREATE DATABASE BD_IdleGame_TEST
+CREATE DATABASE BD_IdleGame
  CONTAINMENT = NONE
  ON PRIMARY
- ( NAME = N'IdleGame', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\IdleGameTEST.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ ( NAME = N'IdleGame', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\IdleGame.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
  LOG ON
- ( NAME = N'IdleGame_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\IdleGameTEST_log.ldf' , SIZE = 73728KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ ( NAME = N'IdleGame_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\IdleGame_log.ldf' , SIZE = 73728KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
  GO
 
- USE BD_IdleGame_TEST
+ USE BD_IdleGame
  --DONE CREATING DB
 
 --CREATING TABLES
@@ -17,7 +17,7 @@ CREATE DATABASE BD_IdleGame_TEST
    CharRaceID int NOT NULL,
    CharClassID int NOT NULL,
    CharStatus int NOT NULL,
-   CharName nvarchar(50) ,
+   CharName nvarchar(50) NOT NULL,
    CharLevel int NOT NULL,
    CharExp int NOT NULL,
    CharGP int NOT NULL,
@@ -64,22 +64,23 @@ GO
  CREATE TABLE Monsters --This table keeps all possible monsters
 (
    MonsterID int IDENTITY(1,1),
+   MonsterName NVARCHAR(50),
    MonsterLevel int NOT NULL,
    MonsterHP int NOT NULL,
    MonsterDmg int NOT NULL,
 )
 GO
 
-CREATE TABLE Encounter --Possible monsters to meet during dungeon
+CREATE TABLE Encounters --Possible monsters to meet during dungeon
 (
 EncounterID int IDENTITY(1,1),
-EncounterMonsterID int,
 EncounterDungeonID int,
-EncounterProbability int
+EncounterMonsterID int,
+EncounterProbability float
 )
 GO
 
-CREATE TABLE Fight --Currently fighting monster in this table
+CREATE TABLE Fights --Currently fighting monster in this table
 (
 FightID int IDENTITY(1,1),
 FightCharacterID int,
@@ -109,7 +110,8 @@ GO
  CREATE TABLE Dungeons --This table keeps track of dungeon and which "MonsterBundle" is associated with it
 (
    DungeonID int IDENTITY(1,1),
-   DungeonLevel int NOT NULL
+   DungeonLevel int NOT NULL,
+   KillQty int NOT NULL
 )
 GO
 
@@ -148,7 +150,7 @@ GO
 --DONE CREATING TABLES
 
 --ADDING PRIMARY KEYS
-ALTER TABLE Loot ADD PRIMARY KEY (LootID)
+ALTER TABLE Loots ADD PRIMARY KEY (LootID)
 GO
 ALTER TABLE CharLoot ADD PRIMARY KEY (CharLootID)
 GO
@@ -156,7 +158,7 @@ ALTER TABLE Characters ADD PRIMARY KEY (CharID)
 GO
 ALTER TABLE EquipType ADD PRIMARY KEY (EquipTypeID)
 GO
-ALTER TABLE Equip ADD PRIMARY KEY (EquipID)
+ALTER TABLE Equipements ADD PRIMARY KEY (EquipID)
 GO
 ALTER TABLE QuestJournal ADD PRIMARY KEY (QuestJournalID)
 GO
@@ -164,9 +166,9 @@ ALTER TABLE Quests ADD PRIMARY KEY (QuestID)
 GO
 ALTER TABLE Dungeons ADD PRIMARY KEY (DungeonID)
 GO
-ALTER TABLE Race ADD PRIMARY KEY (RaceID)
+ALTER TABLE Races ADD PRIMARY KEY (RaceID)
 GO
-ALTER TABLE Class ADD PRIMARY KEY (ClassID)
+ALTER TABLE Classes ADD PRIMARY KEY (ClassID)
 GO
 ALTER TABLE Monsters ADD PRIMARY KEY (MonsterID)
 GO
@@ -175,7 +177,7 @@ GO
 --ADDING FOREIN KEYS CONSTRAINT
 ALTER TABLE CharLoot ADD CONSTRAINT FK_CharLoot_Characters FOREIGN KEY (CharLootCharacterID) REFERENCES Characters(CharID)
 GO
-ALTER TABLE CharLoot ADD CONSTRAINT FK_CharLoot_Loot FOREIGN KEY (CharLootLootID) REFERENCES Loot(LootID)
+ALTER TABLE CharLoot ADD CONSTRAINT FK_CharLoot_Loot FOREIGN KEY (CharLootLootID) REFERENCES Loots(LootID)
 GO
 ALTER TABLE QuestJournal ADD CONSTRAINT FK_QuestJournal_Characters FOREIGN KEY (QuestJournalCharacterID) REFERENCES Characters(CharID)
 GO
@@ -183,40 +185,139 @@ ALTER TABLE QuestJournal ADD CONSTRAINT FK_QuestJournal_Quests FOREIGN KEY (Ques
 GO
 ALTER TABLE Quests ADD CONSTRAINT FK_Quests_Dungeons FOREIGN KEY (QuestDungeonID) REFERENCES Dungeons(DungeonID)
 GO
-ALTER TABLE Encounter ADD CONSTRAINT FK_Encounter_Dungeons FOREIGN KEY (EncounterDungeonID) REFERENCES Dungeons(DungeonID)
+ALTER TABLE Encounters ADD CONSTRAINT FK_Encounter_Dungeons FOREIGN KEY (EncounterDungeonID) REFERENCES Dungeons(DungeonID)
 GO
-ALTER TABLE Encounter ADD CONSTRAINT FK_Encounter_Monsters FOREIGN KEY (EncounterMonsterID) REFERENCES Monsters(MonsterID)
+ALTER TABLE Encounters ADD CONSTRAINT FK_Encounter_Monsters FOREIGN KEY (EncounterMonsterID) REFERENCES Monsters(MonsterID)
 GO
-ALTER TABLE Fight ADD CONSTRAINT FK_Fight_Characters FOREIGN KEY (FightCharacterID) REFERENCES Characters(CharID)
+ALTER TABLE Fights ADD CONSTRAINT FK_Fight_Characters FOREIGN KEY (FightCharacterID) REFERENCES Characters(CharID)
 GO
-ALTER TABLE Fight ADD CONSTRAINT FK_Fight_Monsters FOREIGN KEY (FightMonsterID) REFERENCES Monsters(MonsterID)
+ALTER TABLE Fights ADD CONSTRAINT FK_Fight_Monsters FOREIGN KEY (FightMonsterID) REFERENCES Monsters(MonsterID)
 GO
-ALTER TABLE Equip ADD CONSTRAINT FK_Equip_EquipType FOREIGN KEY (EquipEquipTypeID) REFERENCES EquipType(EquipTypeID)
+ALTER TABLE Equipements ADD CONSTRAINT FK_Equip_EquipType FOREIGN KEY (EquipEquipTypeID) REFERENCES EquipType(EquipTypeID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Race FOREIGN KEY (CharRaceID) REFERENCES Race(RaceID)
+ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Race FOREIGN KEY (CharRaceID) REFERENCES Races(RaceID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Class FOREIGN KEY (CharClassID) REFERENCES Class(ClassID)
+ALTER TABLE Characters ADD CONSTRAINT FK_Characters_Class FOREIGN KEY (CharClassID) REFERENCES Classes(ClassID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_CharactersHead_Equip FOREIGN KEY (CharHeadID) REFERENCES Equip(EquipID)
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersHead_Equip FOREIGN KEY (CharHeadID) REFERENCES Equipements(EquipID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_CharactersTorso_Equip FOREIGN KEY (CharTorsoID) REFERENCES Equip(EquipID)
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersTorso_Equip FOREIGN KEY (CharTorsoID) REFERENCES Equipements(EquipID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_CharactersLegs_Equip FOREIGN KEY (CharLegsID) REFERENCES Equip(EquipID)
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersLegs_Equip FOREIGN KEY (CharLegsID) REFERENCES Equipements(EquipID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_CharactersBoots_Equip FOREIGN KEY (CharBootsID) REFERENCES Equip(EquipID)
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersBoots_Equip FOREIGN KEY (CharBootsID) REFERENCES Equipements(EquipID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_CharactersGloves_Equip FOREIGN KEY (CharGlovesID) REFERENCES Equip(EquipID)
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersGloves_Equip FOREIGN KEY (CharGlovesID) REFERENCES Equipements(EquipID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_CharactersWeap1_Equip FOREIGN KEY (CharWeap1ID) REFERENCES Equip(EquipID)
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersWeap1_Equip FOREIGN KEY (CharWeap1ID) REFERENCES Equipements(EquipID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_CharactersWeap1_Equip FOREIGN KEY (CharWeap2ID) REFERENCES Equip(EquipID)
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersWeap2_Equip FOREIGN KEY (CharWeap2ID) REFERENCES Equipements(EquipID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_CharactersNeck_Equip FOREIGN KEY (CharNeckLaceID) REFERENCES Equip(EquipID)
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersNeck_Equip FOREIGN KEY (CharNeckLaceID) REFERENCES Equipements(EquipID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_CharactersRing1_Equip FOREIGN KEY (CharRing1ID) REFERENCES Equip(EquipID)
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersRing1_Equip FOREIGN KEY (CharRing1ID) REFERENCES Equipements(EquipID)
 GO
-ALTER TABLE Characters ADD CONSTRAINT FK_CharactersRing2_Equip FOREIGN KEY (CharRing2ID) REFERENCES Equip(EquipID)
+ALTER TABLE Characters ADD CONSTRAINT FK_CharactersRing2_Equip FOREIGN KEY (CharRing2ID) REFERENCES Equipements(EquipID)
 GO
 ALTER TABLE Characters ADD CONSTRAINT CHK_CharHP CHECK (CharHP >= 0);
 GO
 --DONE ADDING FOREIGN KEY CONSTRAINT
+
+--ADDING DATA TO TABLES
+INSERT INTO Races VALUES ('Human')
+INSERT INTO Races VALUES ('Dwarf')
+INSERT INTO Races VALUES ('Orc')
+INSERT INTO Races VALUES ('Elf')
+INSERT INTO Races VALUES ('Half-elf')
+INSERT INTO Races VALUES ('Dragonborn')
+GO
+
+INSERT INTO Classes VALUES ('Warrior')
+INSERT INTO Classes VALUES ('Paladin')
+INSERT INTO Classes VALUES ('Archer')
+INSERT INTO Classes VALUES ('Thief')
+INSERT INTO Classes VALUES ('Priest')
+INSERT INTO Classes VALUES ('Mage')
+GO
+
+INSERT INTO Loots VALUES ('Goblin''s testicles', 15)
+INSERT INTO Loots VALUES ('Feather', 1)
+INSERT INTO Loots VALUES ('Bones', 5)
+INSERT INTO Loots VALUES ('Minautor''s Hoof', 15)
+INSERT INTO Loots VALUES ('Basilik head', 25)
+INSERT INTO Loots VALUES ('Hydra''s heart', 50)
+INSERT INTO Loots VALUES ('Rat teeth', 5)
+INSERT INTO Loots VALUES ('Dragon scales', 150)
+INSERT INTO Loots VALUES ('Merfolk''s soul', 100)
+INSERT INTO Loots VALUES ('Rotten flesh', 10)
+GO
+
+--Monsters: Name, Level, HP, Damage
+INSERT INTO Monsters VALUES ('Chicken', 1, 5, 1)
+INSERT INTO Monsters VALUES ('Rat', 2, 10, 2)
+INSERT INTO Monsters VALUES ('Giant Rat', 5, 20, 4)
+INSERT INTO Monsters VALUES ('Goblin', 10, 30, 6)
+INSERT INTO Monsters VALUES ('Undead', 15, 35, 8)
+INSERT INTO Monsters VALUES ('Minautor', 20, 35, 12)
+INSERT INTO Monsters VALUES ('Lost Merfolk', 25, 50, 10)
+INSERT INTO Monsters VALUES ('Basilik', 30, 80, 13)
+INSERT INTO Monsters VALUES ('Hydra', 50, 200, 20)
+INSERT INTO Monsters VALUES ('Dragon', 75, 350, 25)
+GO
+
+INSERT INTO EquipType VALUES ('Head')
+INSERT INTO EquipType VALUES ('Torso')
+INSERT INTO EquipType VALUES ('Legs')
+INSERT INTO EquipType VALUES ('Boots')
+INSERT INTO EquipType VALUES ('Gloves')
+INSERT INTO EquipType VALUES ('Ring')
+INSERT INTO EquipType VALUES ('Necklace')
+INSERT INTO EquipType VALUES ('WeaponSword')
+INSERT INTO EquipType VALUES ('WeaponBow')
+INSERT INTO EquipType VALUES ('WeaponStaff')
+GO
+
+INSERT INTO Dungeons VALUES (1, 5)
+INSERT INTO Dungeons VALUES (3, 10)
+INSERT INTO Dungeons VALUES (5, 13)
+INSERT INTO Dungeons VALUES (7, 17)
+INSERT INTO Dungeons VALUES (10, 30)
+GO
+
+INSERT INTO Quests VALUES (1 ,'Just waking up', 10)
+INSERT INTO Quests VALUES (2,'This is my life now', 25)
+INSERT INTO Quests VALUES (3,'Farming up...', 100)
+INSERT INTO Quests VALUES (4,'Who are you again?', 100)
+INSERT INTO Quests VALUES (5,'Just waking up', 100)
+GO
+
+--Dun1
+INSERT INTO Encounters VALUES (1, 1, .3)
+INSERT INTO Encounters VALUES (1, 2, .3)
+INSERT INTO Encounters VALUES (1, 3, .3)
+INSERT INTO Encounters VALUES (1, 5, .1)
+--Dun2
+INSERT INTO Encounters VALUES (2, 2, .4)
+INSERT INTO Encounters VALUES (2, 3, .2)
+INSERT INTO Encounters VALUES (2, 4, .2)
+INSERT INTO Encounters VALUES (2, 5, .1)
+INSERT INTO Encounters VALUES (2, 6, .1)
+--Dun3
+INSERT INTO Encounters VALUES (3, 2, .1)
+INSERT INTO Encounters VALUES (3, 3, .1)
+INSERT INTO Encounters VALUES (3, 4, .2)
+INSERT INTO Encounters VALUES (3, 5, .4)
+INSERT INTO Encounters VALUES (3, 6, .2)
+--Dun4
+INSERT INTO Encounters VALUES (4, 4, .1)
+INSERT INTO Encounters VALUES (4, 5, .2)
+INSERT INTO Encounters VALUES (4, 6, .4)
+INSERT INTO Encounters VALUES (4, 7, .3)
+--Dun5
+INSERT INTO Encounters VALUES (5, 6, .4)
+INSERT INTO Encounters VALUES (5, 8, .3)
+INSERT INTO Encounters VALUES (5, 9, .2)
+INSERT INTO Encounters VALUES (5, 10, .1)
+GO
+--DONE ADDING DATA TO TABLES
+
