@@ -1,4 +1,4 @@
-CREATE PROCEDURE spDeleteLoot
+CREATE PROCEDURE spDeleteAllCharacterLoot
 @id INTEGER
 AS
 DELETE FROM CharLoot

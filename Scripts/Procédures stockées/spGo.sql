@@ -1,53 +1,70 @@
-Create PROCEDURE spGo(@charID integer)
-
+Create PROCEDURE spGo 
+@charID integer
 AS
 BEGIN
-	DECLARE @state int 
-	SET @state = 0
+	Declare @state nvarchar(25) 
+	Select @state = dbo.fnGetStatusCharacter(@charID)
+
+	Declare @text nvarchar(250)
 	
-	IF @state = 0
+	IF @state = 'sellLoot'
 		Begin
 			Declare @income int
 			Declare @gold int
-			Set @income = Execute incomeSellAllLoot
-			Set @gold = @gold + @income
-			DECLARE @nameLoot nvarchar(50)
-			SET @nameLoot = ''
 
-			SELECT 'Selling ' + @nameLoot + ' for ' + @income
+			Select @income = dbo.fnIncomeSellAllLoot(@charID)
+
+			Select @gold = dbo.fnGetGPCharacter(@charID)
+			Set @gold = @gold + @income
+			
+			EXEC dbo.spUpdateGPCharacter @charID, @gold
+			EXEC dbo.spDeleteAllCharacterLoot @charID
+
+			Set @state = 'buyEquip'
+			EXEC dbo.spSetStatusCharacter @charID, @state 
+
+			Set @text = 'Selling all loot...'
 		End
-	ELSE IF @state = 1
+	ELSE IF @state = 'buyEquip'
 		Begin
-			SELECT 'Checking to buy better equipement...'
+			Declare @equip1 int
+			Declare @equip2 int
+			Declare @equip3 int
+
+			Select @equip1 = dbo.fnRandomShopItem(@charID)
+			Select @equip2 = dbo.fnRandomShopItem(@charID)
+			Select @equip3 = dbo.fnRandomShopItem(@charID)
+
+			Set @text = 'Checking to buy better equipement...'
 		End
-	ELSE IF @state = 2
+	ELSE IF @state = 'getQuest'
 		Begin
-			DECLARE @nameQuest nvarchar(50)
-			SET @nameQuest = ''
-			SELECT 'A strange old man give you the quest :' + @nameQuest
+			DECLARE @nameDungeon nvarchar(50)
+			SET @nameDungeon = ''
+			SELECT 'A strange old man give you the quest :' + @nameDungeon
 		End
-	ELSE IF @state = 3
+	ELSE IF @state = 'goDungeon'
 		Begin
 			SELECT 'Go to the dungeon...'
 		End
-	ELSE IF @state = 4
+	ELSE IF @state = 'encouterMonster'
 		Begin
 			DECLARE @monsterName nvarchar(50) 
 			SET @monsterName = ''
 			SELECT 'You encounter a ' + @monsterName + '!'
 		End
-	ELSE IF @state = 5
+	ELSE IF @state = 'monsterAttack'
 		Begin
 			DECLARE @damage int 
 			SET @monsterName = ''
 			SELECT @monsterName + 'attak and deal ' + @damage + 'damage.'
 		End
-	ELSE IF @state = 6
+	ELSE IF @state = 'playerAttack'
 		Begin
 			SET @monsterName = ''
 			SELECT 'Your attak deal ' + @damage + 'damage.'
 		End
-	ELSE IF @state = 7
+	ELSE IF @state = 'receiveLoot'
 		Begin
 			DECLARE @qty int 
 			SET @qty = 0
@@ -55,12 +72,12 @@ BEGIN
 			SET @lootName = ''
 			SELECT 'You slain the monster and get ' + @qty + @lootName
 		End
-	ELSE IF @state = 8
+	ELSE IF @state = 'goVillage'
 		Begin
 			SELECT 'Return to the village...'
 		End
 	ELSE
 		SELECT 'Your dead!'
 
-    SELECT 'toto'
+    Return @text
 END
