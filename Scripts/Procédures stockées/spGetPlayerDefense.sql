@@ -3,27 +3,24 @@ ALTER PROCEDURE spGetPlayerDefense
 AS
 BEGIN
 	DECLARE @PlayerHeadDef INT, @PlayerTorsoDef INT, @PlayerLegsDef INT, @PlayerBootsDef INT, @PlayerGlovesDef INT, @PlayerTotalDef INT
-
-	SET @PlayerHeadDef = (SELECT EquipFlatDef FROM Characters INNER JOIN Equipements ON CharHeadID = EquipID WHERE CharHeadID != NULL AND CharID = @CharID)
-	SET @PlayerTorsoDef = (SELECT EquipFlatDef FROM Characters INNER JOIN Equipements ON CharTorsoID = EquipID WHERE CharHeadID != NULL AND CharID = @CharID)
-	SET @PlayerLegsDef = (SELECT EquipFlatDef FROM Characters INNER JOIN Equipements ON CharLegsID = EquipID WHERE CharHeadID != NULL AND CharID = @CharID)
-	SET @PlayerBootsDef = (SELECT EquipFlatDef FROM Characters INNER JOIN Equipements ON CharBootsID = EquipID WHERE CharHeadID != NULL AND CharID = @CharID)
-	SET @PlayerGlovesDef = (SELECT EquipFlatDef FROM Characters INNER JOIN Equipements ON CharGlovesID = EquipID WHERE CharHeadID != NULL AND CharID = @CharID)
+	
+	SET @PlayerHeadDef = (SELECT EquipFlatDef FROM Equipements INNER JOIN Characters ON EquipID = CharHeadID WHERE CharHeadID != 0 AND CharID = @CharID)
+	SET @PlayerTorsoDef = (SELECT EquipFlatDef FROM Equipements INNER JOIN Characters ON EquipID = CharTorsoID WHERE CharTorsoID != 0 AND CharID = @CharID)
+	SET @PlayerLegsDef = (SELECT EquipFlatDef FROM Equipements INNER JOIN Characters ON EquipID = CharLegsID WHERE CharLegsID != 0 AND CharID = @CharID)
+	SET @PlayerBootsDef = (SELECT EquipFlatDef FROM Equipements INNER JOIN Characters ON EquipID = CharBootsID WHERE CharBootsID != 0 AND CharID = @CharID)
+	SET @PlayerGlovesDef = (SELECT EquipFlatDef FROM Equipements INNER JOIN Characters ON EquipID = CharGlovesID WHERE CharGlovesID != 0 AND CharID = @CharID)
+	SET @PlayerTotalDef = 0
 
 	IF NOT @PlayerHeadDef IS NULL
 		SET @PlayerTotalDef += @PlayerHeadDef
-
-	ELSE IF NOT @PlayerTorsoDef IS NULL
+	IF NOT @PlayerTorsoDef IS NULL
 		SET @PlayerTotalDef += @PlayerTorsoDef
-
-	ELSE IF NOT @PlayerLegsDef IS NULL
+	IF NOT @PlayerLegsDef IS NULL
 		SET @PlayerTotalDef += @PlayerLegsDef
-
-	ELSE IF NOT @PlayerBootsDef IS NULL
+	IF NOT @PlayerBootsDef IS NULL
 		SET @PlayerTotalDef += @PlayerBootsDef
-
-	ELSE IF NOT @PlayerGlovesDef IS NULL
+	IF NOT @PlayerGlovesDef IS NULL
 		SET @PlayerTotalDef += @PlayerGlovesDef
 
-	SELECT @PlayerTotalDef
+	RETURN (@PlayerTotalDef)
 END
