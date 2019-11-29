@@ -6,8 +6,10 @@ BEGIN
 	Select @state = dbo.fnGetStatusCharacter(@charID)
 
 	Declare @text nvarchar(250)
+	Declare @asLoot bit
+	Select @asLoot = dbo.fnCheckIfHasLoot(@charID)
 	
-	IF @state = 'sellLoot'
+	IF @state = 'sellLoot' And @asLoot = 1
 		Begin
 			Declare @income int
 			Declare @gold int
@@ -30,10 +32,27 @@ BEGIN
 			Declare @equip1 int
 			Declare @equip2 int
 			Declare @equip3 int
+			Declare @equipType1 nvarchar(25)
+			Declare @equipType2 nvarchar(25)
+			Declare @equipType3 nvarchar(25)
 
 			Select @equip1 = dbo.fnRandomShopItem(@charID)
 			Select @equip2 = dbo.fnRandomShopItem(@charID)
 			Select @equip3 = dbo.fnRandomShopItem(@charID)
+
+			Select @equipType1 = dbo.fnGetEquipTypeName(@equip1)
+			Select @equipType2 = dbo.fnGetEquipTypeName(@equip2)
+			Select @equipType3 = dbo.fnGetEquipTypeName(@equip3)
+
+			If @equipType1 = 1
+				Declare @ifHasEquip bit
+				Select @ifHasEquip = 
+				Begin
+					If @ifHasEquip = 1
+						Begin
+							
+						End
+				End
 
 			Set @text = 'Checking to buy better equipement...'
 		End
