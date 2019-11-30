@@ -34,16 +34,8 @@ namespace ProgressQuest_Client
         /// <param name="e"></param>
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            ComboBoxItem character;
-            string actionString = "";
-
-            if (cmbCharacter.SelectedIndex != -1)
-            {
-                character = (ComboBoxItem)cmbCharacter.SelectedItem;
-                m_charID = character.getID();
-
+            if (m_charID != null)
                 Console.WriteLine(controller.Go(m_charID));
-            }
         }
 
         /// <summary>
@@ -73,14 +65,15 @@ namespace ProgressQuest_Client
 
         private void CmbCharacter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ComboBoxItem selectedCharacter = (ComboBoxItem)cmbCharacter.SelectedItem;
+            m_charID = selectedCharacter.getID();
             loadLsbCharacterLoot();
             setInfoLabel();
         }
 
         public void setInfoLabel()
         {
-            ComboBoxItem selectedCharacter = (ComboBoxItem)cmbCharacter.SelectedItem;
-            DataView info = controller.getAllCharactersInfo(selectedCharacter.getID());
+            DataView info = controller.getAllCharactersInfo(m_charID);
             DataRowView character = info[0];
 
             charName.Text = character["Name"].ToString();
@@ -99,6 +92,17 @@ namespace ProgressQuest_Client
 
             healthProgressbar.Value = (int)character["CurrHP"];
             manaProgressbar.Value = 100;
+        }
+
+        private void BtnStop_Click(object sender, EventArgs e)
+        {
+            if (m_charID != 0)
+            {
+                object[,] charID = new object[1, 2];
+                charID[0, 0] = "@CharID";
+                charID[0, 1] = m_charID;
+                controller.resetDefaultTesting(charID);
+            }
         }
     }
 }

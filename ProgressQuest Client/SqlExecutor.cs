@@ -197,26 +197,7 @@ namespace ProgressQuest_Client
             cnx.Open();
             cmd.ExecuteNonQuery();
             cnx.Close();
-        }
-
-        public string executeGo(int CharID, string actionString)
-        {
-            SqlCommand cmd = new SqlCommand("spGo", cnx);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@CharID", CharID);
-
-            SqlParameter paramReturnText = new SqlParameter("@paramReturnText", SqlDbType.NVarChar, 2048);
-            paramReturnText.Value = actionString;
-            paramReturnText.Direction = ParameterDirection.Output;
-            cmd.Parameters.Add(paramReturnText);
-
-            cnx.Open();
-            cmd.ExecuteNonQuery();
-            actionString = (string)cmd.Parameters["@paramReturnText"].Value;
-            cnx.Close();
-
-            return actionString;
-        }
+        }        
 
         /// <summary>
         /// Execute a complex stored procedure on the SQL server that takes one or more args.
@@ -238,6 +219,25 @@ namespace ProgressQuest_Client
             cnx.Open();
             cmd.ExecuteNonQuery();
             cnx.Close();
+        }
+
+        public string executeGo(int CharID, string actionString)
+        {
+            SqlCommand cmd = new SqlCommand("spGo", cnx);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@CharID", CharID);
+
+            SqlParameter paramReturnText = new SqlParameter("@paramReturnText", SqlDbType.NVarChar, 2048);
+            paramReturnText.Value = actionString;
+            paramReturnText.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(paramReturnText);
+
+            cnx.Open();
+            cmd.ExecuteNonQuery();
+            actionString = (string)cmd.Parameters["@paramReturnText"].Value;
+            cnx.Close();
+
+            return actionString;
         }
         // -------------------------------------------------
     }

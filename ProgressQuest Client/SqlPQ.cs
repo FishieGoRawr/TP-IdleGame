@@ -80,5 +80,11 @@ namespace ProgressQuest_Client
             return view;
         }
 
+        public void resetDefaultTesting(object[,] charID)
+        {
+            executor.executeSP("spDefaultTesting", charID);
+            Console.Clear();
+        }
+
     }
 }
