@@ -89,20 +89,11 @@ MonsterCurrentHP int
 )
 GO
 
- CREATE TABLE Quests --This table keep the quests, quest reward, which dungeon is linked to the quest, etc...
-(
-   QuestID int IDENTITY(1,1),
-   QuestDungeonID int NOT NULL,
-   QuestName nvarchar(50),
-   QuestReward int NOT NULL
-)
-GO
-
  CREATE TABLE QuestJournal --This table keep track of which quest is done
 (
    QuestJournalID int IDENTITY(1,1),
    QuestJournalCharacterID int NOT NULL,
-   QuestJournalQuestID int NOT NULL,
+   QuestJournalDungeonID int NOT NULL,
    QuestJournalCompletion bit NOT NULL
 )
 GO
@@ -110,7 +101,9 @@ GO
  CREATE TABLE Dungeons --This table keeps track of dungeon and which "MonsterBundle" is associated with it
 (
    DungeonID int IDENTITY(1,1),
+   DungeonName NVARCHAR(50) NOT NULL,
    DungeonLevel int NOT NULL,
+   DungeonReward int NOT NULL,
    KillQty int NOT NULL
 )
 GO
@@ -144,7 +137,10 @@ CREATE TABLE Equipements --This table keeps all possible equipment
    EquipID int IDENTITY(1,1),
    EquipEquipTypeID int,
    EquipName nvarchar(50),
-   EquipValue int
+   EquipValue int NOT NULL,
+   EquipLevel int NOT NULL,
+   EquipFlatAtk int NOT NULL,
+   EquipFlatDef int NOT NULL
 )
 GO
 --DONE CREATING TABLES
@@ -161,8 +157,6 @@ GO
 ALTER TABLE Equipements ADD PRIMARY KEY (EquipID)
 GO
 ALTER TABLE QuestJournal ADD PRIMARY KEY (QuestJournalID)
-GO
-ALTER TABLE Quests ADD PRIMARY KEY (QuestID)
 GO
 ALTER TABLE Dungeons ADD PRIMARY KEY (DungeonID)
 GO
@@ -181,10 +175,15 @@ ALTER TABLE CharLoot ADD CONSTRAINT FK_CharLoot_Loot FOREIGN KEY (CharLootLootID
 GO
 ALTER TABLE QuestJournal ADD CONSTRAINT FK_QuestJournal_Characters FOREIGN KEY (QuestJournalCharacterID) REFERENCES Characters(CharID)
 GO
+
 ALTER TABLE QuestJournal ADD CONSTRAINT FK_QuestJournal_Quests FOREIGN KEY (QuestJournalQuestID) REFERENCES Quests(QuestID)
 GO
 ALTER TABLE Quests ADD CONSTRAINT FK_Quests_Dungeons FOREIGN KEY (QuestDungeonID) REFERENCES Dungeons(DungeonID)
 GO
+
+ALTER TABLE QuestJournal ADD CONSTRAINT FK_QuestJournal_Dungeons FOREIGN KEY (QuestJournalDungeonID) REFERENCES Dungeons(DungeonID)
+GO
+
 ALTER TABLE Encounters ADD CONSTRAINT FK_Encounter_Dungeons FOREIGN KEY (EncounterDungeonID) REFERENCES Dungeons(DungeonID)
 GO
 ALTER TABLE Encounters ADD CONSTRAINT FK_Encounter_Monsters FOREIGN KEY (EncounterMonsterID) REFERENCES Monsters(MonsterID)

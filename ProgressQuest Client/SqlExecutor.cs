@@ -29,7 +29,7 @@ namespace ProgressQuest_Client
             cnxString = "Data Source='" + server + "';Initial Catalog='" + database + "';User ID='" + user + "';Password='" + pass + "'";
             this.cnx = new SqlConnection(cnxString);
         }
-   
+
         /// <summary>
         /// Create and validate a connection using the specified values.
         /// </summary>
@@ -197,6 +197,25 @@ namespace ProgressQuest_Client
             cnx.Open();
             cmd.ExecuteNonQuery();
             cnx.Close();
+        }
+
+        public string executeGo(int CharID, string actionString)
+        {
+            SqlCommand cmd = new SqlCommand("spGo", cnx);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@CharID", CharID);
+
+            SqlParameter paramReturnText = new SqlParameter("@paramReturnText", SqlDbType.NVarChar, 2048);
+            paramReturnText.Value = actionString;
+            paramReturnText.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(paramReturnText);
+
+            cnx.Open();
+            cmd.ExecuteNonQuery();
+            actionString = (string)cmd.Parameters["@paramReturnText"].Value;
+            cnx.Close();
+
+            return actionString;
         }
 
         /// <summary>

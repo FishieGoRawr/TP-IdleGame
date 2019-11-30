@@ -13,12 +13,17 @@ namespace ProgressQuest_Client
     public partial class GUI : Form
     {
         SqlPQ controller;
+        bool m_started;
+        int m_speed;
+        int m_charID;
 
         public GUI()
         {
             InitializeComponent();
 
             controller = new SqlPQ();
+            m_started = false;
+            m_speed = 1;
             loadCharacterCmb();
         }
 
@@ -29,7 +34,16 @@ namespace ProgressQuest_Client
         /// <param name="e"></param>
         private void BtnStart_Click(object sender, EventArgs e)
         {
+            ComboBoxItem character;
+            string actionString = "";
 
+            if (cmbCharacter.SelectedIndex != -1)
+            {
+                character = (ComboBoxItem)cmbCharacter.SelectedItem;
+                m_charID = character.getID();
+
+                Console.WriteLine(controller.Go(m_charID));
+            }
         }
 
         /// <summary>
@@ -54,7 +68,7 @@ namespace ProgressQuest_Client
             DataView sortedLoot = controller.getAllCharacterLootSorted(selectedCharacter.getID());
 
             foreach (DataRowView loot in sortedLoot)
-                lsbLoot.Items.Add("Name: " + loot["Name"].ToString() + " | Value: " + loot["Value"].ToString() + " | Quantity: " + loot["Qty"].ToString());
+                lsbLoot.Items.Add(loot["Name"].ToString() + " | Value: " + loot["Value"].ToString() + "GP | Qty: " + loot["Qty"].ToString());
         }
 
         private void CmbCharacter_SelectedIndexChanged(object sender, EventArgs e)
@@ -82,6 +96,9 @@ namespace ProgressQuest_Client
 
             ExpProgressbar.Maximum = (int)character["Level"] * 100;
             ExpProgressbar.Value = (int)character["Exp"];
+
+            healthProgressbar.Value = (int)character["CurrHP"];
+            manaProgressbar.Value = 100;
         }
     }
 }

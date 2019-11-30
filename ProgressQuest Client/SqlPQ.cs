@@ -24,6 +24,12 @@ namespace ProgressQuest_Client
             table = new DataTable();
         }
 
+        public string Go(int CharID)
+        {
+            string tempString = "";
+            return tempString = executor.executeGo(CharID, tempString);
+        }
+
         /// <summary>
         /// Get all characters from the database.
         /// </summary>
@@ -74,9 +80,5 @@ namespace ProgressQuest_Client
             return view;
         }
 
-        public void setQuest()
-        {
-            DataView view = new DataView(executor.executeView("SELECT * FROM fnGetAllQuests"));
-        }
     }
 }

@@ -63,7 +63,6 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
-            this.questName = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pendingQuest = new System.Windows.Forms.GroupBox();
             this.questProgressbar = new System.Windows.Forms.ProgressBar();
@@ -398,15 +397,6 @@
             this.label18.TabIndex = 61;
             this.label18.Text = "Speed";
             // 
-            // questName
-            // 
-            this.questName.AutoSize = true;
-            this.questName.Location = new System.Drawing.Point(18, 35);
-            this.questName.Name = "questName";
-            this.questName.Size = new System.Drawing.Size(96, 20);
-            this.questName.TabIndex = 62;
-            this.questName.Text = "Quest name";
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ProgressQuest_Client.Properties.Resources.téléchargement;
@@ -423,13 +413,12 @@
             this.pendingQuest.Controls.Add(this.dungeon3);
             this.pendingQuest.Controls.Add(this.dungeon2);
             this.pendingQuest.Controls.Add(this.dungeon1);
-            this.pendingQuest.Controls.Add(this.questName);
             this.pendingQuest.Location = new System.Drawing.Point(24, 26);
             this.pendingQuest.Name = "pendingQuest";
             this.pendingQuest.Size = new System.Drawing.Size(286, 275);
             this.pendingQuest.TabIndex = 64;
             this.pendingQuest.TabStop = false;
-            this.pendingQuest.Text = "Pending quest";
+            this.pendingQuest.Text = "Pending Dungeons...";
             // 
             // questProgressbar
             // 
@@ -441,7 +430,7 @@
             // dungeon3
             // 
             this.dungeon3.AutoSize = true;
-            this.dungeon3.Location = new System.Drawing.Point(22, 125);
+            this.dungeon3.Location = new System.Drawing.Point(6, 85);
             this.dungeon3.Name = "dungeon3";
             this.dungeon3.Size = new System.Drawing.Size(147, 24);
             this.dungeon3.TabIndex = 65;
@@ -451,7 +440,7 @@
             // dungeon2
             // 
             this.dungeon2.AutoSize = true;
-            this.dungeon2.Location = new System.Drawing.Point(22, 95);
+            this.dungeon2.Location = new System.Drawing.Point(6, 55);
             this.dungeon2.Name = "dungeon2";
             this.dungeon2.Size = new System.Drawing.Size(147, 24);
             this.dungeon2.TabIndex = 64;
@@ -461,7 +450,7 @@
             // dungeon1
             // 
             this.dungeon1.AutoSize = true;
-            this.dungeon1.Location = new System.Drawing.Point(22, 65);
+            this.dungeon1.Location = new System.Drawing.Point(6, 25);
             this.dungeon1.Name = "dungeon1";
             this.dungeon1.Size = new System.Drawing.Size(147, 24);
             this.dungeon1.TabIndex = 63;
@@ -482,9 +471,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(20, 316);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(130, 20);
+            this.label10.Size = new System.Drawing.Size(164, 20);
             this.label10.TabIndex = 66;
-            this.label10.Text = "Completed quest";
+            this.label10.Text = "Completed Dungeons";
             // 
             // charRace
             // 
@@ -677,7 +666,6 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label questName;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox pendingQuest;
         private System.Windows.Forms.CheckBox dungeon3;
