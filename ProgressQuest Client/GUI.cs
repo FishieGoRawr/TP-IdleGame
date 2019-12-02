@@ -25,6 +25,7 @@ namespace ProgressQuest_Client
             m_started = false;
             m_speed = 1;
             loadCharacterCmb();
+            cmbCharacter.SelectedIndex = 0;
         }
 
         /// <summary>
