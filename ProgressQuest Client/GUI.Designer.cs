@@ -43,8 +43,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.charHead = new System.Windows.Forms.Label();
             this.charTorso = new System.Windows.Forms.Label();
-            this.charRing = new System.Windows.Forms.Label();
-            this.charWeapon = new System.Windows.Forms.Label();
+            this.charWeapon2 = new System.Windows.Forms.Label();
+            this.charRing2 = new System.Windows.Forms.Label();
+            this.charRing1 = new System.Windows.Forms.Label();
+            this.charWeapon1 = new System.Windows.Forms.Label();
             this.charNeck = new System.Windows.Forms.Label();
             this.charGloves = new System.Windows.Forms.Label();
             this.charLegs = new System.Windows.Forms.Label();
@@ -219,23 +221,41 @@
             this.charTorso.TabIndex = 14;
             this.charTorso.Text = "Torso";
             // 
-            // charRing
+            // charWeapon2
             // 
-            this.charRing.AutoSize = true;
-            this.charRing.Location = new System.Drawing.Point(1211, 342);
-            this.charRing.Name = "charRing";
-            this.charRing.Size = new System.Drawing.Size(42, 20);
-            this.charRing.TabIndex = 18;
-            this.charRing.Text = "Ring";
+            this.charWeapon2.AutoSize = true;
+            this.charWeapon2.Location = new System.Drawing.Point(1214, 314);
+            this.charWeapon2.Name = "charWeapon2";
+            this.charWeapon2.Size = new System.Drawing.Size(82, 20);
+            this.charWeapon2.TabIndex = 15;
+            this.charWeapon2.Text = "Weapon 2";
             // 
-            // charWeapon
+            // charRing2
             // 
-            this.charWeapon.AutoSize = true;
-            this.charWeapon.Location = new System.Drawing.Point(881, 316);
-            this.charWeapon.Name = "charWeapon";
-            this.charWeapon.Size = new System.Drawing.Size(69, 20);
-            this.charWeapon.TabIndex = 17;
-            this.charWeapon.Text = "Weapon";
+            this.charRing2.AutoSize = true;
+            this.charRing2.Location = new System.Drawing.Point(1162, 353);
+            this.charRing2.Name = "charRing2";
+            this.charRing2.Size = new System.Drawing.Size(55, 20);
+            this.charRing2.TabIndex = 16;
+            this.charRing2.Text = "Ring 2";
+            // 
+            // charRing1
+            // 
+            this.charRing1.AutoSize = true;
+            this.charRing1.Location = new System.Drawing.Point(948, 342);
+            this.charRing1.Name = "charRing1";
+            this.charRing1.Size = new System.Drawing.Size(55, 20);
+            this.charRing1.TabIndex = 18;
+            this.charRing1.Text = "Ring 1";
+            // 
+            // charWeapon1
+            // 
+            this.charWeapon1.AutoSize = true;
+            this.charWeapon1.Location = new System.Drawing.Point(874, 314);
+            this.charWeapon1.Name = "charWeapon1";
+            this.charWeapon1.Size = new System.Drawing.Size(82, 20);
+            this.charWeapon1.TabIndex = 17;
+            this.charWeapon1.Text = "Weapon 1";
             // 
             // charNeck
             // 
@@ -249,7 +269,7 @@
             // charGloves
             // 
             this.charGloves.AutoSize = true;
-            this.charGloves.Location = new System.Drawing.Point(1211, 291);
+            this.charGloves.Location = new System.Drawing.Point(874, 248);
             this.charGloves.Name = "charGloves";
             this.charGloves.Size = new System.Drawing.Size(58, 20);
             this.charGloves.TabIndex = 21;
@@ -600,8 +620,10 @@
             this.Controls.Add(this.charLegs);
             this.Controls.Add(this.charGloves);
             this.Controls.Add(this.charNeck);
-            this.Controls.Add(this.charRing);
-            this.Controls.Add(this.charWeapon);
+            this.Controls.Add(this.charRing1);
+            this.Controls.Add(this.charWeapon1);
+            this.Controls.Add(this.charRing2);
+            this.Controls.Add(this.charWeapon2);
             this.Controls.Add(this.charTorso);
             this.Controls.Add(this.charHead);
             this.Controls.Add(this.label9);
@@ -647,8 +669,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label charHead;
         private System.Windows.Forms.Label charTorso;
-        private System.Windows.Forms.Label charRing;
-        private System.Windows.Forms.Label charWeapon;
+        private System.Windows.Forms.Label charWeapon2;
+        private System.Windows.Forms.Label charRing2;
+        private System.Windows.Forms.Label charRing1;
+        private System.Windows.Forms.Label charWeapon1;
         private System.Windows.Forms.Label charNeck;
         private System.Windows.Forms.Label charGloves;
         private System.Windows.Forms.Label charLegs;
