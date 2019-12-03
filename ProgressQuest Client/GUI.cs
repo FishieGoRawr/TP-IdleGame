@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,6 +27,7 @@ namespace ProgressQuest_Client
             m_speed = 1;
             loadCharacterCmb();
             cmbCharacter.SelectedIndex = 0;
+
         }
 
         /// <summary>
@@ -35,8 +37,25 @@ namespace ProgressQuest_Client
         /// <param name="e"></param>
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            if (m_charID != null)
-                Console.WriteLine(controller.Go(m_charID));
+            bool running = true;
+            string returnString = "";
+
+            while (running)
+            {
+                Thread.Sleep(1000);
+
+                if (cmbCharacter.SelectedIndex != -1)
+                {
+                    returnString = controller.Go(m_charID);
+
+                    if (returnString.StartsWith("You searched the corpse") || returnString.StartsWith("You sold"))
+                        loadLsbCharacterLoot();
+
+                    addEventToLog(returnString);
+                }
+
+                this.Refresh();
+            }
         }
 
         /// <summary>
@@ -105,5 +124,12 @@ namespace ProgressQuest_Client
                 controller.resetDefaultTesting(charID);
             }
         }
+
+        private void addEventToLog(string ev)
+        {
+            lsbLog.Items.Add(ev);
+            lsbLog.TopIndex = lsbLog.Items.Count - 1;
+        }
+
     }
 }

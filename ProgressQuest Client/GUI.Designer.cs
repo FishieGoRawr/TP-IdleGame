@@ -59,7 +59,6 @@
             this.charStr = new System.Windows.Forms.Label();
             this.txtStatus = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.splitter2 = new System.Windows.Forms.Splitter();
             this.statusProgress = new System.Windows.Forms.ProgressBar();
             this.speed = new System.Windows.Forms.TrackBar();
             this.btnStop = new System.Windows.Forms.Button();
@@ -71,7 +70,7 @@
             this.dungeon3 = new System.Windows.Forms.CheckBox();
             this.dungeon2 = new System.Windows.Forms.CheckBox();
             this.dungeon1 = new System.Windows.Forms.CheckBox();
-            this.completedQuest = new System.Windows.Forms.ListView();
+            this.lsvCompletedQuest = new System.Windows.Forms.ListView();
             this.label10 = new System.Windows.Forms.Label();
             this.charRace = new System.Windows.Forms.Label();
             this.charGP = new System.Windows.Forms.Label();
@@ -83,6 +82,8 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.ExpProgressbar = new System.Windows.Forms.ProgressBar();
+            this.lsbLog = new System.Windows.Forms.ListBox();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.speed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pendingQuest.SuspendLayout();
@@ -360,17 +361,9 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 796);
+            this.splitter1.Size = new System.Drawing.Size(3, 1210);
             this.splitter1.TabIndex = 31;
             this.splitter1.TabStop = false;
-            // 
-            // splitter2
-            // 
-            this.splitter2.Location = new System.Drawing.Point(3, 0);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(327, 796);
-            this.splitter2.TabIndex = 32;
-            this.splitter2.TabStop = false;
             // 
             // statusProgress
             // 
@@ -478,14 +471,14 @@
             this.dungeon1.Text = "Dungeon Name";
             this.dungeon1.UseVisualStyleBackColor = true;
             // 
-            // completedQuest
+            // lsvCompletedQuest
             // 
-            this.completedQuest.HideSelection = false;
-            this.completedQuest.Location = new System.Drawing.Point(24, 342);
-            this.completedQuest.Name = "completedQuest";
-            this.completedQuest.Size = new System.Drawing.Size(286, 433);
-            this.completedQuest.TabIndex = 65;
-            this.completedQuest.UseCompatibleStateImageBehavior = false;
+            this.lsvCompletedQuest.HideSelection = false;
+            this.lsvCompletedQuest.Location = new System.Drawing.Point(24, 342);
+            this.lsvCompletedQuest.Name = "lsvCompletedQuest";
+            this.lsvCompletedQuest.Size = new System.Drawing.Size(286, 433);
+            this.lsvCompletedQuest.TabIndex = 65;
+            this.lsvCompletedQuest.UseCompatibleStateImageBehavior = false;
             // 
             // label10
             // 
@@ -585,11 +578,31 @@
             this.ExpProgressbar.Size = new System.Drawing.Size(389, 32);
             this.ExpProgressbar.TabIndex = 66;
             // 
+            // lsbLog
+            // 
+            this.lsbLog.FormattingEnabled = true;
+            this.lsbLog.ItemHeight = 20;
+            this.lsbLog.Location = new System.Drawing.Point(24, 818);
+            this.lsbLog.Name = "lsbLog";
+            this.lsbLog.Size = new System.Drawing.Size(1287, 224);
+            this.lsbLog.TabIndex = 78;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(24, 792);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(433, 20);
+            this.label12.TabIndex = 79;
+            this.label12.Text = "Adventurer\'s Exploration Log of Epic Excursions (A.E.L.E.E.)";
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1323, 796);
+            this.ClientSize = new System.Drawing.Size(1323, 1210);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.lsbLog);
             this.Controls.Add(this.ExpProgressbar);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.charRace);
@@ -601,13 +614,12 @@
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.completedQuest);
+            this.Controls.Add(this.lsvCompletedQuest);
             this.Controls.Add(this.pendingQuest);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.statusProgress);
-            this.Controls.Add(this.splitter2);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.charLck);
@@ -685,7 +697,6 @@
         private System.Windows.Forms.Label charStr;
         private System.Windows.Forms.Label txtStatus;
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.ProgressBar statusProgress;
         private System.Windows.Forms.TrackBar speed;
         private System.Windows.Forms.Button btnStop;
@@ -697,7 +708,7 @@
         private System.Windows.Forms.CheckBox dungeon2;
         private System.Windows.Forms.CheckBox dungeon1;
         private System.Windows.Forms.ProgressBar questProgressbar;
-        private System.Windows.Forms.ListView completedQuest;
+        private System.Windows.Forms.ListView lsvCompletedQuest;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label charRace;
         private System.Windows.Forms.Label charGP;
@@ -709,6 +720,8 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ProgressBar ExpProgressbar;
+        private System.Windows.Forms.ListBox lsbLog;
+        private System.Windows.Forms.Label label12;
     }
 }
 
