@@ -177,7 +177,7 @@ namespace ProgressQuest_Client
             charWis.Text = character["Wis"].ToString();
             charLck.Text = character["Luck"].ToString();
 
-            ExpProgressbar.Maximum = (int)character["Level"] * 100;
+            ExpProgressbar.Maximum = (int)character["Level"] * 150;
             ExpProgressbar.Value = (int)character["Exp"];
 
             healthProgressbar.Value = (int)character["CurrHP"];
