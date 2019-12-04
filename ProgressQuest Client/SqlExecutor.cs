@@ -28,6 +28,7 @@ namespace ProgressQuest_Client
         {
             cnxString = "Data Source='" + server + "';Initial Catalog='" + database + "';User ID='" + user + "';Password='" + pass + "'";
             this.cnx = new SqlConnection(cnxString);
+            Console.WriteLine(cnxString);
         }
 
         /// <summary>

@@ -60,7 +60,7 @@
             this.txtStatus = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.statusProgress = new System.Windows.Forms.ProgressBar();
-            this.speed = new System.Windows.Forms.TrackBar();
+            this.trkSpeed = new System.Windows.Forms.TrackBar();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
@@ -84,7 +84,7 @@
             this.ExpProgressbar = new System.Windows.Forms.ProgressBar();
             this.lsbLog = new System.Windows.Forms.ListBox();
             this.label12 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.speed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pendingQuest.SuspendLayout();
             this.SuspendLayout();
@@ -372,15 +372,18 @@
             this.statusProgress.Size = new System.Drawing.Size(947, 27);
             this.statusProgress.TabIndex = 33;
             // 
-            // speed
+            // trkSpeed
             // 
-            this.speed.Cursor = System.Windows.Forms.Cursors.Default;
-            this.speed.LargeChange = 3;
-            this.speed.Location = new System.Drawing.Point(904, 34);
-            this.speed.Maximum = 2;
-            this.speed.Name = "speed";
-            this.speed.Size = new System.Drawing.Size(222, 69);
-            this.speed.TabIndex = 60;
+            this.trkSpeed.Cursor = System.Windows.Forms.Cursors.Default;
+            this.trkSpeed.LargeChange = 1;
+            this.trkSpeed.Location = new System.Drawing.Point(904, 34);
+            this.trkSpeed.Maximum = 6;
+            this.trkSpeed.Minimum = 1;
+            this.trkSpeed.Name = "trkSpeed";
+            this.trkSpeed.Size = new System.Drawing.Size(222, 69);
+            this.trkSpeed.TabIndex = 60;
+            this.trkSpeed.Value = 1;
+            this.trkSpeed.ValueChanged += new System.EventHandler(this.trkSpeed_ValueChanged);
             // 
             // btnStop
             // 
@@ -652,10 +655,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.speed);
+            this.Controls.Add(this.trkSpeed);
             this.Name = "GUI";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.speed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pendingQuest.ResumeLayout(false);
             this.pendingQuest.PerformLayout();
@@ -698,7 +701,7 @@
         private System.Windows.Forms.Label txtStatus;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.ProgressBar statusProgress;
-        private System.Windows.Forms.TrackBar speed;
+        private System.Windows.Forms.TrackBar trkSpeed;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label label18;
