@@ -14,20 +14,35 @@ namespace ProgressQuest_Client
     public partial class GUI : Form
     {
         SqlPQ controller;
-        bool m_started;
+        bool m_running;
         int m_speed;
         int m_charID;
+        Thread mainLoop;
+        string returnString;
+        MethodInvoker refresh;
+        MethodInvoker refreshLootLsb;
+        MethodInvoker refreshLog;
+        MethodInvoker refreshCharInfos;
+        MethodInvoker refreshHealth;
 
         public GUI()
         {
             InitializeComponent();
 
             controller = new SqlPQ();
-            m_started = false;
-            m_speed = 1;
+            m_running = false;
+            m_speed = 1000;
             loadCharacterCmb();
             cmbCharacter.SelectedIndex = 0;
+            returnString = "";
 
+            refresh = delegate { this.Refresh(); };
+            refreshLootLsb = delegate { loadLsbCharacterLoot(); };
+            refreshLog = delegate { addEventToLog(returnString); };
+            refreshCharInfos = delegate { setInfoLabel(); };
+            refreshHealth = delegate { };
+
+            mainLoop = new Thread(new ThreadStart(Go));
         }
 
         /// <summary>
@@ -37,24 +52,79 @@ namespace ProgressQuest_Client
         /// <param name="e"></param>
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            bool running = true;
-            string returnString = "";
+            m_running = true;
 
-            while (running)
+            if (!mainLoop.IsAlive)
+                mainLoop.Start();
+            else
+                mainLoop.Resume();
+        }
+
+        private void BtnStop_Click(object sender, EventArgs e)
+        {
+            m_running = false;
+            mainLoop.Suspend();
+
+            //TESTING
+            //if (m_charID != 0)
+            //{
+            //    object[,] charID = new object[1, 2];
+            //    charID[0, 0] = "@CharID";
+            //    charID[0, 1] = m_charID;
+            //    controller.resetDefaultTesting(charID);
+            //}
+        }
+
+        private void trkSpeed_ValueChanged(object sender, EventArgs e)
+        {
+            switch (trkSpeed.Value)
             {
-                Thread.Sleep(1000);
+                case 1:
+                    m_speed = 1500;
+                    break;
+                case 2:
+                    m_speed = 750;
+                    break;
+                case 3:
+                    m_speed = 375;
+                    break;
+                case 4:
+                    m_speed = 187;
+                    break;
+                case 5:
+                    m_speed = 94;
+                    break;
+                case 6:
+                    m_speed = 46;
+                    break;
+                default:
+                    m_speed = 1500;
+                    break;
+            }
+        }
 
-                if (cmbCharacter.SelectedIndex != -1)
-                {
-                    returnString = controller.Go(m_charID);
+        private void Go()
+        {
+            returnString = "";
 
-                    if (returnString.StartsWith("You searched the corpse") || returnString.StartsWith("You sold"))
-                        loadLsbCharacterLoot();
+            while (m_running)
+            {
+                Thread.Sleep(m_speed);
 
-                    addEventToLog(returnString);
-                }
+                returnString = controller.Go(m_charID);
 
-                this.Refresh();
+                if (returnString.StartsWith("You searched") || returnString.StartsWith("You sold"))
+                    this.Invoke(refreshLootLsb);
+
+                if (returnString.StartsWith("You sold"))
+                    this.Invoke(refreshCharInfos);
+
+                if (returnString.Contains("kicked your butt"))
+                    this.Invoke(refreshCharInfos);
+                    
+
+                this.Invoke(refreshLog);
+                this.Invoke(refresh);
             }
         }
 
@@ -114,22 +184,17 @@ namespace ProgressQuest_Client
             manaProgressbar.Value = 100;
         }
 
-        private void BtnStop_Click(object sender, EventArgs e)
-        {
-            if (m_charID != 0)
-            {
-                object[,] charID = new object[1, 2];
-                charID[0, 0] = "@CharID";
-                charID[0, 1] = m_charID;
-                controller.resetDefaultTesting(charID);
-            }
-        }
-
         private void addEventToLog(string ev)
         {
             lsbLog.Items.Add(ev);
             lsbLog.TopIndex = lsbLog.Items.Count - 1;
         }
 
+        private bool isCharacterSelected()
+        {
+            if (cmbCharacter.SelectedIndex == -1)
+                return false;
+            else return true;
+        }
     }
 }
