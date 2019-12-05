@@ -19,11 +19,18 @@ namespace ProgressQuest_Client
         int m_charID;
         Thread mainLoop;
         string returnString;
+
+
         MethodInvoker refresh;
         MethodInvoker refreshLootLsb;
         MethodInvoker refreshLog;
         MethodInvoker refreshCharInfos;
-        MethodInvoker refreshHealth;
+        MethodInvoker updateProgress;
+        MethodInvoker clearProgress;
+        MethodInvoker refreshCompletedDungeons;
+        MethodInvoker refreshDungeonName;
+        MethodInvoker refreshDungeonKC;
+        MethodInvoker refreshEquip;
 
         public GUI()
         {
@@ -31,16 +38,25 @@ namespace ProgressQuest_Client
 
             controller = new SqlPQ();
             m_running = false;
-            m_speed = 1000;
+            m_speed = 750;
             loadCharacterCmb();
             cmbCharacter.SelectedIndex = 0;
             returnString = "";
 
+            setCompletedDungeonLsb();
+            setDungeonName();
+            setEquipement();
+
+            refreshDungeonKC = delegate { setDungeonKillcount(); };
+            refreshDungeonName = delegate { setDungeonName(); };
             refresh = delegate { this.Refresh(); };
             refreshLootLsb = delegate { loadLsbCharacterLoot(); };
             refreshLog = delegate { addEventToLog(returnString); };
             refreshCharInfos = delegate { setInfoLabel(); };
-            refreshHealth = delegate { };
+            updateProgress = delegate { updateStatusProgress(); };
+            clearProgress = delegate { clearStatusProgress(); };
+            refreshCompletedDungeons = delegate { setCompletedDungeonLsb(); };
+            refreshEquip = delegate { setEquipement(); };
 
             mainLoop = new Thread(new ThreadStart(Go));
         }
@@ -80,25 +96,25 @@ namespace ProgressQuest_Client
             switch (trkSpeed.Value)
             {
                 case 1:
-                    m_speed = 1500;
-                    break;
-                case 2:
                     m_speed = 750;
                     break;
-                case 3:
+                case 2:
                     m_speed = 375;
                     break;
-                case 4:
+                case 3:
                     m_speed = 187;
                     break;
+                case 4:
+                    m_speed = 93;
+                    break;
                 case 5:
-                    m_speed = 94;
+                    m_speed = 42;
                     break;
                 case 6:
-                    m_speed = 46;
+                    m_speed = 21;
                     break;
                 default:
-                    m_speed = 1500;
+                    m_speed = 750;
                     break;
             }
         }
@@ -109,23 +125,52 @@ namespace ProgressQuest_Client
 
             while (m_running)
             {
-                Thread.Sleep(m_speed);
+                while (statusProgress.Value != statusProgress.Maximum)
+                {
+                    Thread.Sleep(1);
+                    this.Invoke(updateProgress);
+                }
+
 
                 returnString = controller.Go(m_charID);
 
-                if (returnString.StartsWith("You searched") || returnString.StartsWith("You sold"))
+                if (returnString.Contains("GoblinBurger")) //Dungeon completed
+                {
+                    this.Invoke(refreshCompletedDungeons);
+                }
+
+                if (returnString.StartsWith("A strange"))
+                    this.Invoke(refreshDungeonName);
+
+                if (returnString.StartsWith("You finally ended"))
+                    this.Invoke(refreshDungeonKC);
+
+                if (returnString.Contains("You bought") || returnString.Contains("goblin thief"))
+                    this.Invoke(refreshEquip);
+
                     this.Invoke(refreshLootLsb);
-
-                if (returnString.StartsWith("You sold"))
-                    this.Invoke(refreshCharInfos);
-
-                if (returnString.Contains("kicked your butt"))
-                    this.Invoke(refreshCharInfos);
-                    
-
+                this.Invoke(refreshCharInfos);
                 this.Invoke(refreshLog);
                 this.Invoke(refresh);
+                this.Invoke(clearProgress);
             }
+        }
+
+        public void updateStatusProgress()
+        {
+            int progressSpeed = (10000 / m_speed);
+
+            if (statusProgress.Value + progressSpeed > statusProgress.Maximum)
+                statusProgress.Value = statusProgress.Maximum;
+            else
+                statusProgress.Value = statusProgress.Value + progressSpeed;
+
+            //statusProgress.Value = statusProgress.Value + 1;
+        }
+
+        public void clearStatusProgress()
+        {
+            statusProgress.Value = 0;
         }
 
         /// <summary>
@@ -181,7 +226,6 @@ namespace ProgressQuest_Client
             ExpProgressbar.Value = (int)character["Exp"];
 
             healthProgressbar.Value = (int)character["CurrHP"];
-            manaProgressbar.Value = 100;
         }
 
         private void addEventToLog(string ev)
@@ -195,6 +239,81 @@ namespace ProgressQuest_Client
             if (cmbCharacter.SelectedIndex == -1)
                 return false;
             else return true;
+        }
+
+        private void setCompletedDungeonLsb()
+        {
+            DataView view = controller.getCharacterCompletedDungeons(m_charID);
+
+            lsbCompletedDungeon.Items.Clear();
+
+            foreach (DataRowView row in view)
+                lsbCompletedDungeon.Items.Add(row[0] + " | " + row[1] + "x");
+        }
+
+        private void setDungeonName()
+        {
+            DataView view = controller.getDungeonName(m_charID);
+
+            if (view.Count > 0)
+            {
+                DataRowView character = view[0];
+                lblDunName.Text = character[0].ToString();
+                prgDunProg.Value = 0;
+            }
+        }
+
+        private void setDungeonKillcount()
+        {
+            DataView view = controller.getDungeonKC(m_charID);
+            DataRowView character = view[0];
+
+            prgDunProg.Value = 25 - (int)character[0];
+        }
+
+        private void setEquipement()
+        {
+            DataView view = controller.getCharacterEquip(m_charID);
+            DataRowView equip = view[0];
+
+            if (equip[0].ToString() != "")
+                lblCharHead.Text = equip[0].ToString();
+            else lblCharHead.Text = "None";
+
+            equip = view[1];
+            if (equip[0].ToString() != "")
+                lblCharTorso.Text = equip[0].ToString();
+            else lblCharTorso.Text = "None";
+
+            equip = view[2];
+            if (equip[0].ToString() != "")
+                lblCharLegs.Text = equip[0].ToString();
+            else lblCharLegs.Text = "None";
+
+            equip = view[3];
+            if (equip[0].ToString() != "")
+                lblCharBoots.Text = equip[0].ToString();
+            else lblCharBoots.Text = "None";
+
+            equip = view[4];
+            if (equip[0].ToString() != "")
+                lblCharGloves.Text = equip[0].ToString();
+            else lblCharGloves.Text = "None";
+
+            equip = view[5];
+            if (equip[0].ToString() != "")
+                lblCharWeapon.Text = equip[0].ToString();
+            else lblCharWeapon.Text = "None";
+
+            equip = view[6];
+            if (equip[0].ToString() != "")
+                lblCharRing.Text = equip[0].ToString();
+            else lblCharRing.Text = "None";
+
+            equip = view[7];
+            if (equip[0].ToString() != "")
+                lblCharNeck.Text = equip[0].ToString();
+            else lblCharNeck.Text = "None";
         }
     }
 }
