@@ -1,3 +1,4 @@
+--Return the amount of weight on a character
 CREATE PROCEDURE spGetCurrentWeight
 @charID INT
 AS

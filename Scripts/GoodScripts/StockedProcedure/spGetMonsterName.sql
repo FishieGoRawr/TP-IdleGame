@@ -1,3 +1,4 @@
+--Return the name of a monster
 CREATE PROCEDURE spGetMonsterName
 @MonsterID INT,
 @MonsterName NVARCHAR(50) OUTPUT

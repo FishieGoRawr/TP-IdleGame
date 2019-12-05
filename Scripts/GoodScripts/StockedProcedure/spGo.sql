@@ -108,7 +108,7 @@ BEGIN
 			IF (@HasQuest = 0) --If player doesn't actually have a quest assigned
 				Begin
 					EXEC dbo.spRandomQuestByLevel @charID, @level
-					DECLARE @nameDungeon nvarchar(50) SET @nameDungeon = (SELECT DungeonName FROM (Dungeons INNER JOIN QuestJournal ON DungeonID = QuestJournalDungeonID) WHERE QuestJournalCompletion = 0) --Get the active dungeon's name					
+					DECLARE @nameDungeon nvarchar(50) SET @nameDungeon = (SELECT DungeonName FROM (Dungeons INNER JOIN QuestJournal ON DungeonID = QuestJournalDungeonID) WHERE QuestJournalCompletion = 0 AND QuestJournalCharacterID = @charID) --Get the active dungeon's name					
 					
 					SET @paramReturnText = CONCAT('A strange old man give you a quest: ', @nameDungeon)
 					EXEC dbo.spSetStatusCharacter @charID, 'goDungeon'

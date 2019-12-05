@@ -1,3 +1,4 @@
+--Return the name of an equipement
 CREATE PROCEDURE spGetEquipName
 @EquipID INT,
 @name NVARCHAR(25) OUT

@@ -2,7 +2,7 @@ CREATE PROCEDURE spHasActiveQuest
 @CharID INT
 AS
 BEGIN
-	DECLARE @QuestCount INT SET @QuestCount = (SELECT COUNT(QuestJournalCompletion) FROM QuestJournal WHERE QuestJournalCompletion = 0 AND QuestJournalCharacterID = @charID)
+	DECLARE @QuestCount INT SET @QuestCount = (SELECT COUNT(QuestJournalCompletion) FROM QuestJournal WHERE QuestJournalCompletion = 0 AND QuestJournalCharacterID = @CharID)
 
 	IF @QuestCount > 0
 		RETURN 1

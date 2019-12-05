@@ -1,3 +1,4 @@
+--Return a random ID of a monster a character can encounter in a specific dungeon
 CREATE PROCEDURE spGetMonsterFromDungeon
 @DunID INT
 AS

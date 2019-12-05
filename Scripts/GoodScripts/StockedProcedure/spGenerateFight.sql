@@ -1,3 +1,4 @@
+--Create a new fight with the character and the encounter monster
 CREATE PROCEDURE spGenerateFight
 @CharID INT,
 @MonsterID INT,
