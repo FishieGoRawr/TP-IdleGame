@@ -65,6 +65,11 @@ namespace ProgressQuest_Client
             return view;
         }
 
+        /// <summary>
+        /// Get all character loot sorted by descending value.
+        /// </summary>
+        /// <param name="characterID">Character ID</param>
+        /// <returns>DataView with all loot from selected character.</returns>
         public DataView getAllCharacterLootSorted(int characterID)
         {
             DataView view = new DataView(executor.executeView("SELECT * FROM fnGetCharacterLoot(" + characterID + ")"));
@@ -73,6 +78,11 @@ namespace ProgressQuest_Client
             return view;
         }
 
+        /// <summary>
+        /// Get all character infos (Stats, GP, level, exp...)
+        /// </summary>
+        /// <param name="characterID">Character ID</param>
+        /// <returns>All infos from selected character.</returns>
         public DataView getAllCharactersInfo(int characterID)
         {
             DataView view = new DataView(executor.executeView("SELECT * FROM fnGetCharacterInfos(" + characterID + ")"));
@@ -80,6 +90,11 @@ namespace ProgressQuest_Client
             return view;
         }
 
+        /// <summary>
+        /// Get the completed dungeons for the selected character.
+        /// </summary>
+        /// <param name="characterID">Character ID</param>
+        /// <returns>DataView of the selected character completed dungeons.</returns>
         public DataView getCharacterCompletedDungeons(int characterID)
         {
             DataView view = new DataView(executor.executeView("SELECT * FROM fnGetCompletedDungeons(" + characterID + ")"));
@@ -87,6 +102,11 @@ namespace ProgressQuest_Client
             return view;
         }
 
+        /// <summary>
+        /// Get the name of the selected character current dungeon.
+        /// </summary>
+        /// <param name="characterID">Character ID</param>
+        /// <returns></returns>
         public DataView getDungeonName(int characterID)
         {
             DataView view = new DataView(executor.executeView("SELECT * FROM fnGetActiveDungeonName(" + characterID + ")"));
@@ -94,6 +114,11 @@ namespace ProgressQuest_Client
             return view;
         }
 
+        /// <summary>
+        /// Get the selected character's killcount for the current dungeon.
+        /// </summary>
+        /// <param name="characterID">Character ID</param>
+        /// <returns>DataView with all of the character's completed dungeons.</returns>
         public DataView getDungeonKC(int characterID)
         {
             DataView view = new DataView(executor.executeView("SELECT * FROM fnGetDungeonKC(" + characterID + ")"));
@@ -101,6 +126,11 @@ namespace ProgressQuest_Client
             return view;
         }
 
+        /// <summary>
+        /// Get the selected character equipement names.
+        /// </summary>
+        /// <param name="characterID">Character ID</param>
+        /// <returns>DataView with the name of all of the selected character's equipement.</returns>
         public DataView getCharacterEquip(int characterID)
         {
             DataView view = new DataView(executor.executeView("SELECT * FROM fnGetCharacterEquiped(" + characterID + ")"));

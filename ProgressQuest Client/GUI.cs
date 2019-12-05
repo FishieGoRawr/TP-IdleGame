@@ -20,7 +20,6 @@ namespace ProgressQuest_Client
         Thread mainLoop;
         string returnString;
 
-
         MethodInvoker refresh;
         MethodInvoker refreshLootLsb;
         MethodInvoker refreshLog;
@@ -32,6 +31,9 @@ namespace ProgressQuest_Client
         MethodInvoker refreshDungeonKC;
         MethodInvoker refreshEquip;
 
+        /// <summary>
+        /// GUI Constructor
+        /// </summary>
         public GUI()
         {
             InitializeComponent();
@@ -76,21 +78,35 @@ namespace ProgressQuest_Client
                 mainLoop.Resume();
         }
 
+        /// <summary>
+        /// Pause the adventure.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnStop_Click(object sender, EventArgs e)
         {
             m_running = false;
             mainLoop.Suspend();
-
-            //TESTING
-            //if (m_charID != 0)
-            //{
-            //    object[,] charID = new object[1, 2];
-            //    charID[0, 0] = "@CharID";
-            //    charID[0, 1] = m_charID;
-            //    controller.resetDefaultTesting(charID);
-            //}
         }
 
+        /// <summary>
+        /// Change the selected character and reload the infos.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CmbCharacter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBoxItem selectedCharacter = (ComboBoxItem)cmbCharacter.SelectedItem;
+            m_charID = selectedCharacter.getID();
+            loadLsbCharacterLoot();
+            setInfoLabel();
+        }
+
+        /// <summary>
+        /// Change the game tick speed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void trkSpeed_ValueChanged(object sender, EventArgs e)
         {
             switch (trkSpeed.Value)
@@ -111,7 +127,7 @@ namespace ProgressQuest_Client
                     m_speed = 42;
                     break;
                 case 6:
-                    m_speed = 21;
+                    m_speed = 1;
                     break;
                 default:
                     m_speed = 750;
@@ -119,6 +135,9 @@ namespace ProgressQuest_Client
             }
         }
 
+        /// <summary>
+        /// Main loop. Calls go and refresh what has to be refreshed.
+        /// </summary>
         private void Go()
         {
             returnString = "";
@@ -156,6 +175,9 @@ namespace ProgressQuest_Client
             }
         }
 
+        /// <summary>
+        /// Update the game status progress bar with each game tick.
+        /// </summary>
         public void updateStatusProgress()
         {
             int progressSpeed = (10000 / m_speed);
@@ -165,9 +187,12 @@ namespace ProgressQuest_Client
             else
                 statusProgress.Value = statusProgress.Value + progressSpeed;
 
-            //statusProgress.Value = statusProgress.Value + 1;
+            //statusProgress.Value = statusProgress.Value + 100;
         }
 
+        /// <summary>
+        /// Resets the game status progress bar
+        /// </summary>
         public void clearStatusProgress()
         {
             statusProgress.Value = 0;
@@ -182,11 +207,14 @@ namespace ProgressQuest_Client
 
             foreach (DataRowView character in sortedCharacters)
             {
-                ComboBoxItem temp = new ComboBoxItem("Name: " + character["CharName"].ToString() + " | Level: " + character["CharLevel"].ToString(), (int)character["CharID"]);
+                ComboBoxItem temp = new ComboBoxItem("Name: " + character["CharName"].ToString()/* + " | Level: " + character["CharLevel"].ToString()*/, (int)character["CharID"]);
                 cmbCharacter.Items.Add(temp);
             }
         }
 
+        /// <summary>
+        /// Fill the loot listbox with the selected character's loot table.
+        /// </summary>
         public void loadLsbCharacterLoot()
         {
             lsbLoot.Items.Clear();
@@ -198,14 +226,9 @@ namespace ProgressQuest_Client
                 lsbLoot.Items.Add(loot["Name"].ToString() + " | Value: " + loot["Value"].ToString() + "GP | Qty: " + loot["Qty"].ToString());
         }
 
-        private void CmbCharacter_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboBoxItem selectedCharacter = (ComboBoxItem)cmbCharacter.SelectedItem;
-            m_charID = selectedCharacter.getID();
-            loadLsbCharacterLoot();
-            setInfoLabel();
-        }
-
+        /// <summary>
+        /// Set all the character infos labels.
+        /// </summary>
         public void setInfoLabel()
         {
             DataView info = controller.getAllCharactersInfo(m_charID);
@@ -228,12 +251,20 @@ namespace ProgressQuest_Client
             healthProgressbar.Value = (int)character["CurrHP"];
         }
 
+        /// <summary>
+        /// Add current event to adventurer's log.
+        /// </summary>
+        /// <param name="ev"></param>
         private void addEventToLog(string ev)
         {
             lsbLog.Items.Add(ev);
             lsbLog.TopIndex = lsbLog.Items.Count - 1;
         }
 
+        /// <summary>
+        /// Check if a character is selected.
+        /// </summary>
+        /// <returns></returns>
         private bool isCharacterSelected()
         {
             if (cmbCharacter.SelectedIndex == -1)
@@ -241,6 +272,9 @@ namespace ProgressQuest_Client
             else return true;
         }
 
+        /// <summary>
+        /// Fill the completed dungeon listbox with the selected character's completed dungeons.
+        /// </summary>
         private void setCompletedDungeonLsb()
         {
             DataView view = controller.getCharacterCompletedDungeons(m_charID);
@@ -251,6 +285,9 @@ namespace ProgressQuest_Client
                 lsbCompletedDungeon.Items.Add(row[0] + " | " + row[1] + "x");
         }
 
+        /// <summary>
+        /// Set the label for the active dungeon's name.
+        /// </summary>
         private void setDungeonName()
         {
             DataView view = controller.getDungeonName(m_charID);
@@ -263,6 +300,9 @@ namespace ProgressQuest_Client
             }
         }
 
+        /// <summary>
+        /// Set the killcount for the active dungeon.
+        /// </summary>
         private void setDungeonKillcount()
         {
             DataView view = controller.getDungeonKC(m_charID);
@@ -271,6 +311,9 @@ namespace ProgressQuest_Client
             prgDunProg.Value = 25 - (int)character[0];
         }
 
+        /// <summary>
+        /// Set the equipement labels with the selected character's equiped items.
+        /// </summary>
         private void setEquipement()
         {
             DataView view = controller.getCharacterEquip(m_charID);

@@ -78,6 +78,12 @@
             this.lsbLog = new System.Windows.Forms.ListBox();
             this.label12 = new System.Windows.Forms.Label();
             this.lsbCompletedDungeon = new System.Windows.Forms.ListBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trkSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pendingQuest.SuspendLayout();
@@ -337,7 +343,7 @@
             // 
             this.statusProgress.ForeColor = System.Drawing.Color.SteelBlue;
             this.statusProgress.Location = new System.Drawing.Point(359, 748);
-            this.statusProgress.Maximum = 10000;
+            this.statusProgress.Maximum = 1000;
             this.statusProgress.Name = "statusProgress";
             this.statusProgress.Size = new System.Drawing.Size(947, 27);
             this.statusProgress.TabIndex = 33;
@@ -346,7 +352,7 @@
             // 
             this.trkSpeed.Cursor = System.Windows.Forms.Cursors.Default;
             this.trkSpeed.LargeChange = 1;
-            this.trkSpeed.Location = new System.Drawing.Point(1022, 41);
+            this.trkSpeed.Location = new System.Drawing.Point(1022, 33);
             this.trkSpeed.Maximum = 6;
             this.trkSpeed.Minimum = 1;
             this.trkSpeed.Name = "trkSpeed";
@@ -378,7 +384,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(1031, 18);
+            this.label18.Location = new System.Drawing.Point(1031, 10);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(56, 20);
             this.label18.TabIndex = 61;
@@ -550,11 +556,71 @@
             this.lsbCompletedDungeon.Size = new System.Drawing.Size(312, 604);
             this.lsbCompletedDungeon.TabIndex = 80;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(1030, 73);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(25, 20);
+            this.label9.TabIndex = 81;
+            this.label9.Text = "1x";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(1077, 74);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(25, 20);
+            this.label13.TabIndex = 82;
+            this.label13.Text = "2x";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(1174, 75);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(25, 20);
+            this.label14.TabIndex = 84;
+            this.label14.Text = "8x";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(1127, 74);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(25, 20);
+            this.label15.TabIndex = 83;
+            this.label15.Text = "4x";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(1264, 77);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(44, 20);
+            this.label16.TabIndex = 86;
+            this.label16.Text = "MAX";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(1223, 76);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(34, 20);
+            this.label17.TabIndex = 85;
+            this.label17.Text = "16x";
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1323, 1139);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.lsbCompletedDungeon);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.lsbLog);
@@ -604,7 +670,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.trkSpeed);
             this.Name = "GUI";
-            this.Text = "Form1";
+            this.Text = "Dungeon Buster: Idle Edition";
             ((System.ComponentModel.ISupportInitialize)(this.trkSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pendingQuest.ResumeLayout(false);
@@ -666,6 +732,12 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblDunName;
         private System.Windows.Forms.ListBox lsbCompletedDungeon;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
     }
 }
 

@@ -14,7 +14,7 @@ namespace ProgressQuest_Client
     class SqlExecutor
     {
         string cnxString = ""; ///<summary>Connection string required to access database.</summary>
-        string database = "BD_IdleGame"; ///<summary>Database name.</summary>
+        string database = "BD_IdleGameTEST"; ///<summary>Database name.</summary>
         string server = "J-C236-OL-06"; ///<summary>Database server address.</summary>
         string user = "AlexMartigny"; ///<summary>Username to connect to database.</summary>
         string pass = "Banane123"; ///<summary>Password for above user.</summary>
