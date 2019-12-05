@@ -100,6 +100,9 @@ namespace ProgressQuest_Client
             m_charID = selectedCharacter.getID();
             loadLsbCharacterLoot();
             setInfoLabel();
+            setCompletedDungeonLsb();
+            setEquipement();
+            setDungeonName();
         }
 
         /// <summary>
