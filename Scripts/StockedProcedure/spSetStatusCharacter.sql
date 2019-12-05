@@ -1,3 +1,4 @@
+--Set the character status
 CREATE PROCEDURE spSetStatusCharacter
 @CharID int, @status nvarchar(25)
 AS

@@ -1,3 +1,4 @@
+--Check if character is overweight (Loot count over Character max loot)
 CREATE PROCEDURE spIsOverweight
 @charID INT
 AS

@@ -1,3 +1,4 @@
+--Generate a random event (4 total)
 CREATE PROCEDURE spRandomEvents
 AS
 BEGIN

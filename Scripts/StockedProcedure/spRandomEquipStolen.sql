@@ -1,3 +1,4 @@
+--Generate a random equipement to be stolen by the golbin thief
 CREATE PROCEDURE spRandomEquipStolen
 @CharID INT
 AS
@@ -35,6 +36,7 @@ BEGIN
 				SET @HasStolen = 1
 		END
 	
+	--Returns the ID of the stolen equip so you can later get the name
 	RETURN @StolenEquipID
 END
 GO
