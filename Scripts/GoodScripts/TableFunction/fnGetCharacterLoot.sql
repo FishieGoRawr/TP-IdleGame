@@ -1,3 +1,4 @@
+--Get all of the name from the character loot table.
 CREATE FUNCTION fnGetCharacterLoot (@CharID INTEGER)
 RETURNS TABLE
 AS

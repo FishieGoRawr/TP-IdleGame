@@ -1,3 +1,4 @@
+--Get the character gold amount.
 CREATE FUNCTION fnGetCharacterGold (@CharID INT)
 RETURNS TABLE
 AS
