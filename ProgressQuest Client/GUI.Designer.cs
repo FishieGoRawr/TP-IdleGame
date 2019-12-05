@@ -343,7 +343,7 @@
             // 
             this.statusProgress.ForeColor = System.Drawing.Color.SteelBlue;
             this.statusProgress.Location = new System.Drawing.Point(359, 748);
-            this.statusProgress.Maximum = 1000;
+            this.statusProgress.Maximum = 10000;
             this.statusProgress.Name = "statusProgress";
             this.statusProgress.Size = new System.Drawing.Size(947, 27);
             this.statusProgress.TabIndex = 33;

@@ -4,7 +4,7 @@ CREATE PROCEDURE spGenerateMonsterHit
 @MonsterID INT
 AS
 BEGIN
-	DECLARE @MonsterAtk INT SET @MonsterAtk = (SELECT MonsterDmg FROM Monsters WHERE MonsterID = @MonsterID) --Get the max hit damage the monster can deal
+	DECLARE @MonsterAtk INT SET @MonsterAtk = (SELECT TOP 1 MonsterDmg FROM Monsters WHERE MonsterID = @MonsterID) --Get the max hit damage the monster can deal
 	DECLARE @PlayerDefense INT EXEC @PlayerDefense = dbo.spGetPlayerDefense @CharID --Get the total of armor the character own
 	
 	--Get a random amount of damage deal by the attack of the monster

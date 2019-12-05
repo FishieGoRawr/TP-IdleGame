@@ -4,7 +4,7 @@ CREATE PROCEDURE spGetMonsterName
 @MonsterName NVARCHAR(50) OUTPUT
 AS
 BEGIN
-	SET @MonsterName = (SELECT MonsterName FROM Monsters WHERE MonsterID = @MonsterID)
+	SET @MonsterName = (SELECT TOP 1 MonsterName FROM Monsters WHERE MonsterID = @MonsterID)
 END
 GO
 

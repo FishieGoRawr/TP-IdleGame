@@ -759,21 +759,21 @@ RETURNS TABLE
 AS
 RETURN 
 (
-	SELECT EquipName FROM Characters  LEFT JOIN Equipements ON CharHeadID = EquipID WHERE CharID = 1
+	SELECT EquipName FROM Characters  LEFT JOIN Equipements ON CharHeadID = EquipID WHERE CharID = @CharID
 	UNION ALL
-	SELECT EquipName FROM Characters  LEFT JOIN Equipements ON CharTorsoID = EquipID WHERE CharID = 1
+	SELECT EquipName FROM Characters  LEFT JOIN Equipements ON CharTorsoID = EquipID WHERE CharID = @CharID
 	UNION ALL
-	SELECT EquipName FROM Characters  LEFT JOIN Equipements ON CharLegsID = EquipID WHERE CharID = 1
+	SELECT EquipName FROM Characters  LEFT JOIN Equipements ON CharLegsID = EquipID WHERE CharID = @CharID
 	UNION ALL
-	SELECT EquipName FROM Characters  LEFT JOIN Equipements ON CharBootsID = EquipID WHERE CharID = 1
+	SELECT EquipName FROM Characters  LEFT JOIN Equipements ON CharBootsID = EquipID WHERE CharID = @CharID
 	UNION ALL
-	SELECT EquipName FROM Characters  LEFT JOIN Equipements ON CharGlovesID = EquipID WHERE CharID = 1
+	SELECT EquipName FROM Characters  LEFT JOIN Equipements ON CharGlovesID = EquipID WHERE CharID = @CharID
 	UNION ALL
-	SELECT EquipName FROM Characters LEFT JOIN Equipements ON CharWeapID = EquipID WHERE CharID = 1
+	SELECT EquipName FROM Characters LEFT JOIN Equipements ON CharWeapID = EquipID WHERE CharID = @CharID
 	UNION ALL
-	SELECT EquipName FROM Characters LEFT JOIN Equipements ON CharRingID = EquipID WHERE CharID = 1
+	SELECT EquipName FROM Characters LEFT JOIN Equipements ON CharRingID = EquipID WHERE CharID = @CharID
 	UNION ALL
-	SELECT EquipName FROM Characters LEFT JOIN Equipements ON CharNeckLaceID = EquipID WHERE CharID = 1
+	SELECT EquipName FROM Characters LEFT JOIN Equipements ON CharNeckLaceID = EquipID WHERE CharID = @CharID
 )
 GO
 /****** Object:  View [dbo].[viewAllCharacters]    Script Date: 2019-12-05 09:31:05 ******/
@@ -1093,7 +1093,7 @@ CREATE PROCEDURE [dbo].[spGenerateMonsterHit]
 @MonsterID INT
 AS
 BEGIN
-	DECLARE @MonsterAtk INT SET @MonsterAtk = (SELECT MonsterDmg FROM Monsters WHERE MonsterID = @MonsterID)
+	DECLARE @MonsterAtk INT SET @MonsterAtk = (SELECT TOP 1 MonsterDmg FROM Monsters WHERE MonsterID = @MonsterID)
 	DECLARE @PlayerDefense INT EXEC @PlayerDefense = dbo.spGetPlayerDefense @CharID
 	
 	DECLARE @Hit INT SET @Hit = CAST(RAND(CHECKSUM(NEWID())) * @MonsterAtk as INT) + 0
@@ -1226,7 +1226,7 @@ CREATE PROCEDURE [dbo].[spGetMonsterName]
 @MonsterName NVARCHAR(50) OUTPUT
 AS
 BEGIN
-	SET @MonsterName = (SELECT MonsterName FROM Monsters WHERE MonsterID = @MonsterID)
+	SET @MonsterName = (SELECT TOP 1 MonsterName FROM Monsters WHERE MonsterID = @MonsterID)
 END
 GO
 /****** Object:  StoredProcedure [dbo].[spGetPlayerDefense]    Script Date: 2019-12-05 09:31:06 ******/
@@ -1556,7 +1556,7 @@ BEGIN
 				BEGIN
 					SET @paramReturnText = CONCAT('You kicked the monster in the teeth for ', @PlayerHitDamage, ' damage.')
 					EXEC dbo.spSetStatusCharacter @charID, 'monsterAttack'					
-					EXEC spUpdateMonsterHealth @MonsterID, @PlayerHitDamage
+					EXEC spUpdateMonsterHealth @MonsterID, @PlayerHitDamage, @charID
 				END
 		END
 
@@ -1889,10 +1889,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [dbo].[spUpdateMonsterHealth]
 @MonsterID INT,
-@HitDamage INT
+@HitDamage INT,
+@CharID INT
 AS
 BEGIN
-	UPDATE Fights SET MonsterCurrentHP = MonsterCurrentHP - @HitDamage WHERE FightMonsterID = @MonsterID
+	UPDATE Fights SET MonsterCurrentHP = MonsterCurrentHP - @HitDamage WHERE FightMonsterID = @MonsterID AND FightCharacterID = @CharID
 END
 GO
 /****** Object:  StoredProcedure [dbo].[spUpdateStealEquip]    Script Date: 2019-12-05 09:31:06 ******/
