@@ -1,3 +1,4 @@
+--Get a random item that's the same level as the character
 CREATE PROCEDURE spRandomItemByLevel
 @level INT
 AS

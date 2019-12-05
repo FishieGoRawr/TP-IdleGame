@@ -1,3 +1,4 @@
+--Update the monster health to a set amount
 CREATE PROCEDURE spUpdateMonsterHealth
 @MonsterID INT,
 @HitDamage INT

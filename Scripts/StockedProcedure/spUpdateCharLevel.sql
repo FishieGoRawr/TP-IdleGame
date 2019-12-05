@@ -1,3 +1,4 @@
+--Update the character level to a set amount
 CREATE PROCEDURE spUpdateCharLevel
 @CharID INT,
 @level INT

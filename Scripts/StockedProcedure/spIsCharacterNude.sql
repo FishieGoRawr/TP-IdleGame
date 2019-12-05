@@ -1,3 +1,5 @@
+--Check every slot of a given character's equipement to see if character has equip
+--Used for the goblin random event
 CREATE PROCEDURE spIsCharacterNude
 @CharID INT
 AS
@@ -28,7 +30,7 @@ BEGIN
 	ELSE IF (SELECT CharWeapID FROM Characters WHERE CharID = @CharID) IS NULL
 		SET @isNude = 1
 
-	RETURN @isNude
+	RETURN @isNude --Return 1 if nude, 0 if not.
 END
 GO
 

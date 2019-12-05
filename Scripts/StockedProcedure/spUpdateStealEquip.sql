@@ -1,3 +1,4 @@
+--Set the character's equip slot to "null" if the goblin stole it.
 CREATE PROCEDURE spUpdateStealEquip
 @CharID INT, @eventID INT 
 AS

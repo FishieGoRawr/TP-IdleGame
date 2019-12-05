@@ -1,3 +1,4 @@
+--Update the character XP to a set amount
 CREATE PROCEDURE spUpdateCharExp
 @CharID INT,
 @monsterExp INT,
