@@ -1,0 +1,7 @@
+CREATE FUNCTION fnGetCharacterHP (@CharID INT)
+RETURNS TABLE
+AS
+RETURN SELECT CharCurrHP as HP FROM Characters WHERE CharID = @CharID
+GO
+
+
