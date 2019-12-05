@@ -80,11 +80,32 @@ namespace ProgressQuest_Client
             return view;
         }
 
-        public void resetDefaultTesting(object[,] charID)
+        public DataView getCharacterCompletedDungeons(int characterID)
         {
-            executor.executeSP("spDefaultTesting", charID);
-            Console.Clear();
+            DataView view = new DataView(executor.executeView("SELECT * FROM fnGetCompletedDungeons(" + characterID + ")"));
+
+            return view;
         }
 
+        public DataView getDungeonName(int characterID)
+        {
+            DataView view = new DataView(executor.executeView("SELECT * FROM fnGetActiveDungeonName(" + characterID + ")"));
+
+            return view;
+        }
+
+        public DataView getDungeonKC(int characterID)
+        {
+            DataView view = new DataView(executor.executeView("SELECT * FROM fnGetDungeonKC(" + characterID + ")"));
+
+            return view;
+        }
+
+        public DataView getCharacterEquip(int characterID)
+        {
+            DataView view = new DataView(executor.executeView("SELECT * FROM fnGetCharacterEquiped(" + characterID + ")"));
+
+            return view;
+        }
     }
 }

@@ -37,3 +37,12 @@ P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\obj\Debug\Progress
 P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.csproj.GenerateResource.cache
 P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.exe
 P:\École\Automne 2019\BD II\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.pdb
+C:\Users\1511238\Desktop\TP-IdleGame-47da74b043b43aa5bc151ed9093c1c8da9d3541f\TP-IdleGame\ProgressQuest Client\bin\Debug\ProgressQuest Client.exe.config
+C:\Users\1511238\Desktop\TP-IdleGame-47da74b043b43aa5bc151ed9093c1c8da9d3541f\TP-IdleGame\ProgressQuest Client\bin\Debug\ProgressQuest Client.exe
+C:\Users\1511238\Desktop\TP-IdleGame-47da74b043b43aa5bc151ed9093c1c8da9d3541f\TP-IdleGame\ProgressQuest Client\bin\Debug\ProgressQuest Client.pdb
+C:\Users\1511238\Desktop\TP-IdleGame-47da74b043b43aa5bc151ed9093c1c8da9d3541f\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.csprojAssemblyReference.cache
+C:\Users\1511238\Desktop\TP-IdleGame-47da74b043b43aa5bc151ed9093c1c8da9d3541f\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest_Client.GUI.resources
+C:\Users\1511238\Desktop\TP-IdleGame-47da74b043b43aa5bc151ed9093c1c8da9d3541f\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest_Client.Properties.Resources.resources
+C:\Users\1511238\Desktop\TP-IdleGame-47da74b043b43aa5bc151ed9093c1c8da9d3541f\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.csproj.GenerateResource.cache
+C:\Users\1511238\Desktop\TP-IdleGame-47da74b043b43aa5bc151ed9093c1c8da9d3541f\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.exe
+C:\Users\1511238\Desktop\TP-IdleGame-47da74b043b43aa5bc151ed9093c1c8da9d3541f\TP-IdleGame\ProgressQuest Client\obj\Debug\ProgressQuest Client.pdb
