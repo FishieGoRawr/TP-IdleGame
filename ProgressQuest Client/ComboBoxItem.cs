@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ProgressQuest_Client
 {
+    /// <summary>
+    /// This class is used to hide a character ID in a Combobox control and retrieve it when needed. Those items are added to a combobox.
+    /// </summary>
     public class ComboBoxItem
     {
         string displayValue; ///<summary>Value to display when asking for a combobox item.</summary>
