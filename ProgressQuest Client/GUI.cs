@@ -178,6 +178,8 @@ namespace ProgressQuest_Client
             }
         }
 
+
+
         /// <summary>
         /// Update the game status progress bar with each game tick.
         /// </summary>
@@ -262,6 +264,7 @@ namespace ProgressQuest_Client
         {
             lsbLog.Items.Add(ev);
             lsbLog.TopIndex = lsbLog.Items.Count - 1;
+            lblStatus.Text = ev;
         }
 
         /// <summary>

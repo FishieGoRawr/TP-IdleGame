@@ -53,7 +53,7 @@
             this.charDex = new System.Windows.Forms.Label();
             this.charInt = new System.Windows.Forms.Label();
             this.charStr = new System.Windows.Forms.Label();
-            this.txtStatus = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.statusProgress = new System.Windows.Forms.ProgressBar();
             this.trkSpeed = new System.Windows.Forms.TrackBar();
@@ -322,14 +322,14 @@
             this.charStr.TabIndex = 24;
             this.charStr.Text = "-";
             // 
-            // txtStatus
+            // lblStatus
             // 
-            this.txtStatus.AutoSize = true;
-            this.txtStatus.Location = new System.Drawing.Point(355, 720);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(316, 20);
-            this.txtStatus.TabIndex = 30;
-            this.txtStatus.Text = "Status of the game, ex: Player hit a monster";
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(355, 720);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(316, 20);
+            this.lblStatus.TabIndex = 30;
+            this.lblStatus.Text = "Status of the game, ex: Player hit a monster";
             // 
             // splitter1
             // 
@@ -641,7 +641,7 @@
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.statusProgress);
             this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.txtStatus);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.charLck);
             this.Controls.Add(this.charWis);
             this.Controls.Add(this.charCon);
@@ -707,7 +707,7 @@
         private System.Windows.Forms.Label charDex;
         private System.Windows.Forms.Label charInt;
         private System.Windows.Forms.Label charStr;
-        private System.Windows.Forms.Label txtStatus;
+        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.ProgressBar statusProgress;
         private System.Windows.Forms.TrackBar trkSpeed;
